@@ -1,4 +1,5 @@
 import * as THREE from './vendor/three.module.min.js';
+import { createEquipment } from './presentation/models/equipment.js';
 import { createRaftResources, createExpansionPanel } from './presentation/models/raft.js';
 
 let seed=2187;
@@ -96,8 +97,10 @@ firelight.intensity=40;
 const particlesGeo=new THREE.BufferGeometry();const positions=new Float32Array(250*3);for(let i=0;i<250;i++){const a=rand()*Math.PI*2,r=.6+rand()*3.6;positions[i*3]=Math.cos(a)*r;positions[i*3+1]=rand()*.75;positions[i*3+2]=Math.sin(a)*r}particlesGeo.setAttribute('position',new THREE.BufferAttribute(positions,3));const particles=new THREE.Points(particlesGeo,new THREE.PointsMaterial({color:'#ff5a2c',size:.045,transparent:true,opacity:.8,depthWrite:false,blending:THREE.AdditiveBlending}));vortex.add(particles);
 
 const raycaster=new THREE.Raycaster();let hovered=null;
+let sceneSelection=false;
+export function setSceneSelection(value){sceneSelection=value;}
 const tileHighlight=new THREE.Mesh(new THREE.PlaneGeometry(2.05,2.05),new THREE.MeshBasicMaterial({color:'#6ee6e9',transparent:true,opacity:.22,depthWrite:false,side:THREE.DoubleSide}));tileHighlight.rotation.x=-Math.PI/2;tileHighlight.position.y=.38;tileHighlight.visible=false;raft.add(tileHighlight);
-export function pickTile(nx,ny){raycaster.setFromCamera(new THREE.Vector2(nx,ny),camera);const hits=raycaster.intersectObjects(selectable);hovered=hits[0]?.object.userData.tile??null;tileHighlight.visible=!!hovered&&!!window.gameState?.selected;if(hovered){tileHighlight.position.x=hovered.x;tileHighlight.position.z=hovered.z}return hovered}
+export function pickTile(nx,ny){raycaster.setFromCamera(new THREE.Vector2(nx,ny),camera);const hits=raycaster.intersectObjects(selectable);hovered=hits[0]?.object.userData.tile??null;tileHighlight.visible=!!hovered&&sceneSelection;if(hovered){tileHighlight.position.x=hovered.x;tileHighlight.position.z=hovered.z}return hovered}
 export function expandRaft(){makeTile(5.75 + (tiles.length - 12) * 2.3, 2.25);}
 export function setSceneSettings(s){settings={...settings,...s};renderer.setPixelRatio(settings.quality==='high'?Math.min(devicePixelRatio,1.7):1);}
 let settings={motion:true,quality:'high'};let pointer={x:0,y:0};
@@ -108,3 +111,23 @@ function animate(now){requestAnimationFrame(animate);if(now-last<1000/(settings.
 renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();window.dispatchEvent(new CustomEvent('scene-error',{detail:'画面连接中断，请刷新页面重试。'}))});
 export function sceneInfo(){return{threeRevision:THREE.REVISION,objects:scene.children.length,geometries:renderer.info.memory.geometries,triangles:renderer.info.render.triangles,tiles:tiles.length,canvasWidth:renderer.domElement.width,canvasHeight:renderer.domElement.height}}
 window.sceneInfo=sceneInfo;
+
+// Snapshot presenter: no rule writes, no model references in GameState.
+const equipmentInstances=new Map();
+export function syncDemo(view){
+ view.cells.forEach(cell=>{
+  const x=(cell.x-1.5)*2.3,z=(cell.z-1)*2.25;
+  const panel=raftPanels.find(p=>Math.abs(p.root.position.x-x)<.01&&Math.abs(p.root.position.z-z)<.01);
+  panel?.setState(cell.state);
+ });
+ const alive=new Set(view.units.map(u=>u.id));
+ for(const [id,instance] of equipmentInstances)if(!alive.has(id)){instance.dispose();equipmentInstances.delete(id);}
+ for(const unit of view.units){
+  let instance=equipmentInstances.get(unit.id);
+  if(!instance){instance=createEquipment(unit.definitionId);equipmentInstances.set(unit.id,instance);raft.add(instance.root);}
+  const cell=view.cells.find(c=>c.id===unit.cellId);
+  instance.root.position.set((cell.x-1.5)*2.3,.2,(cell.z-1)*2.25);
+  instance.setState(unit.structure===0?'wreck':unit.operational?'active':'disabled');
+ }
+}
+addEventListener('pagehide',()=>equipmentInstances.forEach(instance=>instance.dispose()),{once:true});

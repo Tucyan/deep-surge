@@ -18,3 +18,11 @@
 ## 程序化模型源
 
 新增 Three.js 木筏与扩展板工厂，详见 [木筏 v1](raft-procedural-v1.md)。源为 JavaScript、配置与视觉种子，纹理程序生成；与上述尚未接入的 PNG 状态独立。
+
+## 第一层 Demo 接入更新（2026-10-03）
+
+上述“未接入”描述为整理时状态。现在原卡牌/节点 ZIP 已保存在 `packs/`，36 张 C/N PNG 按原字节导入 `dist/assets/images/cards/`、`nodes/`。C01–C24、N01–N12 和新包 M01–M03 通过 `presentation/art.js` 显式映射，标题、AP、材料与风险由规则数据提供。原包内 README/CSV 可从保存的 ZIP 恢复。
+
+运行清单共 61 个 AssetId：54 张运行 PNG、木筏/扩展板/木纹 3 项、设备模型 4 项；另有 3 张制作源 PNG。C/N/M 标为 integrated-unverified：部分已浏览器展示检查，未逐张做视觉或透明像素验收。新包材料、状态图标和卡框 15 张仍未接入，不能把它们写成已使用。
+
+四种设备模型见 [设备模型 v1](equipment-procedural-v1.md)。素材接入不改变包外正式玩法。

@@ -4,8 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node --check dist/app.js && node --check dist/scene.js && node --check dist/presentation/models/raft.js && node --check dist/presentation/raft-showcase.js",
+    "check": "node scripts/check.mjs",
     "start": "python -m http.server 5173 --directory dist",
-    "test:assets": "node --test tests/raft-assets.test.mjs"
+    "test:assets": "node --test tests/raft-assets.test.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check:assets": "node scripts/check-assets.mjs"
   }
 }
