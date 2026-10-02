@@ -1,4 +1,5 @@
 import * as THREE from './vendor/three.module.min.js';
+import { createRaftResources, createExpansionPanel } from './presentation/models/raft.js';
 
 let seed=2187;
 const rand=()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646};
@@ -47,7 +48,17 @@ raft.position.z=-1.25;raft.scale.setScalar(1.3);guardian.position.set(.6,0,-10.6
 silhouette.color.set('#1b3647');silhouette.roughness=1;eye.material.toneMapped=false;
 guardian.visible=false;
 const tiles=[],selectable=[];
-function makeTile(x,z){const group=new THREE.Group();group.position.set(x,0,z);raft.add(group);for(let j=0;j<6;j++){const m=box(0,.06+rand()*.015,-.9+j*.355,2.19,.24,.335,woods[Math.floor(rand()*7)],group);m.rotation.y=(rand()-.5)*.012}for(const xx of [-1.07,1.07]){box(xx,.23,0,.14,.13,2.2,woods[2],group);for(const zz of [-1,1]){const n=mesh(new THREE.CylinderGeometry(.056,.06,.045,8),nailMat,xx,.31,zz,group);n.castShadow=false}}box(0,-.13,0,2.3,.15,.2,darkWood,group);const hit=new THREE.Mesh(new THREE.PlaneGeometry(2.1,2.1),new THREE.MeshBasicMaterial({visible:false}));hit.rotation.x=-Math.PI/2;hit.position.y=.32;hit.userData.tile={x,z};group.add(hit);selectable.push(hit);tiles.push(group);return group}
+const raftResources = createRaftResources({ seed: 2187 });
+const raftPanels = [];
+function makeTile(x,z) {
+  const panel = createExpansionPanel({resources:raftResources, cellId:`${x}:${z}`, seed:2187 ^ Math.round(x*100) ^ Math.round(z*173)});
+  panel.root.position.set(x,.19,z);
+  panel.pickMesh.userData.tile={x,z};
+  raft.add(panel.root);selectable.push(panel.pickMesh);tiles.push(panel.root);raftPanels.push(panel);
+  return panel.root;
+}
+addEventListener('pagehide',()=>{raftPanels.forEach(panel=>panel.dispose());raftResources.dispose();},{once:true});
+
 for(let x=0;x<4;x++)for(let z=0;z<3;z++)makeTile((x-1.5)*2.3,(z-1)*2.25);
 // Crosswise floating logs and dark bound framing.
 for(const zz of [-3.5,3.5]){rod([-4.9,-.1,zz],[4.9,-.1,zz],.23,woods[1],raft);for(let i=0;i<9;i++){const xx=-4.4+i*1.1;box(xx,-.13,zz,.4,.63,.64,woods[Math.floor(rand()*3)],raft);for(const offset of [-.12,.12]){const b=mesh(new THREE.TorusGeometry(.34,.04,4,12),darkWood,xx+offset,-.13,zz,raft);b.rotation.y=Math.PI/2}mesh(new THREE.CylinderGeometry(.045,.045,.045,6),nailMat,xx,.2,zz,raft)}}
@@ -87,7 +98,7 @@ const particlesGeo=new THREE.BufferGeometry();const positions=new Float32Array(2
 const raycaster=new THREE.Raycaster();let hovered=null;
 const tileHighlight=new THREE.Mesh(new THREE.PlaneGeometry(2.05,2.05),new THREE.MeshBasicMaterial({color:'#6ee6e9',transparent:true,opacity:.22,depthWrite:false,side:THREE.DoubleSide}));tileHighlight.rotation.x=-Math.PI/2;tileHighlight.position.y=.38;tileHighlight.visible=false;raft.add(tileHighlight);
 export function pickTile(nx,ny){raycaster.setFromCamera(new THREE.Vector2(nx,ny),camera);const hits=raycaster.intersectObjects(selectable);hovered=hits[0]?.object.userData.tile??null;tileHighlight.visible=!!hovered&&!!window.gameState?.selected;if(hovered){tileHighlight.position.x=hovered.x;tileHighlight.position.z=hovered.z}return hovered}
-export function expandRaft(){makeTile(5.75,2.25);rod([6.9,-.13,1.12],[6.9,-.13,3.4],.23,woods[1],raft);}
+export function expandRaft(){makeTile(5.75 + (tiles.length - 12) * 2.3, 2.25);}
 export function setSceneSettings(s){settings={...settings,...s};renderer.setPixelRatio(settings.quality==='high'?Math.min(devicePixelRatio,1.7):1);}
 let settings={motion:true,quality:'high'};let pointer={x:0,y:0};
 export function setPointer(x,y){pointer={x,y}}

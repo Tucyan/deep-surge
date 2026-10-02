@@ -21,3 +21,13 @@
 `dist/index.html` 界面结构；`dist/style.css` 样式；`dist/scene.js` 三维场景；`dist/app.js` 交互。
 
 Three.js 使用 MIT 许可证，许可证包含在 `dist/vendor/LICENSE`。参考图素材仅来自用户提供的图片。
+
+## 新增美术素材
+
+2026-10-03 整理用户提供的新美术包：3 张怪物立绘、6 张材料图标、4 张状态/信息图标和 5 张卡框。文件位于 `dist/assets/images/`，详见 [资产清单](dist/assets/manifest.json) 和 [来源记录](asset-sources/README.md)。原 ZIP 及 3 张合成源图已保留，图片未经修改。当前页面尚未读取这些素材；状态为 `staged-not-integrated`。
+
+## 程序化木筏资产
+
+启动 `npm start`，打开 [木筏资产工坊](http://127.0.0.1:5173/raft-assets.html)：查看四格木筏、独立扩展板，旋转/缩放、拼接和切换战损展示。模型已接入旧场景的筏板生成入口，规则循环仍未实现。
+
+工厂与资源接口详见 [木筏资产说明](asset-sources/raft-procedural-v1.md)。验证命令：`npm run check`、`npm run test:assets`。

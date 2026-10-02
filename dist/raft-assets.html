@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deep Surge · 木筏资产工坊</title><link rel="stylesheet" href="raft-assets.css"><link rel="icon" href="data:,"></head>
+<body><div id="viewport" aria-label="木筏与扩展板三维展示"></div>
+<header><span class="eyebrow">DEEP SURGE / ASSET WORKSHOP</span><h1>木筏 · 模块化甲板</h1><p>浮木承托，绳索绑接，逐格延伸。</p></header>
+<aside><span class="eyebrow">01 / 实时资产</span><h2>从一块甲板开始</h2><p>左侧为四格木筏，右侧为独立扩展板。相同模块、相同接口，可以沿边拼接。</p>
+<div class="specs"><div><span>格间距</span><b>2.30 × 2.25</b></div><div><span>甲板锚点</span><b>Y = 0</b></div><div><span>生成方式</span><b>原生 Three.js</b></div></div>
+<h3>扩展板状态</h3><div class="states" role="group" aria-label="扩展板状态"><button data-state="intact" aria-pressed="true">完好</button><button data-state="damaged" aria-pressed="false">破损</button><button data-state="lost" aria-pressed="false">脱落</button></div>
+<button id="extend" class="primary">＋ 拼接一块扩展板</button><button id="reset">重置展示</button><label><input id="motion" type="checkbox" checked> 轻微随波浮动</label>
+<p class="note">状态和拼接仅为资产预览。实际放置与战损由游戏规则驱动。</p></aside>
+<footer><span>拖动旋转 · 滚轮缩放</span><span id="metrics">正在加载模型…</span></footer>
+<div class="labels"><span>组合木筏</span><span>独立扩展板</span></div>
+<script type="module" src="presentation/raft-showcase.js"></script></body></html>
