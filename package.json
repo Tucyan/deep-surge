@@ -1,0 +1,1 @@
+{"name":"water-era-three-recreation","version":"1.0.0","private":true,"type":"module","scripts":{"check":"node --check dist/app.js && node --check dist/scene.js","start":"python -m http.server 5173 --directory dist"}}

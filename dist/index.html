@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071c28"><meta name="description" content="在无尽深海之上，建造你的木筏，寻找失落的文明。"><title>水世代 · 深海航行</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23071926'/%3E%3Cpath d='M5 27Q12 20 20 27T35 27M20 5L9 22H29Z' fill='none' stroke='%234acbd8' stroke-width='2'/%3E%3C/svg%3E"><link rel="stylesheet" href="style.css"></head>
+<body><main id="game" aria-label="水世代海上生存游戏">
+<div id="world" aria-label="动态三维海面与木筏"></div><div class="horizon-art" aria-hidden="true"></div><div class="vignette"></div><div class="sea-mist"></div>
+<header class="brand"><h1>水世代</h1><p>卡牌构筑 · 海上生存 · 克苏鲁</p></header>
+<nav class="side-nav" aria-label="游戏导航">
+<button class="nav-button frame" data-panel="map"><svg viewBox="0 0 48 48"><path d="M4 9l13-5 14 6 13-5v34l-13 5-14-6-13 5zM17 4v34M31 10v34"/><path class="fine" d="M9 18l5 3 10-6 11 12 5-2"/></svg><span>航行图</span></button>
+<button class="nav-button frame" data-panel="inventory"><svg viewBox="0 0 48 48"><path d="M7 17l4-9h26l4 9v24H7zM5 19h38M13 19v8h6v-8M29 19v8h6v-8"/></svg><span>藏品</span><i class="nav-dot"></i></button>
+<button class="nav-button frame" data-panel="deck"><svg viewBox="0 0 48 48"><path d="M6 9l14-3 7 33-14 3zM20 6l15 1-2 34-15-1zM34 10l11 4-10 29-6-2"/><path class="fine" d="M26 13v2"/></svg><span>牌库</span></button>
+<button class="nav-button frame" data-panel="settings"><svg viewBox="0 0 48 48"><path d="M20 3h8l2 7 6-3 6 6-3 6 7 2v8l-7 2 3 6-6 6-6-3-2 7h-8l-2-7-6 3-6-6 3-6-7-2v-8l7-2-3-6 6-6 6 3z"/><circle cx="24" cy="25" r="8" class="cutout"/></svg><span>设置</span></button>
+</nav>
+<button class="destination destination-city frame" data-travel="city"><h2>下个行进点</h2><div class="destination-art city-art"><span class="chevron">❯</span></div><div class="destination-name"><i class="diamond"></i><span>沉没的城市</span></div></button>
+<section class="survival frame" aria-label="生存系统"><h2>生存系统</h2><div id="stats"></div></section>
+<div class="action-points"><span>行动点</span><b id="ap">3/3</b><div id="ap-lights"><i></i><i></i><i></i></div></div>
+<button class="vortex-info" id="vortex-button"><svg viewBox="0 0 70 106"><path d="M35 2L64 31 35 100 6 31z"/><path d="M35 22L48 38 35 78 23 38z"/></svg><span><strong>涌泉</strong><small>深渊正在注视着你……</small></span><i class="magnify"></i></button>
+<button class="destination destination-island frame" data-travel="island"><h2>下个行进点</h2><div class="destination-art island-art"><span class="chevron">❯</span></div><div class="destination-name"><i class="diamond"></i><span>神秘岛屿</span></div></button>
+<div class="raft-hint" id="raft-hint">选择卡牌 · 在木筏上建造</div>
+<section class="crafting" aria-label="合成位置"><button class="craft-circle" id="craft" aria-label="合成所选卡牌"><svg viewBox="0 0 240 170"><ellipse cx="120" cy="85" rx="104" ry="66"/><ellipse cx="120" cy="85" rx="85" ry="54"/><ellipse cx="120" cy="85" rx="75" ry="45"/><path d="M120 16L213 85 120 153 27 85zM24 85h192M120 30v110"/><path d="M32 49l13-3M200 48l12 6M200 123l12-6M32 120l13 3"/></svg><span>＋</span><div class="craft-orbit"></div></button><div class="craft-description"><h2>合成位置</h2><p id="craft-text">将卡牌放入此处合成</p></div></section>
+<section id="hand" class="hand" aria-label="手牌"></section>
+<button class="organize" id="organize"><svg viewBox="0 0 64 64"><path d="M8 13l30-5 8 40-30 5zM21 11l31 5-7 39-31-5z"/><path d="M35 24l5 7-6 7-5-7z"/></svg><span>整理手牌</span></button>
+<footer class="voyage-label"><span class="compass">✥</span> 漂流之海 <i></i> 第 <span id="day">01</span> 天 <span class="coordinates">17° N · 126° E</span></footer>
+<button id="end-turn" class="end-turn">结束回合 <span>↵</span></button>
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="panel"><div class="dialog-inner frame"><button id="close-panel" aria-label="关闭面板">×</button><div id="panel-content"></div></div></dialog>
+<div id="loading"><div class="loading-ring"></div><h2>驶入深海</h2><p>风浪将至，灯火未熄。</p></div>
+</main><script type="module" src="app.js"></script></body></html>
