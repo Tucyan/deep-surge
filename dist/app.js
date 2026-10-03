@@ -1,7 +1,7 @@
 import {createSession} from './game/session.js?v=navigation-v4';
 import {CARDS,RECIPES,NODES,MONSTERS,EQUIPMENT,MATERIAL_NAMES} from './game/content/catalog.js?v=navigation-v4';
 import {cardArt,nodeArt,monsterArt} from './presentation/art.js';
-import {syncDemo,setPointer,resizeScene,setSceneSettings,getSpringScreenPosition,getRaftSummary,pickTile} from './scene.js?v=navigation-v4';
+import {syncDemo,setPointer,resizeScene,setSceneSettings,getSpringScreenPosition,getRaftSummary,pickTile} from './scene.js?v=contact-v6';
 
 const $=selector=>document.querySelector(selector);
 const escape=text=>String(text??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from '../dist/vendor/three.module.min.js';
 import {createRaftResources} from '../dist/presentation/models/raft.js';
+import {ROOT_CONFIG} from '../dist/presentation/models/raft-root.js';
 import {createRaftPresenter} from '../dist/presentation/scene/raft-presenter.js';
 const view=()=>({cells:[{id:'a',x:0,z:0,state:'intact',label:'1-1'},{id:'b',x:1,z:0,state:'intact',label:'2-1'}],units:[],defense:[{index:0,cellId:'a'}],logistics:[{index:0,cellId:'b'}]});
 test('presenter follows arbitrary added/removed coordinates, lost cells leave no deck or pick proxy',()=>{
@@ -15,5 +16,5 @@ test('decorative root stays outside playable cells and auto-fit shrinks expanded
  const resources=createRaftResources();const presenter=createRaftPresenter({resources});const small=view();presenter.sync(small);const first=presenter.fit.scale;assert.ok(presenter.decorations.root.position.z<Math.min(...small.cells.map(c=>c.z))*2.25-1.125);assert.equal(presenter.decorations.root.userData.functional,false);const bigger=view();bigger.cells=Array.from({length:40},(_,i)=>({id:'tile-'+i,x:i%8,z:Math.floor(i/8),state:'intact'}));presenter.sync(bigger);assert.ok(presenter.fit.scale<first);assert.ok(presenter.fit.width*presenter.fit.scale<=10.6);presenter.dispose();resources.dispose();
 });
 test('offset grids fit their own bounds and repaired cells regain picking',()=>{
- const resources=createRaftResources(),presenter=createRaftPresenter({resources});const state=view();state.cells=state.cells.map(c=>({...c,x:c.x+10,z:c.z+10}));presenter.sync(state);assert.ok(Math.abs(presenter.fit.width-4.6)<1e-9);state.cells[0].state='lost';presenter.sync(state);assert.equal(presenter.getPickMeshes().length,1);state.cells[0].state='intact';presenter.sync(state);assert.equal(presenter.getPickMeshes().length,2);presenter.dispose();presenter.dispose();assert.equal(resources.disposed,false);resources.dispose();
+ const resources=createRaftResources(),presenter=createRaftPresenter({resources});const state=view();state.cells=state.cells.map(c=>({...c,x:c.x+10,z:c.z+10}));presenter.sync(state);assert.ok(Math.abs(presenter.fit.width-Math.max(4.6,ROOT_CONFIG.width))<1e-9);state.cells[0].state='lost';presenter.sync(state);assert.equal(presenter.getPickMeshes().length,1);state.cells[0].state='intact';presenter.sync(state);assert.equal(presenter.getPickMeshes().length,2);presenter.dispose();presenter.dispose();assert.equal(resources.disposed,false);resources.dispose();
 });

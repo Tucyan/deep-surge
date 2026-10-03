@@ -1,10 +1,11 @@
 import * as THREE from '../vendor/three.module.min.js';
 import {createRaftResources} from './models/raft.js';
-import {createRaftPresenter} from './scene/raft-presenter.js';
+import {createRaftPresenter} from './scene/raft-presenter.js?v=contact-v6';
+import {createPerspectiveView} from './scene/camera.js?v=contact-v6';
 import {createCellLabel} from './materials/cell-label.js';
 
 const scene=new THREE.Scene();scene.background=new THREE.Color('#0b1d29');
-const camera=new THREE.OrthographicCamera(-10,10,6,-6,.1,100);camera.position.set(0,15,20);camera.lookAt(0,0,0);
+const cameraView=createPerspectiveView({position:[8,12,18],target:[1.6,0,0],fov:35}),camera=cameraView.camera;
 const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.shadowMap.enabled=true;document.querySelector('#world').appendChild(renderer.domElement);
 scene.add(new THREE.HemisphereLight('#c4dfe7','#211c18',2.2));const sun=new THREE.DirectionalLight('#e2dac4',2.5);sun.position.set(-3,12,5);scene.add(sun);
 const resources=createRaftResources(),presenter=createRaftPresenter({resources,createLabel:createCellLabel});scene.add(presenter.root);presenter.root.position.set(1.6,0,0);
@@ -17,5 +18,5 @@ function snapshot(preset){const view={cells:cells(preset==='expanded'?5:preset==
 }
 function show(preset){presenter.sync(snapshot(preset));document.querySelectorAll('[data-preset]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.preset===preset)));const s=presenter.summary;document.querySelector('#status').textContent=`${s.total} 格登记 · ${s.total-s.lost} 格在位 · 扩展 +${s.expanded} · 破损 ${s.damaged} · 脱落 ${s.lost} · 自动缩放 ${presenter.fit.scale.toFixed(2)}`;}
 document.querySelectorAll('[data-preset]').forEach(button=>button.addEventListener('click',()=>show(button.dataset.preset)));
-function resize(){renderer.setSize(innerWidth,innerHeight);const width=12*innerWidth/innerHeight;camera.left=-width/2;camera.right=width/2;camera.top=6;camera.bottom=-6;camera.updateProjectionMatrix();}addEventListener('resize',resize);resize();show('initial');
+function resize(){renderer.setSize(innerWidth,innerHeight);cameraView.resize(innerWidth/innerHeight);}addEventListener('resize',resize);resize();show('initial');
 renderer.setAnimationLoop(()=>renderer.render(scene,camera));addEventListener('pagehide',()=>{renderer.setAnimationLoop(null);presenter.dispose();resources.dispose();renderer.dispose();},{once:true});

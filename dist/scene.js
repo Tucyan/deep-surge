@@ -1,6 +1,8 @@
 import * as THREE from './vendor/three.module.min.js';
-import {createRaftPresenter} from './presentation/scene/raft-presenter.js';
+import {createRaftPresenter} from './presentation/scene/raft-presenter.js?v=contact-v6';
 import {createCellLabel} from './presentation/materials/cell-label.js';
+import {createPerspectiveView} from './presentation/scene/camera.js?v=contact-v6';
+import {SEA_WAVE_GLSL,sampleRaftPose,createWaterContact} from './presentation/scene/water-contact.js?v=contact-v6';
 import { createRaftResources } from './presentation/models/raft.js';
 
 let seed=2187;
@@ -8,8 +10,8 @@ const rand=()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646};
 const scene=new THREE.Scene();
 function skyTexture(){const c=document.createElement('canvas');c.width=1024;c.height=512;const ctx=c.getContext('2d'),im=ctx.createImageData(1024,512);const grid=Array.from({length:48*24},()=>rand());const noise=(x,y)=>{const xx=Math.floor(x),yy=Math.floor(y),u=x-xx,v=y-yy;const n=(a,b)=>grid[((a%48+48)%48)+((b%24+24)%24)*48];return n(xx,yy)*(1-u)*(1-v)+n(xx+1,yy)*u*(1-v)+n(xx,yy+1)*(1-u)*v+n(xx+1,yy+1)*u*v};for(let y=0;y<512;y++)for(let x=0;x<1024;x++){const n=noise(x/83,y/45)*.57+noise(x/39,y/22)*.28+noise(x/17,y/11)*.15;const cloud=Math.max(0,n-.35)*32;const grad=y/512;const i=(y*1024+x)*4;im.data[i]=15+grad*17+cloud;im.data[i+1]=35+grad*19+cloud;im.data[i+2]=49+grad*20+cloud;im.data[i+3]=255}ctx.putImageData(im,0,0);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t}scene.background=skyTexture();
 scene.fog=new THREE.FogExp2('#26475c',.012);
-const camera=new THREE.OrthographicCamera(-15.8,15.8,8.9,-8.9,.1,180);
-camera.position.set(0,19,26);camera.lookAt(0,0,-1.4);
+const cameraView=createPerspectiveView();
+const camera=cameraView.camera;
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.setSize(1672,941);
 renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;
@@ -26,12 +28,12 @@ function rod(a,b,r,material,parent=scene){const from=new THREE.Vector3(...a),to=
 function rope(points,r=.027,parent=scene,material=ropeMat){return mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p))),24,r,5,false),material,0,0,0,parent)}
 
 // Broad wave bands, warped fine ripples, breaking white caps and red reflected light.
-const oceanMat=new THREE.ShaderMaterial({uniforms:{time:{value:0},horizonFade:{value:new THREE.Vector2(-35,-25)}},vertexShader:`varying vec3 vWorld;uniform float time;void main(){vec3 p=position;float h=sin(p.x*.65+time*.75)*cos(p.y*.77+time*.44)*.13+sin(p.x*1.15+p.y*1.2+time)*.06;p.z+=h;vec4 w=modelMatrix*vec4(p,1.);vWorld=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`,fragmentShader:`precision highp float;varying vec3 vWorld;uniform float time;uniform vec2 horizonFade;
+const oceanMat=new THREE.ShaderMaterial({uniforms:{time:{value:0},horizonFade:{value:new THREE.Vector2(-35,-25)}},vertexShader:`varying vec3 vWorld;uniform float time;${SEA_WAVE_GLSL}void main(){vec4 w=modelMatrix*vec4(position,1.);w.y=seaHeight(w.xz,time);vWorld=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`,fragmentShader:`precision highp float;varying vec3 vWorld;uniform float time;uniform vec2 horizonFade;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+1.),f.x),f.y);}float fbm(vec2 p){float a=.5,n=0.;for(int i=0;i<5;i++){n+=a*noise(p);p=p*2.03+3.7;a*=.5;}return n;}
-void main(){vec2 p=vWorld.xz;float t=time*.33;float warp=fbm(p*.55+vec2(t,-t));float n=fbm(p*vec2(1.5,3.)+vec2(warp*3.,t));float band=sin(p.y*3.+sin(p.x*1.8+t)*1.4+warp*4.+t);float ridges=pow(max(0.,1.-abs(band)),7.);float crest=smoothstep(.66,.81,n+band*.12);vec3 col=mix(vec3(.012,.055,.081),vec3(.038,.145,.209),n);col+=ridges*vec3(.07,.15,.18)*(.3+n);col=mix(col,vec3(.34,.5,.58),crest*.73);float foam=smoothstep(.7,.82,fbm(p*vec2(2.8,5.5)+vec2(t,warp*2.)))*ridges;col+=foam*vec3(.36,.45,.5);float raftDist=length((p-vec2(-5.1,1.8))*vec2(.78,1.));float wake=exp(-pow(raftDist-5.5,2.)*4.)*smoothstep(.38,.68,n)*.18;col+=wake*vec3(.5,.65,.7);float vd=length(p-vec2(7.,2.9));float red=exp(-vd*.45)*(.25+ridges)*.6;col+=vec3(.52,.015,.025)*red;float fog=smoothstep(5.,48.,-p.y);col=mix(col,vec3(.13,.24,.31),fog*.94);gl_FragColor=vec4(col,1.);}`});
+void main(){vec2 p=vWorld.xz;float t=time*.33;float warp=fbm(p*.55+vec2(t,-t));float n=fbm(p*vec2(1.5,3.)+vec2(warp*3.,t));float band=sin(p.y*3.+sin(p.x*1.8+t)*1.4+warp*4.+t);float ridges=pow(max(0.,1.-abs(band)),7.);float crest=smoothstep(.66,.81,n+band*.12);vec3 col=mix(vec3(.012,.055,.081),vec3(.038,.145,.209),n);col+=ridges*vec3(.07,.15,.18)*(.3+n);col=mix(col,vec3(.34,.5,.58),crest*.73);float foam=smoothstep(.7,.82,fbm(p*vec2(2.8,5.5)+vec2(t,warp*2.)))*ridges;col+=foam*vec3(.36,.45,.5);float vd=length(p-vec2(7.,2.9));float red=exp(-vd*.45)*(.25+ridges)*.6;col+=vec3(.52,.015,.025)*red;float fog=smoothstep(5.,48.,-p.y);col=mix(col,vec3(.13,.24,.31),fog*.94);gl_FragColor=vec4(col,1.);}`});
 const ocean=mesh(new THREE.PlaneGeometry(170,150,260,230),oceanMat,0,-.43,-20);ocean.rotation.x=-Math.PI/2;ocean.castShadow=false;ocean.receiveShadow=false;
 oceanMat.transparent=true;oceanMat.fragmentShader=oceanMat.fragmentShader.replace('crest*.73','crest*.46').replace('vec3(.038,.145,.209)','vec3(.052,.17,.233)').replace('gl_FragColor=vec4(col,1.);','gl_FragColor=vec4(col,smoothstep(-16.5,-11.8,p.y));');
-oceanMat.fragmentShader=oceanMat.fragmentShader.replace('vec2(7.,2.9)','vec2(3.5,-.3)').replace('vec2(-5.1,1.8)','vec2(-7.3,-1.1)');
+oceanMat.fragmentShader=oceanMat.fragmentShader.replace('vec2(7.,2.9)','vec2(3.5,-.3)');
 oceanMat.fragmentShader=oceanMat.fragmentShader.replace('smoothstep(-16.5,-11.8,p.y)','smoothstep(horizonFade.x,horizonFade.y,p.y)');
 
 // Distant drowned architecture. Broken towers are silhouettes in the sea mist.
@@ -49,7 +51,8 @@ export const raft=raftPresenter.root;raft.position.set(-7.3,0,-1.1);scene.add(ra
 guardian.position.set(.6,-.9,-9);guardian.scale.setScalar(.55);
 silhouette.color.set('#1b3647');silhouette.roughness=1;eye.material.toneMapped=false;
 raftPresenter.sync({cells:Array.from({length:12},(_,i)=>({id:`cell-${i%4}-${Math.floor(i/4)}`,x:i%4,z:Math.floor(i/4),state:'intact',label:`${i%4+1}-${Math.floor(i/4)+1}`})),units:[],defense:[],logistics:[]});
-addEventListener('pagehide',()=>{raftPresenter.dispose();raftResources.dispose();},{once:true});
+const waterContact=createWaterContact();scene.add(waterContact.mesh);waterContact.sync(raftPresenter.getContactRects());
+addEventListener('pagehide',()=>{waterContact.dispose();raftPresenter.dispose();raftResources.dispose();},{once:true});
 
 // A red whirlpool with several independent turbulent spiral arms.
 const vortex=new THREE.Group();vortex.position.set(3.5,-.2,2.9);scene.add(vortex);
@@ -70,15 +73,15 @@ export function setSceneSelection(){} // Compatibility: cell picking no longer r
 export function setSceneSettings(s){settings={...settings,...s};renderer.setPixelRatio(settings.quality==='high'?Math.min(devicePixelRatio,1.7):1);}
 let settings={motion:true,quality:'high'};let pointer={x:0,y:0};
 export function setPointer(x,y){pointer={x,y}}
-export function resizeScene(w,h){renderer.setSize(w,h);}
+export function resizeScene(w,h){renderer.setSize(w,h);cameraView.resize(w/h);}
 let last=0;const start=performance.now();
-function animate(now){requestAnimationFrame(animate);if(now-last<1000/(settings.quality==='high'?45:30))return;last=now;const t=settings.motion?(now-start)/1000:0;oceanMat.uniforms.time.value=t;vortexMat.uniforms.time.value=t;raft.rotation.z=Math.sin(t*.65)*.009;raft.rotation.x=Math.sin(t*.8)*.006;raft.position.y=Math.sin(t*.8)*.037;particles.rotation.y=-t*.14;eye.material.color.setHSL(.51,.6,.56+Math.sin(t)*.07);raftPresenter.decorations.light.intensity=3+Math.sin(t*7)*.3;if(settings.motion){camera.position.x=pointer.x*.12;camera.lookAt(pointer.x*.08,0,-1.4+pointer.y*.07)}renderer.render(scene,camera)}requestAnimationFrame(animate);
+function animate(now){requestAnimationFrame(animate);if(now-last<1000/(settings.quality==='high'?45:30))return;last=now;const t=settings.motion?(now-start)/1000:0;oceanMat.uniforms.time.value=t;vortexMat.uniforms.time.value=t;const pose=sampleRaftPose(raft.position.x,raft.position.z,raftPresenter.fit.width*raftPresenter.fit.scale,raftPresenter.fit.depth*raftPresenter.fit.scale,t);raft.rotation.z=pose.roll;raft.rotation.x=pose.pitch;raft.position.y=pose.y;waterContact.update(t);particles.rotation.y=-t*.14;eye.material.color.setHSL(.51,.6,.56+Math.sin(t)*.07);raftPresenter.decorations.light.intensity=3+Math.sin(t*7)*.3;if(settings.motion){cameraView.updatePointer(pointer.x,pointer.y)}renderer.render(scene,camera)}requestAnimationFrame(animate);
 renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();window.dispatchEvent(new CustomEvent('scene-error',{detail:'画面连接中断，请刷新页面重试。'}))});
 export function sceneInfo(){return{threeRevision:THREE.REVISION,objects:scene.children.length,geometries:renderer.info.memory.geometries,triangles:renderer.info.render.triangles,tiles:raftPresenter.cells.size,raftSummary:raftPresenter.summary,raftScale:raftPresenter.fit.scale,canvasWidth:renderer.domElement.width,canvasHeight:renderer.domElement.height}}
 window.sceneInfo=sceneInfo;
 
 // No rule writes, state entities never hold model or texture references.
-export function syncDemo(view){raftPresenter.sync(view);}
+export function syncDemo(view){raftPresenter.sync(view);waterContact.sync(raftPresenter.getContactRects());}
 export function getRaftSummary(){return raftPresenter.summary;}
 
 export function getSpringScreenPosition(){camera.updateMatrixWorld();const p=vortex.getWorldPosition(new THREE.Vector3()).project(camera);return {x:(p.x+1)*innerWidth/2,y:(1-p.y)*innerHeight/2};}

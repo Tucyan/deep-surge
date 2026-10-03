@@ -1125,13 +1125,13 @@
     {
       "assetId": "model.raft-root",
       "kind": "procedural-model",
-      "version": "v3",
+      "version": "v6",
       "status": "integrated-tested",
       "generator": {
         "module": "presentation/models/raft-root.js",
         "factory": "createRaftRoot"
       },
-      "sourceRecord": "asset-sources/raft-state-v3.md",
+      "sourceRecord": "asset-sources/camp-contact-v6.md",
       "dependencies": [
         "texture.raft-wood"
       ],
@@ -1139,18 +1139,18 @@
         "scene.js",
         "raft-state.html"
       ],
-      "validation": "Node snapshot/fit/pick/resource tests and browser initial/expanded/damaged/small layouts, 2026-10-03"
+      "validation": "Node camp bounds/resource/fit tests and actual browser perspective views, 2026-10-03"
     },
     {
       "assetId": "presentation.raft-state",
       "kind": "procedural-presentation",
-      "version": "v3",
+      "version": "v6",
       "status": "integrated-tested",
       "generator": {
         "module": "presentation/scene/raft-presenter.js",
         "factory": "createRaftPresenter"
       },
-      "sourceRecord": "asset-sources/raft-state-v3.md",
+      "sourceRecord": "asset-sources/camp-contact-v6.md",
       "dependencies": [
         "model.raft-expansion-panel",
         "model.raft-root",
@@ -1160,7 +1160,7 @@
         "scene.js",
         "raft-state.html"
       ],
-      "validation": "Node snapshot/fit/pick/resource tests and browser initial/expanded/damaged/small layouts, 2026-10-03"
+      "validation": "Node camp bounds/resource/fit tests and actual browser perspective views, 2026-10-03"
     },
     {
       "assetId": "texture.raft-cell-label",
@@ -1208,6 +1208,43 @@
         "demo.css"
       ],
       "validation": "Post-discard stage/transaction/replay tests and browser route screenshot, 2026-10-03"
+    },
+    {
+      "assetId": "presentation.perspective-camera",
+      "kind": "procedural-presentation",
+      "version": "v6",
+      "status": "integrated-tested",
+      "generator": {
+        "module": "presentation/scene/camera.js",
+        "factory": "createPerspectiveView",
+        "configLocation": "CAMERA_CONFIG"
+      },
+      "sourceRecord": "asset-sources/camp-contact-v6.md",
+      "dependencies": [],
+      "consumers": [
+        "scene.js",
+        "presentation/raft-state-showcase.js"
+      ],
+      "validation": "Node wave/contact/float-pick/resource tests and main-scene browser screenshot, 2026-10-03"
+    },
+    {
+      "assetId": "effect.raft-water-contact",
+      "kind": "procedural-presentation",
+      "version": "v6",
+      "status": "integrated-tested",
+      "generator": {
+        "module": "presentation/scene/water-contact.js",
+        "factory": "createWaterContact",
+        "configLocation": "WATER_CONTACT_CONFIG"
+      },
+      "sourceRecord": "asset-sources/camp-contact-v6.md",
+      "dependencies": [
+        "presentation.raft-state"
+      ],
+      "consumers": [
+        "scene.js"
+      ],
+      "validation": "Node wave/contact/float-pick/resource tests and main-scene browser screenshot, 2026-10-03"
     }
   ]
 }
