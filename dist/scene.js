@@ -31,7 +31,7 @@ float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}float
 void main(){vec2 p=vWorld.xz;float t=time*.33;float warp=fbm(p*.55+vec2(t,-t));float n=fbm(p*vec2(1.5,3.)+vec2(warp*3.,t));float band=sin(p.y*3.+sin(p.x*1.8+t)*1.4+warp*4.+t);float ridges=pow(max(0.,1.-abs(band)),7.);float crest=smoothstep(.66,.81,n+band*.12);vec3 col=mix(vec3(.012,.055,.081),vec3(.038,.145,.209),n);col+=ridges*vec3(.07,.15,.18)*(.3+n);col=mix(col,vec3(.34,.5,.58),crest*.73);float foam=smoothstep(.7,.82,fbm(p*vec2(2.8,5.5)+vec2(t,warp*2.)))*ridges;col+=foam*vec3(.36,.45,.5);float raftDist=length((p-vec2(-5.1,1.8))*vec2(.78,1.));float wake=exp(-pow(raftDist-5.5,2.)*4.)*smoothstep(.38,.68,n)*.18;col+=wake*vec3(.5,.65,.7);float vd=length(p-vec2(7.,2.9));float red=exp(-vd*.45)*(.25+ridges)*.6;col+=vec3(.52,.015,.025)*red;float fog=smoothstep(5.,48.,-p.y);col=mix(col,vec3(.13,.24,.31),fog*.94);gl_FragColor=vec4(col,1.);}`});
 const ocean=mesh(new THREE.PlaneGeometry(170,150,260,230),oceanMat,0,-.43,-20);ocean.rotation.x=-Math.PI/2;ocean.castShadow=false;ocean.receiveShadow=false;
 oceanMat.transparent=true;oceanMat.fragmentShader=oceanMat.fragmentShader.replace('crest*.73','crest*.46').replace('vec3(.038,.145,.209)','vec3(.052,.17,.233)').replace('gl_FragColor=vec4(col,1.);','gl_FragColor=vec4(col,smoothstep(-16.5,-11.8,p.y));');
-oceanMat.fragmentShader=oceanMat.fragmentShader.replace('vec2(7.,2.9)','vec2(7.,-.3)').replace('vec2(-5.1,1.8)','vec2(-5.1,-1.25)');
+oceanMat.fragmentShader=oceanMat.fragmentShader.replace('vec2(7.,2.9)','vec2(3.5,-.3)').replace('vec2(-5.1,1.8)','vec2(-7.3,-1.1)');
 oceanMat.fragmentShader=oceanMat.fragmentShader.replace('smoothstep(-16.5,-11.8,p.y)','smoothstep(horizonFade.x,horizonFade.y,p.y)');
 
 // Distant drowned architecture. Broken towers are silhouettes in the sea mist.
@@ -45,14 +45,14 @@ const guardian=new THREE.Group();guardian.position.set(1.3,0,-29);scene.add(guar
 // The root camp is decorative. Playable deck panels are entirely snapshot-driven.
 const raftResources=createRaftResources({seed:2187});
 const raftPresenter=createRaftPresenter({resources:raftResources,createLabel:createCellLabel});
-export const raft=raftPresenter.root;raft.position.set(-3.8,0,-1.1);scene.add(raft);
+export const raft=raftPresenter.root;raft.position.set(-7.3,0,-1.1);scene.add(raft);
 guardian.position.set(.6,-.9,-9);guardian.scale.setScalar(.55);
 silhouette.color.set('#1b3647');silhouette.roughness=1;eye.material.toneMapped=false;
 raftPresenter.sync({cells:Array.from({length:12},(_,i)=>({id:`cell-${i%4}-${Math.floor(i/4)}`,x:i%4,z:Math.floor(i/4),state:'intact',label:`${i%4+1}-${Math.floor(i/4)+1}`})),units:[],defense:[],logistics:[]});
 addEventListener('pagehide',()=>{raftPresenter.dispose();raftResources.dispose();},{once:true});
 
 // A red whirlpool with several independent turbulent spiral arms.
-const vortex=new THREE.Group();vortex.position.set(7,-.2,2.9);scene.add(vortex);
+const vortex=new THREE.Group();vortex.position.set(3.5,-.2,2.9);scene.add(vortex);
 vortex.position.z=-.3;
 const vortexMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,uniforms:{time:{value:0}},vertexShader:`varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,fragmentShader:`varying vec2 vUv;uniform float time;void main(){vec2 p=(vUv-.5)*2.;float r=length(p);float a=atan(p.y,p.x);float wave=sin(r*39.+a*4.-time*2.1+sin(a*8.+r*20.)*.8);float strand=pow(max(0.,wave),12.);float ring=exp(-abs(r-.29)*37.)+exp(-abs(r-.61)*42.)*.55;float fade=smoothstep(1.,.65,r);float alpha=(strand*.85+ring*.7+exp(-r*3.)*.15)*fade;gl_FragColor=vec4(vec3(1.,.026+strand*.12,.008)*alpha,alpha);}`});
 const pool=mesh(new THREE.PlaneGeometry(8.8,8.8),vortexMat,0,.015,0,vortex);pool.rotation.x=-Math.PI/2;pool.castShadow=false;

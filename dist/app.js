@@ -1,14 +1,14 @@
-import {createSession} from './game/session.js?v=raft-state-v3';
-import {CARDS,RECIPES,NODES,MONSTERS,EQUIPMENT,MATERIAL_NAMES} from './game/content/catalog.js';
+import {createSession} from './game/session.js?v=navigation-v4';
+import {CARDS,RECIPES,NODES,MONSTERS,EQUIPMENT,MATERIAL_NAMES} from './game/content/catalog.js?v=navigation-v4';
 import {cardArt,nodeArt,monsterArt} from './presentation/art.js';
-import {syncDemo,setPointer,resizeScene,setSceneSettings,getSpringScreenPosition,getRaftSummary,pickTile} from './scene.js?v=raft-state-v3';
+import {syncDemo,setPointer,resizeScene,setSceneSettings,getSpringScreenPosition,getRaftSummary,pickTile} from './scene.js?v=navigation-v4';
 
 const $=selector=>document.querySelector(selector);
 const escape=text=>String(text??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let session=null,view=null,selectedCandidate=null,armedAnchor=null,dialogMode=null,toastTimer;
 let settings={motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,quality:'high'};
 setSceneSettings(settings);
-const phaseNames={VoyageSupply:'涌泉抽牌',VoyageAction:'航行行动',VoyagePreparation:'航行准备',NodeResolution:'节点事件',BattleAction:'战斗行动',BattleSupply:'战术补给',BattleDiscard:'战斗轮末弃牌',VoyageDiscard:'航行轮末弃牌',Completed:'第一层完成',Failed:'航行失败'};
+const phaseNames={VoyageNavigation:'选择下一节点',VoyageSupply:'涌泉抽牌',VoyageAction:'航行行动',VoyagePreparation:'航行准备',NodeResolution:'节点事件',BattleAction:'战斗行动',BattleSupply:'战术补给',BattleDiscard:'战斗轮末弃牌',VoyageDiscard:'航行轮末弃牌',Completed:'第一层完成',Failed:'航行失败'};
 const materialText=id=>CARDS[id].materials.map(m=>MATERIAL_NAMES[m]).join(' / ');
 function toast(message){$('#toast').textContent=message;$('#toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('visible'),3800);}
 function commandButton(label,command,{className='',disabled=false,title=''}={}){
@@ -32,7 +32,6 @@ function render(){
  $('#hand-count').textContent=`手牌 ${view.hand.length} / ${view.config.handLimit}`;
  const discard=view.phase.endsWith('Discard');$('#hand-tip').textContent=discard?`请弃置 ${view.hand.length-view.config.handLimit} 张：点击即弃牌`:'点击物资查看用途 · 工具保留，制作与使用分别付费';
  $('#hand').innerHTML=view.hand.map(card=>{const def=CARDS[card.definitionId],image=cardArt[card.definitionId]??cardArt[card.definitionId==='T01'?'C18':'C01'];return `<button class="card ${discard?'discard':''}" data-card="${card.id}" aria-label="${escape(def.name)}${discard?'，弃置':'，查看用途'}"><img src="${image}" alt="" loading="lazy"><span class="cost">${def.cost??'—'}</span>${card.temporary?'<span class="temp">本场临时</span>':''}<h3>${escape(def.name)}</h3><span class="desc">${escape(def.description)}</span><span class="material">${materialText(card.definitionId)}${card.definitionId==='C09'?` · 鲜度 ${3-card.age}轮`:''}</span></button>`;}).join('')||'<div class="empty-hand">手牌已空，谨慎使用基础指令与下一轮补给。</div>';
- $('#destinations').innerHTML=view.phase==='VoyagePreparation'?view.candidates.map(node=>`<button class="destination ${selectedCandidate===node.id?'selected':''}" data-node="${node.id}" aria-label="选择航行候选：${node.name}"><img src="${nodeArt[node.nodeId]}" alt=""><strong>${node.name}</strong><small>${escape(node.risk)}</small>${node.details!==null?`<small class="detail">详情：${escape(node.details||'无额外物资')}</small>`:''}</button>`).join(''):'';
  renderPanel();renderBattle();
  const terminal=['Completed','Failed'].includes(view.phase);$('#end-screen').hidden=!terminal;
  if(terminal)$('#end-screen').innerHTML=`<div class="end-content"><div class="eyebrow">VOYAGE / ${view.phase==='Completed'?'SURVIVED':'LOST'}</div><h2>${view.phase==='Completed'?'第一层 · 航行完成':'灯火熄灭，航行终止'}</h2><p>${view.phase==='Completed'?'五次航行已完成，最后的生存结算与弃牌均已处理。':'生命归零。本次航行留下的经验，会成为下一次出发的准备。'}<br>生命 ${view.health}/30 · 饱食 ${view.hunger} · 水分 ${view.hydration} · SAN ${view.sanity}<br>完好筏格 ${view.cells.filter(c=>c.state==='intact').length} / ${view.cells.length} · 种子 ${view.seed}</p><button data-ui="restart" class="primary">重新航行</button><button data-ui="menu">返回开始界面</button><button data-ui="log">查看航海日志</button><p class="disclaimer">第一版 Demo · 本层不包含 Boss</p></div>`;
@@ -45,11 +44,16 @@ function renderPanel(){
   content+=`<p>${view.phase==='VoyageSupply'?'选择一张基本物资，另两张已固定的补给一起入手。':'第二回合起每回合选择一张临时战术牌，战后清除，不能制作永久物资。'}</p>`;
   content+=view.supply.choices.map(id=>commandButton(CARDS[id].name,{type:'ChooseSupply',definitionId:id},{className:'choice'})).join('');
   if(view.supply.fixed.length)content+=`<p>固定补给：${view.supply.fixed.map(id=>CARDS[id].name).join('、')}</p>`;
+ }else if(view.phase==='VoyageNavigation'){
+  content+=`<p>${view.voyageIndex===1?'选择出发节点，再确认移动。':'结算与弃牌已完成，请选择下一节点。'}</p>`;
+  content+='<div class="panel-nodes" role="region" aria-label="下一批节点">'+view.candidates.map(node=>`<button class="destination ${selectedCandidate===node.id?'selected':''}" data-node="${node.id}" aria-label="选择航行候选：${escape(node.name)}" aria-pressed="${selectedCandidate===node.id}"><img src="${nodeArt[node.nodeId]}" alt=""><div><strong>${escape(node.name)}</strong><small>${escape(node.risk)}</small>${node.details!==null?`<small class="detail">详情：${escape(node.details||'无额外物资')}</small>`:''}</div></button>`).join('')+'</div>';
+  const node=view.candidates.find(c=>c.id===selectedCandidate);
+  if(armedAnchor)content+='<p>折叠锚已选择：移动时付 1 AP，抵消首次环境筏格损伤。</p>';
+  content+=node?commandButton('移动至 '+node.name,{type:'SubmitVoyage',candidateId:node.id,protectionCardId:armedAnchor},{className:'primary navigation-move'}):'<button class="navigation-move" disabled>选择一个节点后移动</button>';
  }else if(view.phase==='VoyagePreparation'){
-  const node=view.candidates.find(c=>c.id===selectedCandidate);content+=`<p>可先饮水、进食、制作、安装或维修。每航行轮结算饱食与水分各 -10。</p><p>${node?`已选：${node.name}`:'从左侧选择一个候选，提交后其他候选失效。'}</p>`;
-  if(armedAnchor)content+='<p>折叠锚已选择：提交时付 1 AP，可取消首次环境筏格损伤。</p>';
-  content+=node?commandButton('航行至 '+node.name,{type:'SubmitVoyage',candidateId:node.id,protectionCardId:armedAnchor},{className:'primary'}):'<button disabled>先选择航行候选</button>';
-  content+='<button data-ui="craft">查看确定配方</button><button data-ui="raft">查看设备与筏格</button><p class="muted">本版无自动存档，刷新会重开。</p>';
+  content+=`<p>已到达：${NODES[view.node.nodeId].name}。可先饮水、进食、制作、安装或维修。</p>`;
+  content+=commandButton('处理当前节点 · '+NODES[view.node.nodeId].name,{type:'EnterNode'},{className:'primary'});
+  content+='<button data-ui="craft">查看确定配方</button><button data-ui="raft">查看设备与筏格</button><p class="muted">结束当前节点行动并完成轮末弃牌后，才能移动到下一节点。</p>';
  }else if(view.phase==='VoyageAction'){content+='<p>节点已处理。剩余 AP 可用于进食、饮水、合成、部署、维修和领取产物；超过十张也可继续行动。</p>'+commandButton('结束行动 · 结算与弃牌',{type:'EndVoyageAction'},{className:'primary'})+'<button data-ui="craft">查看确定配方</button><button data-ui="raft">管理设备</button>';
  }else if(view.phase==='NodeResolution'){
   const def=NODES[view.node.nodeId];content+=`<p>${def.name} · ${def.risk}</p>`;let options=def.options;
@@ -62,16 +66,16 @@ function renderPanel(){
   content+=view.enemies.map(e=>commandButton(`长杆驱离 → ${MONSTERS[e.definitionId].name}（2 AP / 2伤害）`,{type:'PoleRepel',enemyId:e.id})).join('');
   content+=commandButton('紧急防护（1 AP）',{type:'EmergencyGuard'})+commandButton('撤退：生命 -4，无奖励',{type:'Retreat'});
   content+='<p class="muted">长杆每回合一次，只对无限制敌人有效；敌方意图见各航道。</p>';
- }else if(view.phase.endsWith('Discard'))content+='<p>手牌超限。点击下方卡牌弃置，达到 10 张后自动继续。此时不能使用物资或制作。</p>';
+ }else if(view.phase.endsWith('Discard'))content+='<p>手牌超限。点击下方卡牌弃置，达到 10 张后自动继续。此时不能使用物资、制作或移动。</p>'+(view.phase==='VoyageDiscard'?'<p>完成弃牌后，这里显示下一批节点；最后一轮则完成本层。</p>':'');
  else content+='<p>本局已结束。可查看日志或重新开始。</p>';
- $('#panel').innerHTML=content;
+ $('#panel').innerHTML=content;$('#panel').classList.toggle('navigation-panel',view.phase==='VoyageNavigation');
 }
 function renderBattle(){
  if(!['BattleAction','BattleSupply','BattleDiscard'].includes(view.phase)){$('#battle').innerHTML='';return;}
  $('#battle').innerHTML=Array.from({length:4},(_,lane)=>{const enemy=view.enemies.find(e=>e.lane===lane),unit=view.units.find(u=>u.slotKind==='defense'&&u.slotIndex===lane);return `<div class="lane"><div class="lane-title">航道 ${lane+1}</div>${enemy?`<img src="${monsterArt[enemy.definitionId]}" alt="${MONSTERS[enemy.definitionId].name}"><b>${MONSTERS[enemy.definitionId].name}</b><div class="hp">生命 ${enemy.health}/${MONSTERS[enemy.definitionId].health}</div><div class="status">${enemy.wet?'浸湿 ':''}${enemy.bound?'束缚 ':''}${enemy.baited?'诱饵 ':''}</div><p>有效材料：${MONSTERS[enemy.definitionId].materials?.map(m=>MATERIAL_NAMES[m]).join(' / ')??'无限制'}<br>${MONSTERS[enemy.definitionId].intent}</p>`:'<div class="empty">海面暂时平静</div>'}<div class="unit">${unit?`${CARDS[unit.definitionId].name} · ${unit.structure===0?'残骸':unit.operational?`结构 ${unit.structure}`:'承载格破损，停用'}`:'防卫位空缺'}</div></div>`;}).join('');
 }
 function renderDialog(){const mode=dialogMode;if(!mode)return;let html='';
- if(mode.kind==='help')html=`<h2>航行指南</h2><p>目标：完成五次航行并活下来。本层没有 Boss。</p><ol><li>每轮从右侧涌泉随机抽三张牌，获得 3 AP；可进食、饮水、制作、安装和维修。</li><li>从左侧 2～3 个候选中选择一个，再提交航行。事件需要选择一次选项，战斗有独立 AP。</li><li>战斗时看清材料限制。火把对付水母，放电包对付绝壳蟹。每回合设备先攻击，之后敌人执行意图。</li><li>选择手牌查看可用目标；合成只消耗原料与制作 AP，工具保留。制作出的物资使用时仍需 AP。</li><li>每航行轮饱食、水分各 -10，归零会扣生命；战斗不重复扣饥渴。</li><li>破损筏格停用设备，两个后续航行轮未修就脱落；漂流木或修补包可修破损格，不能补建缺口。</li><li>行动点耗尽或主动结束行动后才开放弃牌；行动期间允许超过 10 张。节点奖励入手不立即弃牌，可使用剩余 AP。战斗第二回合起可撤退，代价是生命 -4 且无奖励。</li></ol><p>鼠标点击按钮操作；手牌横向滚动查看更多。暂无存档，刷新和重开会清除当前局。数值为首版试测。</p>`;
+ if(mode.kind==='help')html=`<h2>航行指南</h2><p>目标：完成五次航行并活下来。本层没有 Boss。</p><ol><li>每轮从右侧涌泉随机抽三张牌，获得 3 AP；可进食、饮水、制作、安装和维修。</li><li>首次出发、或上一轮结算与弃牌检查完成后，在右侧菜单选择节点并移动；移动后领取本轮涌泉，准备好再处理当前节点。事件需要选择一次选项，战斗有独立 AP。</li><li>战斗时看清材料限制。火把对付水母，放电包对付绝壳蟹。每回合设备先攻击，之后敌人执行意图。</li><li>选择手牌查看可用目标；合成只消耗原料与制作 AP，工具保留。制作出的物资使用时仍需 AP。</li><li>每航行轮饱食、水分各 -10，归零会扣生命；战斗不重复扣饥渴。</li><li>破损筏格停用设备，两个后续航行轮未修就脱落；漂流木或修补包可修破损格，不能补建缺口。</li><li>行动点耗尽或主动结束行动后才开放弃牌；行动期间允许超过 10 张。节点奖励入手不立即弃牌，可使用剩余 AP。战斗第二回合起可撤退，代价是生命 -4 且无奖励。</li></ol><p>鼠标点击按钮操作；手牌横向滚动查看更多。暂无存档，刷新和重开会清除当前局。数值为首版试测。</p>`;
  else if(mode.kind==='settings')html=`<h2>视觉设置</h2><p>视觉设置不影响规则结算。</p><div class="buttons"><button data-ui="motion">随波动态：${settings.motion?'开启':'关闭'}</button><button data-ui="quality">画质：${settings.quality==='high'?'高':'低'}</button></div><a href="raft-assets.html" target="_blank" style="color:#dfc68e">查看独立木筏资产工坊</a><br><a href="raft-state.html" target="_blank" style="color:#dfc68e">查看木筏状态映射样例（含扩展/战损）</a>`;
  else if(mode.kind==='log')html=`<h2>航海日志 · 种子 ${view?.seed??'—'}</h2><div class="log-list">${view?.log.slice().reverse().map(line=>`<p>${escape(line)}</p>`).join('')??'<p>还未开始航行。</p>'}</div>`;
  else if(mode.kind==='craft')html='<h2>确定合成 · 制作与使用分别收费</h2><p>自动选取最早入手的匹配原料；工具保留，临时战术牌不可制作永久物资。</p>'+Object.entries(RECIPES).map(([id,r])=>`<div class="recipe"><div><strong>${id} · ${CARDS[r.output].name}</strong><p>工具：${CARDS[r.tool].name}<br>消耗：${r.ingredients.map(c=>CARDS[c].name).join(' + ')}<br>制作 ${r.cost} AP · 后续使用 ${CARDS[r.output].cost} AP</p></div>${commandButton('制作 '+CARDS[r.output].name,{type:'Craft',recipeId:id})}</div>`).join('');
@@ -98,9 +102,9 @@ function cardDialog(cardId){const card=view.hand.find(c=>c.id===cardId);if(!card
   return mismatch?`<button data-ineffective="${encodeURIComponent(JSON.stringify(command))}">航道 ${e.lane+1} · ${MONSTERS[e.definitionId].name}（材料不匹配）</button>`:commandButton(`航道 ${e.lane+1} · ${MONSTERS[e.definitionId].name}`,command);
  }).join('');
  if(['C22','C24'].includes(id))html+=commandButton(id==='C22'?'重掷本轮全部候选':'揭示本轮候选详情',cmd({kind:'candidates'}));
- if(id==='C23')html+=`<button data-anchor="${cardId}" ${view.phase!=='VoyagePreparation'?'disabled':''}>${armedAnchor===cardId?'取消':'选择'}提交航行时下锚（1 AP）</button>`;
+ if(id==='C23')html+=`<button data-anchor="${cardId}" ${view.phase!=='VoyageNavigation'?'disabled':''}>${armedAnchor===cardId?'取消':'选择'}移动时下锚（1 AP）</button>`;
  if(def.cost===null)html+='<p>此卡提供工具条件或制作原料。到合成界面查看可用配方。</p><button data-ui="craft">查看配方</button>';
- return html+'</div><p class="disclaimer">不可用操作变灰，悬停可查看原因。动作只在航行准备或战斗行动阶段开放。</p>';
+ return html+'</div><p class="disclaimer">不可用操作变灰，悬停可查看原因。导航工具在节点选择阶段使用；其他物资在准备、航行行动或战斗行动阶段使用。</p>';
 }
 
 document.addEventListener('click',event=>{

@@ -1,5 +1,5 @@
-import {NODES,CARDS} from '../content/catalog.js';
-import {rng,uid,log,grant,requireRule,pay,consume,operational,advanceProduction,randomDamage,loseCell,harm} from './common.js';
+import {NODES,CARDS} from '../content/catalog.js?v=navigation-v4';
+import {rng,uid,log,grant,requireRule,pay,consume,operational,advanceProduction,randomDamage,loseCell,harm} from './common.js?v=navigation-v4';
 export function generateCandidates(state,count=2+rng(state,'nodes',2)){
  const eligible=state.config.nodePool.filter(id=>id!=='N07'||state.energyUnlocked).filter(id=>id!=='N06'||state.heatOpportunity);
  requireRule(eligible.length>=2,'节点池需要至少两种合格节点');
@@ -18,7 +18,7 @@ export function generateCandidates(state,count=2+rng(state,'nodes',2)){
  if(chosen.includes('N02'))state.heatOpportunity=true;
 }
 function springCard(state){const entries=Object.entries(state.config.springWeights);const total=entries.reduce((n,[,weight])=>n+weight,0);let roll=rng(state,'supply',total);for(const [id,weight] of entries){if(roll<weight)return id;roll-=weight;}throw new Error('无效涌泉卡池');}
-export function beginVoyage(state){state.phase='VoyageSupply';state.ap=state.config.ap;state.rerollUsed=false;state.revealed=false;state.node=null;state.battleTurn=null;state.enemies=[];state.guard=false;generateCandidates(state);state.supply={cards:Array.from({length:3},()=>springCard(state))};log(state,`第 ${state.voyageIndex}/${state.config.voyages} 次航行：涌泉已凝聚三张牌，等待抽取。`);}
+export function beginVoyage(state){state.phase='VoyageNavigation';state.ap=state.config.ap;state.rerollUsed=false;state.revealed=false;state.node=null;state.battleTurn=null;state.enemies=[];state.guard=false;generateCandidates(state);state.supply={cards:Array.from({length:3},()=>springCard(state))};log(state,`第 ${state.voyageIndex}/${state.config.voyages} 次航行：选择目标节点并移动后，领取本轮涌泉。`);}
 export function drawSpring(state){requireRule(state.phase==='VoyageSupply','本轮涌泉已抽取或当前不能抽牌');grant(state,state.supply.cards);state.supply=null;state.phase='VoyagePreparation';log(state,'从涌泉抽出三张随机卡，不消耗 AP。');}
 export function chooseSupply(state,id){requireRule(state.phase==='BattleSupply','当前没有战术补给选择');requireRule(state.supply.choices.includes(id),'无效补给选项');grant(state,[id,...state.supply.fixed],true);state.supply=null;state.phase='BattleAction';}
 export function finishNodeActions(state){state.phase='VoyageAction';if(state.ap===0)settleVoyage(state);else log(state,'节点结束：仍可使用剩余 AP；主动结束行动后结算与弃牌。');}

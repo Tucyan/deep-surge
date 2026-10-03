@@ -1062,19 +1062,19 @@
     {
       "assetId": "effect.spring-vortex",
       "kind": "procedural-presentation",
-      "version": "v2",
+      "version": "v4",
       "status": "integrated-tested",
       "generator": {
         "module": "scene.js",
         "block": "vortex initialization",
         "visualSeed": 2187
       },
-      "sourceRecord": "asset-sources/spring-v2.md",
+      "sourceRecord": "asset-sources/navigation-v4.md",
       "dependencies": [],
       "consumers": [
         "index.html"
       ],
-      "validation": "Static source checks and browser interaction/screenshot, 2026-10-03"
+      "validation": "Vortex, particles, rocks and light shifted with parent; browser layout inspection"
     },
     {
       "assetId": "effect.spring-card-emergence",
@@ -1178,6 +1178,36 @@
         "raft-state.html"
       ],
       "validation": "Node snapshot/fit/pick/resource tests and browser initial/expanded/damaged/small layouts, 2026-10-03"
+    },
+    {
+      "assetId": "presentation.navigation-panel",
+      "kind": "procedural-presentation",
+      "version": "v4",
+      "status": "integrated-tested",
+      "generator": {
+        "module": "app.js",
+        "block": "renderPanel VoyageNavigation"
+      },
+      "sourceRecord": "asset-sources/navigation-v4.md",
+      "dependencies": [
+        "image.node.n01",
+        "image.node.n02",
+        "image.node.n03",
+        "image.node.n04",
+        "image.node.n05",
+        "image.node.n06",
+        "image.node.n07",
+        "image.node.n08",
+        "image.node.n09",
+        "image.node.n10",
+        "image.node.n11",
+        "image.node.n12"
+      ],
+      "consumers": [
+        "index.html",
+        "demo.css"
+      ],
+      "validation": "Post-discard stage/transaction/replay tests and browser route screenshot, 2026-10-03"
     }
   ]
 }

@@ -1,8 +1,8 @@
-import {CONFIG,CARDS,NODES,MONSTERS} from './content/catalog.js';
-import {copy,requireRule,grant,uid,log,consume,pay,operational} from './rules/common.js';
-import {beginVoyage,chooseSupply,resolveNode,finishDiscard,drawSpring,finishNodeActions,settleVoyage} from './rules/voyage.js';
-import {beginBattle,battleCommand,endBattleTurn} from './rules/battle.js';
-import {craft,play,unitCommand} from './rules/cards.js';
+import {CONFIG,CARDS,NODES,MONSTERS} from './content/catalog.js?v=navigation-v4';
+import {copy,requireRule,grant,uid,log,consume,pay,operational} from './rules/common.js?v=navigation-v4';
+import {beginVoyage,chooseSupply,resolveNode,finishDiscard,drawSpring,finishNodeActions,settleVoyage} from './rules/voyage.js?v=navigation-v4';
+import {beginBattle,battleCommand,endBattleTurn} from './rules/battle.js?v=navigation-v4';
+import {craft,play,unitCommand} from './rules/cards.js?v=navigation-v4';
 
 function invariant(state){requireRule(state.health>=0&&state.health<=30,'生命不变量');requireRule(state.ap>=0&&state.ap<=state.config.ap,'AP 不变量');const entities=[...state.hand,...state.units,...state.units.filter(u=>u.stored).map(u=>u.stored),...state.enemies];requireRule(new Set(entities.map(e=>e.id)).size===entities.length,'重复实体 ID');for(const c of state.hand)requireRule(CARDS[c.definitionId],'未知卡定义');requireRule(new Set(state.units.map(u=>u.slotKind+u.slotIndex)).size===state.units.length,'重复设备槽位');for(const u of state.units)requireRule(state.cells.some(c=>c.id===u.cellId&&c.state!=='lost'),'设备承载格不存在');}
 function execute(state,command){requireRule(!['Completed','Failed'].includes(state.phase),'本局已结束');const type=command.type;
@@ -12,11 +12,14 @@ function execute(state,command){requireRule(!['Completed','Failed'].includes(sta
  else if(type==='Craft')craft(state,command);
  else if(type==='PlayCard')play(state,command);
  else if(type==='SubmitVoyage'){
-  requireRule(state.phase==='VoyagePreparation','当前不能提交航行');const node=state.candidates.find(c=>c.id===command.candidateId);requireRule(node,'候选已失效');
+  requireRule(state.phase==='VoyageNavigation','只能在轮末弃牌检查通过后选择下一节点');const node=state.candidates.find(c=>c.id===command.candidateId);requireRule(node,'候选已失效');
   const protection=command.protectionCardId?state.hand.find(c=>c.id===command.protectionCardId&&c.definitionId==='C23'):null;
   if(command.protectionCardId){requireRule(protection,'折叠锚不存在');pay(state,1);consume(state,[protection.id]);}
   state.node={...node,protected:!!protection};state.candidates=[];log(state,`驶向 ${NODES[node.nodeId].name}${protection?'，已下锚保护':''}。`);
-  if(NODES[node.nodeId].kind==='battle')beginBattle(state);else state.phase='NodeResolution';
+  state.phase='VoyageSupply';
+ }else if(type==='EnterNode'){
+  requireRule(state.phase==='VoyagePreparation'&&state.node,'当前没有已到达的节点');
+  if(NODES[state.node.nodeId].kind==='battle')beginBattle(state);else state.phase='NodeResolution';
  }else if(type==='ResolveNodeOption')resolveNode(state,command.optionId);
  else if(['EndBattleTurn','Retreat','PoleRepel','EmergencyGuard'].includes(type))battleCommand(state,command);
  else if(['CollectProduction','DismantleWreck','RebuildWreck','MoveDefense','SwapDefense'].includes(type))unitCommand(state,command);
@@ -46,7 +49,7 @@ function sessionProbeCraft(state,recipeId){try{const draft=copy(state);draft.pha
 function session(initial){let state=initial;
  const preview=command=>{const draft=copy(state);try{execute(draft,command);return {allowed:true,apCost:Math.max(0,state.ap-draft.ap),errors:[]};}catch(error){return {allowed:false,apCost:0,errors:[{message:error.message}]};}};
  return {getSnapshot:()=>copy(state),getView:()=>{
-  const view=copy(state);delete view.random;delete view.nextId;if(view.phase==='VoyageSupply')view.supply={count:3};
+  const view=copy(state);delete view.random;delete view.nextId;if(view.supply?.cards)view.supply={count:3};
   view.candidates=view.candidates.map(c=>({id:c.id,nodeId:c.nodeId,name:NODES[c.nodeId].name,risk:(c.nodeId==='N04'&&state.toolboxClaimed?'后续工具箱：只给废铁与蓄电碎片':NODES[c.nodeId].risk)+(responseGap(state,c)?'；'+responseGap(state,c):''),kind:NODES[c.nodeId].kind,details:state.revealed?candidateDetails(state,c):null}));
   view.units=view.units.map(u=>({...u,operational:operational(state,u)}));return view;
  },preview,

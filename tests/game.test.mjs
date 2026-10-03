@@ -5,7 +5,7 @@ import {createSession,restoreSession} from '../dist/game/session.js';
 import {CARDS,RECIPES,NODES,MONSTERS} from '../dist/game/content/catalog.js';
 const act=(session,command)=>{const result=session.dispatch({expectedRevision:session.getSnapshot().revision,command});assert.equal(result.accepted,true,JSON.stringify(result));if(session.getSnapshot().phase==='VoyageAction'){const end=session.dispatch({expectedRevision:session.getSnapshot().revision,command:{type:'EndVoyageAction'}});assert.equal(end.accepted,true);}return session.getSnapshot();};
 // Existing route helpers explicitly end post-node actions; the revision tests exercise that boundary directly.
-const prep=s=>act(s,{type:'DrawSpring'});
+const prep=(s,nodeId)=>{act(s,{type:'SubmitVoyage',candidateId:(s.getSnapshot().candidates.find(c=>c.nodeId===nodeId)??s.getSnapshot().candidates[0]).id});return act(s,{type:'DrawSpring'});};
 
 test('catalog covers all first-layer content; starting supply is one-time and costs are atomic',()=>{
  assert.equal(Object.keys(CARDS).filter(id=>id.startsWith('C')).length,24);assert.equal(Object.keys(RECIPES).length,8);assert.equal(Object.keys(NODES).length,12);assert.equal(Object.keys(MONSTERS).length,3);
@@ -19,7 +19,7 @@ test('catalog covers all first-layer content; starting supply is one-time and co
 test('five safe voyages settle once each and finish only after required discard',()=>{
  const s=createSession(81,{nodePool:['N01','N02'],supplies:['C01']});
  for(let round=1;round<=5;round++){
-  prep(s);const node=s.getSnapshot().candidates.find(c=>c.nodeId==='N01')??s.getSnapshot().candidates[0];act(s,{type:'SubmitVoyage',candidateId:node.id});
+  prep(s,'N01');act(s,{type:'EnterNode'});
   if(s.getSnapshot().phase==='NodeResolution')act(s,{type:'ResolveNodeOption',optionId:'0'});
   if(s.getSnapshot().phase==='VoyageDiscard'){const st=s.getSnapshot();act(s,{type:'DiscardCards',cardIds:st.hand.slice(0,st.hand.length-10).map(c=>c.id)});}
  }
@@ -29,7 +29,7 @@ test('five safe voyages settle once each and finish only after required discard'
 test('save restore and rejected commands preserve RNG and deterministic replay',()=>{
  const a=createSession(2026);prep(a);const b=restoreSession(a.exportSave());assert.deepEqual(a.getSnapshot(),b.getSnapshot());const incompatible=a.exportSave();incompatible.state.randomAlgorithm='unknown-v2';assert.throws(()=>restoreSession(incompatible),/版本/);
  const invalid=a.getSnapshot();assert.equal(a.dispatch({expectedRevision:invalid.revision,command:{type:'PlayCard',cardId:'missing'}}).accepted,false);assert.deepEqual(a.getSnapshot(),invalid);
- const commands=[{type:'SubmitVoyage',candidateId:a.getSnapshot().candidates[0].id}];commands.forEach(c=>{act(a,c);act(b,c)});assert.deepEqual(a.getSnapshot(),b.getSnapshot());
+ const commands=[{type:'EnterNode'}];commands.forEach(c=>{act(a,c);act(b,c)});assert.deepEqual(a.getSnapshot(),b.getSnapshot());
 });
 
 function fixture(change){const save=createSession(17).exportSave();change(save.state);return restoreSession(save);}
@@ -73,7 +73,7 @@ test('rain production, capacity, free collection and food freshness are independ
 });
 
 test('candidate reroll preserves count/AP and supply, preview never advances streams',()=>{
- const s=createSession(23,{initialCards:['C22','C24','C10','C11','C01','C04','C08']});prep(s);const before=s.getSnapshot();const cmd={type:'PlayCard',cardId:before.hand.find(c=>c.definitionId==='C22').id,target:{kind:'candidates'}};assert.equal(s.preview(cmd).allowed,true);assert.deepEqual(s.getSnapshot(),before);act(s,cmd);assert.equal(s.getSnapshot().candidates.length,before.candidates.length);assert.equal(s.getSnapshot().ap,2);assert.equal(s.getSnapshot().hand.length,before.hand.length-1);use(s,'C24',{kind:'candidates'});assert.ok(s.getView().candidates.every(c=>c.details!==null));
+ const s=createSession(23,{initialCards:['C22','C24','C10','C11','C01','C04','C08']});const before=s.getSnapshot();const cmd={type:'PlayCard',cardId:before.hand.find(c=>c.definitionId==='C22').id,target:{kind:'candidates'}};assert.equal(s.preview(cmd).allowed,true);assert.deepEqual(s.getSnapshot(),before);act(s,cmd);assert.equal(s.getSnapshot().candidates.length,before.candidates.length);assert.equal(s.getSnapshot().ap,2);assert.equal(s.getSnapshot().hand.length,before.hand.length-1);use(s,'C24',{kind:'candidates'});assert.ok(s.getView().candidates.every(c=>c.details!==null));
 });
 
 test('starvation loss is capped, mental breakdown and deep tide can fail the run',()=>{

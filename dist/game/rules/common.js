@@ -1,4 +1,4 @@
-import {CARDS,EQUIPMENT} from '../content/catalog.js';
+import {CARDS,EQUIPMENT} from '../content/catalog.js?v=navigation-v4';
 export const copy=value=>structuredClone(value);
 export const requireRule=(condition,message)=>{if(!condition)throw new Error(message);};
 export function rng(state,stream,max){const value=(Math.imul(state.random[stream],1664525)+1013904223)>>>0;state.random[stream]=value;return Math.floor(value/4294967296*max);}

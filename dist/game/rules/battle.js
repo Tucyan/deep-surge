@@ -1,6 +1,6 @@
-import {CARDS,EQUIPMENT,MONSTERS,NODES} from '../content/catalog.js';
-import {uid,log,grant,requireRule,pay,operational,harm,randomDamage} from './common.js';
-import {finishNodeActions,discardPhase} from './voyage.js';
+import {CARDS,EQUIPMENT,MONSTERS,NODES} from '../content/catalog.js?v=navigation-v4';
+import {uid,log,grant,requireRule,pay,operational,harm,randomDamage} from './common.js?v=navigation-v4';
+import {finishNodeActions,discardPhase} from './voyage.js?v=navigation-v4';
 export function matches(materials,enemy){const accepted=MONSTERS[enemy.definitionId].materials;return !accepted||materials.some(m=>accepted.includes(m));}
 export function beginBattle(state){state.phase='BattleAction';state.ap=state.config.ap;state.battleTurn=1;state.guardUsed=false;state.poleUsed=false;state.guard=false;state.enemies=state.node.enemies.map(e=>({...e,id:uid(state,'enemy'),health:MONSTERS[e.definitionId].health,wet:false,bound:false,baited:false,lastBound:-2}));for(const e of state.enemies)state.encounters[e.definitionId]++;log(state,'战斗开始：首回合没有战术补给，AP 刷新为 3。');}
 export function finishBattle(state,victory){state.units=state.units.filter(u=>!u.temporary);state.hand=state.hand.filter(c=>!c.temporary);state.enemies=[];state.guard=false;if(victory){log(state,'战斗胜利，领取节点奖励。');grant(state,NODES[state.node.nodeId].reward);}else log(state,'撤退，无节点奖励。');finishNodeActions(state);}

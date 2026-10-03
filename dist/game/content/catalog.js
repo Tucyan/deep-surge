@@ -52,4 +52,4 @@ export const NODES={
  N11:{name:'漩涡残骸',kind:'environment',risk:'随机外围 1 格轻损伤；折叠锚可保护',options:[{name:'驶入残骸区，取得废铁与蓄电碎片',cards:['C02','C05'],penalty:true}]},
  N12:{name:'冷雾漂流物',kind:'event',risk:'可保守拾取；驱雾需要火把和 1 AP',options:[{name:'保守拾取漂流木',cards:['C01']},{name:'消耗火把驱雾（1 AP）',cards:['C04','C08'],costCard:'C13',cost:1}]},
 };
-export const CONFIG={version:'first-layer-v2',voyages:5,ap:3,handLimit:10,initialCards:['C10','C11','C01','C04','C08','C07','C17'],supplies:['C01','C02','C03','C04','C06','C07','C08','C09','C17','C18'],springWeights:{C01:18,C02:10,C03:8,C04:12,C05:5,C06:7,C07:16,C08:16,C09:5,C17:2,C18:1},nodePool:Object.keys(NODES)};
+export const CONFIG={version:'first-layer-v3',voyages:5,ap:3,handLimit:10,initialCards:['C10','C11','C01','C04','C08','C07','C17'],supplies:['C01','C02','C03','C04','C06','C07','C08','C09','C17','C18'],springWeights:{C01:18,C02:10,C03:8,C04:12,C05:5,C06:7,C07:16,C08:16,C09:5,C17:2,C18:1},nodePool:Object.keys(NODES)};
