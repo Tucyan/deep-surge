@@ -1,17 +1,37 @@
-import {NODES,CARDS} from '../content/catalog.js?v=navigation-v4';
-import {rng,uid,log,grant,requireRule,pay,consume,operational,advanceProduction,randomDamage,loseCell,harm} from './common.js?v=navigation-v4';
+import {NODES,CARDS} from '../content/catalog.js?v=balance-v5';
+import {rng,uid,log,grant,requireRule,pay,consume,operational,advanceProduction,randomDamage,loseCell,harm} from './common.js?v=balance-v5';
 export function generateCandidates(state,count=2+rng(state,'nodes',2)){
- const eligible=state.config.nodePool.filter(id=>id!=='N07'||state.energyUnlocked).filter(id=>id!=='N06'||state.heatOpportunity);
- requireRule(eligible.length>=2,'节点池需要至少两种合格节点');
- const supplies=eligible.filter(id=>NODES[id].kind==='supply');
- const chosen=[];
- if(supplies.length)chosen.push(!state.toolboxClaimed&&supplies.includes('N04')?'N04':supplies[rng(state,'nodes',supplies.length)]);
- if(!chosen.length)chosen.push(eligible.filter(id=>NODES[id].kind!=='battle')[0]);
- requireRule(chosen[0],'节点池需要非战斗候选');
- while(chosen.length<Math.min(count,eligible.length)){const pool=eligible.filter(id=>!chosen.includes(id));chosen.push(pool[rng(state,'nodes',pool.length)]);}
+ const eligible = state.config.nodePool
+  .filter(id => id !== 'N07' || state.energyUnlocked)
+  .filter(id => id !== 'N06' || state.heatOpportunity)
+  .filter(id => id !== 'N04' || !state.toolboxClaimed)
+  .filter(id => id !== 'N09' || state.voyageIndex <= state.config.facilityLastVoyage);
+ requireRule(eligible.length >= 2, '节点池需要至少两种合格节点');
+ const lowRisk = eligible.filter(id => state.config.lowRiskNodes.includes(id));
+ const fallback = eligible.filter(id => NODES[id].kind !== 'battle');
+ const guaranteed = lowRisk.length ? lowRisk : fallback;
+ requireRule(guaranteed.length, '节点池需要非战斗候选');
+ const firstToolbox = state.voyageIndex === 1 && !state.toolboxClaimed && eligible.includes('N04');
+ const chosen = [firstToolbox ? 'N04' : guaranteed[rng(state, 'nodes', guaranteed.length)]];
+ if (state.voyageIndex === state.config.facilityOpportunityVoyage && eligible.includes('N09')) chosen.push('N09');
+ while (chosen.length < Math.min(count, eligible.length)) {
+  const pool = eligible.filter(id => !chosen.includes(id));
+  chosen.push(pool[rng(state, 'nodes', pool.length)]);
+ }
  state.candidates=chosen.map(nodeId=>{
   const def=NODES[nodeId],candidate={id:uid(state,'node'),nodeId};
-  if(nodeId==='N03'){candidate.offers=[];const pool=[...state.config.supplies,'C20','C21'];while(candidate.offers.length<3){const id=pool[rng(state,'rewards',pool.length)];if(!candidate.offers.includes(id))candidate.offers.push(id);}}
+  if (nodeId === 'N03') {
+   candidate.offers = [];
+   const facilities = state.voyageIndex <= state.config.facilityLastVoyage ? ['C20', 'C21'] : [];
+   const pool = [...new Set([...state.config.supplies, ...facilities])]
+    .filter(id => state.voyageIndex <= state.config.facilityLastVoyage || !['C20', 'C21'].includes(id));
+   requireRule(pool.length > 0, '涌泉喷口奖励池不能为空');
+   // Draw without replacement, including reduced custom test pools; never loop waiting for a third unique item.
+   const offerCount = Math.min(3, pool.length);
+   while (candidate.offers.length < offerCount) {
+    candidate.offers.push(pool.splice(rng(state, 'rewards', pool.length), 1)[0]);
+   }
+  }
   if(def.monster){const count=nodeId==='N05'&&state.encounters.M01>0?1+rng(state,'nodes',2):1;const lanes=[0,1,2,3];candidate.enemies=Array.from({length:count},()=>({definitionId:def.monster,lane:lanes.splice(rng(state,'nodes',lanes.length),1)[0]}));}
   return candidate;
  });
@@ -22,7 +42,25 @@ export function beginVoyage(state){state.phase='VoyageNavigation';state.ap=state
 export function drawSpring(state){requireRule(state.phase==='VoyageSupply','本轮涌泉已抽取或当前不能抽牌');grant(state,state.supply.cards);state.supply=null;state.phase='VoyagePreparation';log(state,'从涌泉抽出三张随机卡，不消耗 AP。');}
 export function chooseSupply(state,id){requireRule(state.phase==='BattleSupply','当前没有战术补给选择');requireRule(state.supply.choices.includes(id),'无效补给选项');grant(state,[id,...state.supply.fixed],true);state.supply=null;state.phase='BattleAction';}
 export function finishNodeActions(state){state.phase='VoyageAction';if(state.ap===0)settleVoyage(state);else log(state,'节点结束：仍可使用剩余 AP；主动结束行动后结算与弃牌。');}
-export function finishDiscard(state){requireRule(state.hand.length<=state.config.handLimit,'手牌仍然超限');if(state.afterDiscard==='battle'){state.battleTurn++;state.ap=state.config.ap;state.guardUsed=false;state.poleUsed=false;state.phase='BattleSupply';state.supply={choices:['T01','T02'],fixed:[]};}else if(state.voyageIndex>=state.config.voyages){state.phase='Completed';log(state,'第一层航行完成。灯火仍在，没有 Boss 战。');}else{state.voyageIndex++;beginVoyage(state);}}
+export function finishDiscard(state) {
+ requireRule(state.hand.length <= state.config.handLimit, '手牌仍然超限');
+ if (state.afterDiscard === 'battle') {
+  state.battleTurn++;
+  state.ap = state.config.ap;
+  state.guardUsed = false;
+  state.poleUsed = false;
+  state.phase = 'BattleSupply';
+  // First-layer encounters contain one monster definition, even with multiple lanes.
+  const attack = state.config.tacticalAttacks[state.enemies[0]?.definitionId] ?? 'T02';
+  state.supply = {choices: ['T01', attack], fixed: []};
+ } else if (state.voyageIndex >= state.config.voyages) {
+  state.phase = 'Completed';
+  log(state, '第一层航行完成。灯火仍在，没有 Boss 战。');
+ } else {
+  state.voyageIndex++;
+  beginVoyage(state);
+ }
+}
 export function discardPhase(state,scope){state.afterDiscard=scope;state.phase=scope==='battle'?'BattleDiscard':'VoyageDiscard';if(state.hand.length<=state.config.handLimit)finishDiscard(state);}
 export function settleVoyage(state){
  state.hunger=Math.max(0,state.hunger-10);state.hydration=Math.max(0,state.hydration-10);

@@ -1,7 +1,7 @@
-import {CARDS,RECIPES,EQUIPMENT,MONSTERS} from '../content/catalog.js?v=navigation-v4';
-import {requireRule,actionable,pay,consume,grant,log,uid,operational,unlock} from './common.js?v=navigation-v4';
-import {matches,hitEnemy,checkVictory} from './battle.js?v=navigation-v4';
-import {generateCandidates} from './voyage.js?v=navigation-v4';
+import {CARDS,RECIPES,EQUIPMENT,MONSTERS} from '../content/catalog.js?v=balance-v5';
+import {requireRule,actionable,pay,consume,grant,log,uid,operational,unlock} from './common.js?v=balance-v5';
+import {matches,hitEnemy,checkVictory} from './battle.js?v=balance-v5';
+import {generateCandidates} from './voyage.js?v=balance-v5';
 export function craft(state,command){actionable(state);const recipe=RECIPES[command.recipeId];requireRule(recipe,'未知配方');const tool=state.hand.find(c=>c.definitionId===recipe.tool&&!c.temporary);requireRule(tool,`缺少 ${CARDS[recipe.tool].name}`);
  let ingredients;if(command.ingredientCardIds){requireRule(new Set(command.ingredientCardIds).size===command.ingredientCardIds.length,'原料不能重复');ingredients=command.ingredientCardIds.map(id=>state.hand.find(c=>c.id===id));requireRule(ingredients.every(Boolean),'原料不存在');requireRule(ingredients.map(c=>c.definitionId).sort().join()===recipe.ingredients.slice().sort().join(),'原料不符合配方');}else ingredients=recipe.ingredients.map(id=>state.hand.find(c=>c.definitionId===id&&!c.temporary));
  requireRule(ingredients.every(c=>c&&!c.temporary),'缺少永久原料；战术牌不能制作物资');pay(state,recipe.cost);consume(state,ingredients.map(c=>c.id));grant(state,[recipe.output]);log(state,`制作 ${CARDS[recipe.output].name}：${recipe.cost} AP；工具保留。`);
@@ -17,12 +17,12 @@ export function play(state,command){
  else if(id==='C16'){pay(state,1);grant(state,['C07']);}
  else if(id==='C22'){requireRule(state.phase==='VoyageNavigation','逆流桨只能在节点选择阶段使用');requireRule(!state.rerollUsed,'本航行轮已经重掷');pay(state,1);state.rerollUsed=true;generateCandidates(state,state.candidates.length);}
  else if(id==='C24'){requireRule(state.phase==='VoyageNavigation','听潮筒只能在节点选择阶段使用');requireRule(!state.revealed,'候选详情已揭示');pay(state,1);state.revealed=true;}
- else if(['C03','C06','C09','C13','C14','C17','T02'].includes(id)){
+ else if(['C03','C06','C09','C13','C14','C17','T02','T03','T04'].includes(id)){
   requireRule(state.phase==='BattleAction','进攻用途只能在战斗中使用');const enemy=state.enemies.find(e=>e.id===target.enemyId);requireRule(enemy,'请选择敌人');
   if(id==='C09')requireRule(MONSTERS[enemy.definitionId].predator,'此敌人不是捕食者');
   if(id==='C03')requireRule(enemy.lastBound<state.battleTurn-1,'不能在同一回合或连续回合束缚此敌人');
-  const effective=matches(def.materials,enemy);requireRule(effective||command.allowIneffective,'材料不匹配：确认无效使用才会消耗');pay(state,def.cost);
-  if(effective){if(id==='C03'){enemy.bound=true;enemy.lastBound=state.battleTurn;}else if(id==='C06')enemy.wet=true;else if(id==='C09')enemy.baited=true;else{let damage=id==='C14'?4:id==='T02'?2:3;if(id==='C14'&&enemy.wet){damage++;enemy.wet=false;}if(id==='C17'&&enemy.bound){damage+=2;enemy.bound=false;}hitEnemy(state,enemy,damage);}}
+  const effective=matches(def.materials,enemy)||(id==='C06'&&enemy.definitionId==='M03');requireRule(effective||command.allowIneffective,'材料不匹配：确认无效使用才会消耗');pay(state,def.cost);
+  if(effective){if(id==='C03'){enemy.bound=true;enemy.lastBound=state.battleTurn;}else if(id==='C06')enemy.wet=true;else if(id==='C09')enemy.baited=true;else{let damage=id==='C14'?4:id.startsWith('T')?2:3;if(id==='C14'&&enemy.wet){damage++;enemy.wet=false;}if(id==='C17'&&enemy.bound){damage+=2;enemy.bound=false;}hitEnemy(state,enemy,damage);}}
   else log(state,`${def.name} 材料不匹配，对敌无效，但正常消耗。`);
  }else throw new Error('折叠锚请在提交航行时选择；该用途当前不可用');
  consume(state,[card.id]);log(state,`使用 ${def.name}，消耗 ${def.cost} AP。`);unlock(state);checkVictory(state);

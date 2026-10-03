@@ -1,6 +1,6 @@
-import {CARDS,EQUIPMENT,MONSTERS,NODES} from '../content/catalog.js?v=navigation-v4';
-import {uid,log,grant,requireRule,pay,operational,harm,randomDamage} from './common.js?v=navigation-v4';
-import {finishNodeActions,discardPhase} from './voyage.js?v=navigation-v4';
+import {CARDS,EQUIPMENT,MONSTERS,NODES} from '../content/catalog.js?v=balance-v5';
+import {uid,log,grant,requireRule,pay,operational,harm,randomDamage} from './common.js?v=balance-v5';
+import {finishNodeActions,discardPhase} from './voyage.js?v=balance-v5';
 export function matches(materials,enemy){const accepted=MONSTERS[enemy.definitionId].materials;return !accepted||materials.some(m=>accepted.includes(m));}
 export function beginBattle(state){state.phase='BattleAction';state.ap=state.config.ap;state.battleTurn=1;state.guardUsed=false;state.poleUsed=false;state.guard=false;state.enemies=state.node.enemies.map(e=>({...e,id:uid(state,'enemy'),health:MONSTERS[e.definitionId].health,wet:false,bound:false,baited:false,lastBound:-2}));for(const e of state.enemies)state.encounters[e.definitionId]++;log(state,'战斗开始：首回合没有战术补给，AP 刷新为 3。');}
 export function finishBattle(state,victory){state.units=state.units.filter(u=>!u.temporary);state.hand=state.hand.filter(c=>!c.temporary);state.enemies=[];state.guard=false;if(victory){log(state,'战斗胜利，领取节点奖励。');grant(state,NODES[state.node.nodeId].reward);}else log(state,'撤退，无节点奖励。');finishNodeActions(state);}
@@ -11,7 +11,13 @@ export function endBattleTurn(state){requireRule(state.phase==='BattleAction','�
  for(const enemy of [...state.enemies].sort((a,b)=>a.lane-b.lane)){
   const def=MONSTERS[enemy.definitionId];if(enemy.bound){enemy.bound=false;log(state,`${def.name} 被束缚，取消一次攻击。`);continue;}if(enemy.baited){enemy.baited=false;log(state,`${def.name} 被诱饵吸引，取消一次攻击。`);continue;}
   const unit=state.units.find(u=>u.slotKind==='defense'&&u.slotIndex===enemy.lane&&operational(state,u));
-  if(unit){unit.structure=Math.max(0,unit.structure-def.attack);log(state,`${CARDS[unit.definitionId].name} 结构 -${def.attack}${unit.structure===0?'，留下残骸':''}。`);}
+  if (unit) {
+   unit.structure = Math.max(0, unit.structure - def.attack);
+   const destroyed = unit.structure === 0;
+   const suffix = destroyed ? (unit.temporary ? '，临时防卫已移除' : '，留下残骸') : '';
+   log(state, `${CARDS[unit.definitionId].name} 结构 -${def.attack}${suffix}。`);
+   if (destroyed && unit.temporary) state.units = state.units.filter(u => u.id !== unit.id);
+  }
   else if(enemy.definitionId==='M01')randomDamage(state);else harm(state,enemy.definitionId==='M02'?1:2,enemy.definitionId==='M02'?1:0,true);
   if(state.phase==='Failed')return;
  }

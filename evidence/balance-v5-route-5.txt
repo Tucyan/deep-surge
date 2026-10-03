@@ -1,0 +1,131 @@
+第 1 / 5 次航行 航行行动 · 种子 5
+第 1 / 5 次航行 航行轮末弃牌 · 种子 5
+第 1 / 5 次航行 航行轮末弃牌 · 种子 5
+第 2 / 5 次航行 选择下一节点 · 种子 5
+第 2 / 5 次航行 涌泉抽牌 · 种子 5
+第 2 / 5 次航行 航行准备 · 种子 5
+第 2 / 5 次航行 节点事件 · 种子 5
+第 2 / 5 次航行 航行行动 · 种子 5
+第 2 / 5 次航行 航行轮末弃牌 · 种子 5
+第 2 / 5 次航行 航行轮末弃牌 · 种子 5
+第 2 / 5 次航行 航行轮末弃牌 · 种子 5
+第 2 / 5 次航行 航行轮末弃牌 · 种子 5
+第 3 / 5 次航行 选择下一节点 · 种子 5
+第 3 / 5 次航行 涌泉抽牌 · 种子 5
+第 3 / 5 次航行 航行准备 · 种子 5
+第 3 / 5 次航行 节点事件 · 种子 5
+第 3 / 5 次航行 航行行动 · 种子 5
+第 3 / 5 次航行 航行轮末弃牌 · 种子 5
+第 3 / 5 次航行 航行轮末弃牌 · 种子 5
+第 3 / 5 次航行 航行轮末弃牌 · 种子 5
+第 3 / 5 次航行 航行轮末弃牌 · 种子 5
+第 4 / 5 次航行 选择下一节点 · 种子 5
+第 4 / 5 次航行 涌泉抽牌 · 种子 5
+第 4 / 5 次航行 航行准备 · 种子 5
+第 4 / 5 次航行 节点事件 · 种子 5
+第 4 / 5 次航行 航行行动 · 种子 5
+第 4 / 5 次航行 航行轮末弃牌 · 种子 5
+第 4 / 5 次航行 航行轮末弃牌 · 种子 5
+第 4 / 5 次航行 航行轮末弃牌 · 种子 5
+第 4 / 5 次航行 航行轮末弃牌 · 种子 5
+第 5 / 5 次航行 选择下一节点 · 种子 5
+第 5 / 5 次航行 涌泉抽牌 · 种子 5
+第 5 / 5 次航行 航行准备 · 种子 5
+第 5 / 5 次航行 节点事件 · 种子 5
+第 5 / 5 次航行 航行行动 · 种子 5
+第 5 / 5 次航行 航行轮末弃牌 · 种子 5
+第 5 / 5 次航行 航行轮末弃牌 · 种子 5
+第 5 / 5 次航行 航行轮末弃牌 · 种子 5
+第 5 / 5 次航行 航行轮末弃牌 · 种子 5
+第 5 / 5 次航行 第一层完成 · 种子 5
+- main:
+  - generic "三维海面与木筏"
+  - heading "水世代" [level=1]
+  - paragraph: DEEP SURGE · 第一层
+  - navigation:
+    - button "⚒ 合成" [disabled]
+    - button "▦ 木筏"
+    - button "☷ 航海日志"
+    - button "？玩法"
+    - button "⚙ 设置"
+  - region "生存状态":
+    - generic: 生命
+    - strong: 20/30
+    - generic: 饱食
+    - strong: 0/100
+    - generic: 水分
+    - strong: 0/100
+    - generic: SAN
+    - strong: 78/100
+  - generic: 第 5 / 5 次航行 第一层完成 · 种子 5
+  - generic: 行动点 3/3
+  - region "当前阶段行动":
+    - heading "第一层完成" [level=2]
+    - paragraph: 本局已结束。可查看日志或重新开始。
+  - region "四航道战斗"
+  - text: 木筏 · 12 格在位 / 12 格登记
+  - generic: 扩展 +0 · 破损 0 · 脱落 0 · 后方筏根仅装饰
+  - generic: 手牌 10 / 10
+  - generic: 点击物资查看用途 · 工具保留，制作与使用分别付费
+  - generic "手牌":
+    - button "手工工具，查看用途":
+      - generic: —
+      - heading "手工工具" [level=3]
+      - generic: 保留工具，开放修补、滤水、挡板、轻弩及航行配方。
+      - generic: 材料
+    - button "点火器，查看用途":
+      - generic: —
+      - heading "点火器" [level=3]
+      - generic: 保留工具，开放火把配方。
+      - generic: 热源 / 材料
+    - button "漂流木，查看用途":
+      - generic: "1"
+      - heading "漂流木" [level=3]
+      - generic: 修好 1 个破损筏格；或用于制作。
+      - generic: 有机 / 材料
+    - button "布条，查看用途":
+      - generic: —
+      - heading "布条" [level=3]
+      - generic: 用于火把与滤水包制作。
+      - generic: 有机 / 材料
+    - button "干粮，查看用途":
+      - generic: "1"
+      - heading "干粮" [level=3]
+      - generic: 饱食 +24；不腐坏。
+      - generic: 有机
+    - button "淡水，查看用途":
+      - generic: "1"
+      - heading "淡水" [level=3]
+      - generic: 水分 +24。当前没有燃烧目标。
+      - generic: 水源
+    - button "鱼叉，查看用途":
+      - generic: "1"
+      - heading "鱼叉" [level=3]
+      - generic: 匹配敌人受到 3 伤害，束缚则 +2 并移除束缚。
+      - generic: 材料
+    - button "绳索，查看用途":
+      - generic: "1"
+      - heading "绳索" [level=3]
+      - generic: 束缚匹配敌人，取消下次攻击；不能连续回合束缚。
+      - generic: 材料
+    - button "绳索，查看用途":
+      - generic: "1"
+      - heading "绳索" [level=3]
+      - generic: 束缚匹配敌人，取消下次攻击；不能连续回合束缚。
+      - generic: 材料
+    - button "淡水，查看用途":
+      - generic: "1"
+      - heading "淡水" [level=3]
+      - generic: 水分 +24。当前没有燃烧目标。
+      - generic: 水源
+  - status
+  - generic: VOYAGE / SURVIVED
+  - heading "第一层 · 航行完成" [level=2]
+  - paragraph:
+    - text: 五次航行已完成，最后的生存结算与弃牌均已处理。
+    - text: 生命 20/30 · 饱食 0 · 水分 0 · SAN 78
+    - text: 完好筏格 12 / 12 · 种子 5
+  - button "重新航行"
+  - button "返回开始界面"
+  - button "查看航海日志"
+  - paragraph: 第一版 Demo · 本层不包含 Boss

@@ -1245,6 +1245,27 @@
         "scene.js"
       ],
       "validation": "Node wave/contact/float-pick/resource tests and main-scene browser screenshot, 2026-10-03"
+    },
+    {
+      "assetId": "presentation.tactical-card-aliases",
+      "kind": "procedural-presentation",
+      "version": "balance-v5",
+      "status": "integrated",
+      "generator": {
+        "module": "presentation/art.js",
+        "block": "cardArt.T01-T04"
+      },
+      "sourceRecord": "asset-sources/balance-v5.md",
+      "dependencies": [
+        "image.card.c18",
+        "image.card.c01",
+        "image.card.c13",
+        "image.card.c14"
+      ],
+      "consumers": [
+        "app.js"
+      ],
+      "validation": "Rule tests cover costs/materials/lifetime; browser verification recorded separately."
     }
   ]
 }

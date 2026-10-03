@@ -1,8 +1,8 @@
-import {CONFIG,CARDS,NODES,MONSTERS} from './content/catalog.js?v=navigation-v4';
-import {copy,requireRule,grant,uid,log,consume,pay,operational} from './rules/common.js?v=navigation-v4';
-import {beginVoyage,chooseSupply,resolveNode,finishDiscard,drawSpring,finishNodeActions,settleVoyage} from './rules/voyage.js?v=navigation-v4';
-import {beginBattle,battleCommand,endBattleTurn} from './rules/battle.js?v=navigation-v4';
-import {craft,play,unitCommand} from './rules/cards.js?v=navigation-v4';
+import {CONFIG,CARDS,NODES,MONSTERS} from './content/catalog.js?v=balance-v5';
+import {copy,requireRule,grant,uid,log,consume,pay,operational} from './rules/common.js?v=balance-v5';
+import {beginVoyage,chooseSupply,resolveNode,finishDiscard,drawSpring,finishNodeActions,settleVoyage} from './rules/voyage.js?v=balance-v5';
+import {beginBattle,battleCommand,endBattleTurn} from './rules/battle.js?v=balance-v5';
+import {craft,play,unitCommand} from './rules/cards.js?v=balance-v5';
 
 function invariant(state){requireRule(state.health>=0&&state.health<=30,'生命不变量');requireRule(state.ap>=0&&state.ap<=state.config.ap,'AP 不变量');const entities=[...state.hand,...state.units,...state.units.filter(u=>u.stored).map(u=>u.stored),...state.enemies];requireRule(new Set(entities.map(e=>e.id)).size===entities.length,'重复实体 ID');for(const c of state.hand)requireRule(CARDS[c.definitionId],'未知卡定义');requireRule(new Set(state.units.map(u=>u.slotKind+u.slotIndex)).size===state.units.length,'重复设备槽位');for(const u of state.units)requireRule(state.cells.some(c=>c.id===u.cellId&&c.state!=='lost'),'设备承载格不存在');}
 function execute(state,command){requireRule(!['Completed','Failed'].includes(state.phase),'本局已结束');const type=command.type;
@@ -57,7 +57,7 @@ function session(initial){let state=initial;
  exportSave:()=>({formatVersion:1,contentVersion:CONFIG.version,state:copy(state)}),
  };
 }
-export function createSession(seed=20261003,overrides={}){const config={...copy(CONFIG),...copy(overrides)};requireRule(config.supplies.length>0,'补给池不能为空');if(overrides.supplies&&!overrides.springWeights)config.springWeights=Object.fromEntries(config.supplies.map(id=>[id,1]));requireRule(Object.entries(config.springWeights).length>0&&Object.entries(config.springWeights).every(([id,w])=>CARDS[id]&&Number.isInteger(w)&&w>0),'涌泉权重必须为正整数且卡牌存在');const state={schemaVersion:1,randomAlgorithm:'lcg32-v1',revision:0,nextId:0,seed:seed>>>0,config,random:Object.fromEntries(['nodes','rewards','supply','tactical','raftDamage'].map((key,i)=>[key,((seed>>>0)^Math.imul(i+1,2654435761))>>>0])),health:30,hunger:80,hydration:80,sanity:80,ap:3,voyageIndex:1,hand:[],units:[],cells:[],defense:[],logistics:[],enemies:[],candidates:[],log:[],encounters:{M01:0,M02:0,M03:0},energyUnlocked:false,heatOpportunity:true,toolboxClaimed:false};
+export function createSession(seed=20261003,overrides={}){const config={...copy(CONFIG),...copy(overrides)};requireRule(config.supplies.length>0,'补给池不能为空');if(overrides.supplies&&!overrides.springWeights)config.springWeights=Object.fromEntries(config.supplies.map(id=>[id,1]));requireRule(Object.entries(config.springWeights).length>0&&Object.entries(config.springWeights).every(([id,w])=>CARDS[id]&&Number.isInteger(w)&&w>0),'涌泉权重必须为正整数且卡牌存在');const state={schemaVersion:1,randomAlgorithm:'lcg32-v1',revision:0,nextId:0,seed:seed>>>0,config,random:Object.fromEntries(['nodes','rewards','supply','tactical','raftDamage'].map((key,i)=>[key,((seed>>>0)^Math.imul(i+1,2654435761))>>>0])),health:30,hunger:config.initialHunger,hydration:config.initialHydration,sanity:80,ap:3,voyageIndex:1,hand:[],units:[],cells:[],defense:[],logistics:[],enemies:[],candidates:[],log:[],encounters:{M01:0,M02:0,M03:0},energyUnlocked:false,heatOpportunity:true,toolboxClaimed:false};
  for(let z=0;z<3;z++)for(let x=0;x<4;x++)state.cells.push({id:`cell-${x}-${z}`,label:`${x+1}-${z+1}`,x,z,state:'intact',damagedAtVoyage:null});
  state.defense=Array.from({length:4},(_,index)=>({index,cellId:`cell-${index}-2`}));state.logistics=[{index:0,cellId:'cell-0-1'},{index:1,cellId:'cell-3-1'}];
  grant(state,config.initialCards);beginVoyage(state);invariant(state);return session(state);

@@ -1,6 +1,6 @@
-import {createSession} from './game/session.js?v=navigation-v4';
-import {CARDS,RECIPES,NODES,MONSTERS,EQUIPMENT,MATERIAL_NAMES} from './game/content/catalog.js?v=navigation-v4';
-import {cardArt,nodeArt,monsterArt} from './presentation/art.js';
+import {createSession} from './game/session.js?v=balance-v5';
+import {CARDS,RECIPES,NODES,MONSTERS,EQUIPMENT,MATERIAL_NAMES} from './game/content/catalog.js?v=balance-v5';
+import {cardArt,nodeArt,monsterArt} from './presentation/art.js?v=balance-v5';
 import {syncDemo,setPointer,resizeScene,setSceneSettings,getSpringScreenPosition,getRaftSummary,pickTile} from './scene.js?v=contact-v6';
 
 const $=selector=>document.querySelector(selector);
@@ -41,8 +41,8 @@ function renderPanel(){
  let content=`<h2>${phaseNames[view.phase]}</h2>`;
  if(view.phase==='VoyageSupply'){content+='<p>涌泉每次航行凝聚三张随机卡。点击右侧涌泉抽取，不消耗 AP；每轮只能领取一次。</p>'+commandButton('从涌泉抽出三张牌',{type:'DrawSpring'},{className:'primary'})+'<p class="muted">物资与生存牌为主，少量进攻与防卫牌；可能重复。卡牌结果已固定。</p>';
  }else if(view.phase==='BattleSupply'){
-  content+=`<p>${view.phase==='VoyageSupply'?'选择一张基本物资，另两张已固定的补给一起入手。':'第二回合起每回合选择一张临时战术牌，战后清除，不能制作永久物资。'}</p>`;
-  content+=view.supply.choices.map(id=>commandButton(CARDS[id].name,{type:'ChooseSupply',definitionId:id},{className:'choice'})).join('');
+  content+=`<p>${view.phase==='VoyageSupply'?'选择一张基本物资，另两张已固定的补给一起入手。':'第二回合起每回合选择盾或临时攻击；攻击材料对应当前敌人，每次 2 伤害。战后清除，不能制作永久物资。'}</p>`;
+  content+=view.supply.choices.map(id=>commandButton(CARDS[id].name+' · '+CARDS[id].description,{type:'ChooseSupply',definitionId:id},{className:'choice'})).join('');
   if(view.supply.fixed.length)content+=`<p>固定补给：${view.supply.fixed.map(id=>CARDS[id].name).join('、')}</p>`;
  }else if(view.phase==='VoyageNavigation'){
   content+=`<p>${view.voyageIndex===1?'选择出发节点，再确认移动。':'结算与弃牌已完成，请选择下一节点。'}</p>`;
@@ -75,7 +75,7 @@ function renderBattle(){
  $('#battle').innerHTML=Array.from({length:4},(_,lane)=>{const enemy=view.enemies.find(e=>e.lane===lane),unit=view.units.find(u=>u.slotKind==='defense'&&u.slotIndex===lane);return `<div class="lane"><div class="lane-title">航道 ${lane+1}</div>${enemy?`<img src="${monsterArt[enemy.definitionId]}" alt="${MONSTERS[enemy.definitionId].name}"><b>${MONSTERS[enemy.definitionId].name}</b><div class="hp">生命 ${enemy.health}/${MONSTERS[enemy.definitionId].health}</div><div class="status">${enemy.wet?'浸湿 ':''}${enemy.bound?'束缚 ':''}${enemy.baited?'诱饵 ':''}</div><p>有效材料：${MONSTERS[enemy.definitionId].materials?.map(m=>MATERIAL_NAMES[m]).join(' / ')??'无限制'}<br>${MONSTERS[enemy.definitionId].intent}</p>`:'<div class="empty">海面暂时平静</div>'}<div class="unit">${unit?`${CARDS[unit.definitionId].name} · ${unit.structure===0?'残骸':unit.operational?`结构 ${unit.structure}`:'承载格破损，停用'}`:'防卫位空缺'}</div></div>`;}).join('');
 }
 function renderDialog(){const mode=dialogMode;if(!mode)return;let html='';
- if(mode.kind==='help')html=`<h2>航行指南</h2><p>目标：完成五次航行并活下来。本层没有 Boss。</p><ol><li>每轮从右侧涌泉随机抽三张牌，获得 3 AP；可进食、饮水、制作、安装和维修。</li><li>首次出发、或上一轮结算与弃牌检查完成后，在右侧菜单选择节点并移动；移动后领取本轮涌泉，准备好再处理当前节点。事件需要选择一次选项，战斗有独立 AP。</li><li>战斗时看清材料限制。火把对付水母，放电包对付绝壳蟹。每回合设备先攻击，之后敌人执行意图。</li><li>选择手牌查看可用目标；合成只消耗原料与制作 AP，工具保留。制作出的物资使用时仍需 AP。</li><li>每航行轮饱食、水分各 -10，归零会扣生命；战斗不重复扣饥渴。</li><li>破损筏格停用设备，两个后续航行轮未修就脱落；漂流木或修补包可修破损格，不能补建缺口。</li><li>行动点耗尽或主动结束行动后才开放弃牌；行动期间允许超过 10 张。节点奖励入手不立即弃牌，可使用剩余 AP。战斗第二回合起可撤退，代价是生命 -4 且无奖励。</li></ol><p>鼠标点击按钮操作；手牌横向滚动查看更多。暂无存档，刷新和重开会清除当前局。数值为首版试测。</p>`;
+ if(mode.kind==='help')html=`<h2>航行指南</h2><p>目标：完成五次航行并活下来。本层没有 Boss。</p><ol><li>每轮从右侧涌泉随机抽三张牌，获得 3 AP；可进食、饮水、制作、安装和维修。</li><li>首次出发、或上一轮结算与弃牌检查完成后，在右侧菜单选择节点并移动；移动后领取本轮涌泉，准备好再处理当前节点。首轮工具箱保底，领取后不再出现；后续保证低风险选择，第二轮提供设施机会，第四轮起不再奖励新设施。事件需要选择一次选项，战斗有独立 AP。</li><li>战斗时看清材料限制。火把对付水母，放电包对付绝壳蟹；第二回合起可选临时克制攻击补刀。海水能浸湿蟹，随后放电 +1 伤害。临时盾被击毁后释放槽位。每回合设备先攻击，之后敌人执行意图。</li><li>选择手牌查看可用目标；合成只消耗原料与制作 AP，工具保留。制作出的物资使用时仍需 AP。</li><li>初始饱食、水分各 40；每航行轮各 -10，归零会扣生命，起手干粮和淡水各恢复 24；战斗不重复扣饥渴。</li><li>破损筏格停用设备，两个后续航行轮未修就脱落；漂流木或修补包可修破损格，不能补建缺口。</li><li>行动点耗尽或主动结束行动后才开放弃牌；行动期间允许超过 10 张。节点奖励入手不立即弃牌，可使用剩余 AP。战斗第二回合起可撤退，代价是生命 -4 且无奖励。</li></ol><p>鼠标点击按钮操作；手牌横向滚动查看更多。暂无存档，刷新和重开会清除当前局。数值为首版试测。</p>`;
  else if(mode.kind==='settings')html=`<h2>视觉设置</h2><p>视觉设置不影响规则结算。</p><div class="buttons"><button data-ui="motion">随波动态：${settings.motion?'开启':'关闭'}</button><button data-ui="quality">画质：${settings.quality==='high'?'高':'低'}</button></div><a href="raft-assets.html" target="_blank" style="color:#dfc68e">查看独立木筏资产工坊</a><br><a href="raft-state.html" target="_blank" style="color:#dfc68e">查看木筏状态映射样例（含扩展/战损）</a>`;
  else if(mode.kind==='log')html=`<h2>航海日志 · 种子 ${view?.seed??'—'}</h2><div class="log-list">${view?.log.slice().reverse().map(line=>`<p>${escape(line)}</p>`).join('')??'<p>还未开始航行。</p>'}</div>`;
  else if(mode.kind==='craft')html='<h2>确定合成 · 制作与使用分别收费</h2><p>自动选取最早入手的匹配原料；工具保留，临时战术牌不可制作永久物资。</p>'+Object.entries(RECIPES).map(([id,r])=>`<div class="recipe"><div><strong>${id} · ${CARDS[r.output].name}</strong><p>工具：${CARDS[r.tool].name}<br>消耗：${r.ingredients.map(c=>CARDS[c].name).join(' + ')}<br>制作 ${r.cost} AP · 后续使用 ${CARDS[r.output].cost} AP</p></div>${commandButton('制作 '+CARDS[r.output].name,{type:'Craft',recipeId:id})}</div>`).join('');
@@ -97,7 +97,7 @@ function cardDialog(cardId){const card=view.hand.find(c=>c.id===cardId);if(!card
  }
  if(id==='C02')html+=view.units.map(u=>commandButton('维修 '+CARDS[u.definitionId].name+' · '+(u.slotIndex+1),cmd({kind:'unit',unitId:u.id}))).join('')||'<p>尚无可维修设备。</p>';
  if(EQUIPMENT[id])html+=view[EQUIPMENT[id].slot].map(slot=>commandButton(`部署到${EQUIPMENT[id].slot==='defense'?'防卫位':'后勤位'} ${slot.index+1}`,cmd(EQUIPMENT[id].slot==='defense'?{kind:'defenseSlot',lane:slot.index}:{kind:'logisticsSlot',index:slot.index}))).join('');
- if(['C03','C06','C09','C13','C14','C17','T02'].includes(id)&&view.phase==='BattleAction')html+=view.enemies.map(e=>{
+ if(['C03','C06','C09','C13','C14','C17','T02','T03','T04'].includes(id)&&view.phase==='BattleAction')html+=view.enemies.map(e=>{
   const command=cmd({kind:'enemy',enemyId:e.id}),preview=session.preview(command),mismatch=preview.errors?.some(err=>err.message.startsWith('材料不匹配'));
   return mismatch?`<button data-ineffective="${encodeURIComponent(JSON.stringify(command))}">航道 ${e.lane+1} · ${MONSTERS[e.definitionId].name}（材料不匹配）</button>`:commandButton(`航道 ${e.lane+1} · ${MONSTERS[e.definitionId].name}`,command);
  }).join('');

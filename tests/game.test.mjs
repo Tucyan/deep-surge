@@ -23,7 +23,7 @@ test('five safe voyages settle once each and finish only after required discard'
   if(s.getSnapshot().phase==='NodeResolution')act(s,{type:'ResolveNodeOption',optionId:'0'});
   if(s.getSnapshot().phase==='VoyageDiscard'){const st=s.getSnapshot();act(s,{type:'DiscardCards',cardIds:st.hand.slice(0,st.hand.length-10).map(c=>c.id)});}
  }
- const state=s.getSnapshot();assert.equal(state.phase,'Completed');assert.equal(state.hunger,30);assert.equal(state.hydration,30);assert.equal(state.health,30);assert.equal(state.voyageIndex,5);assert.equal(state.hand.length<=10,true);assert.equal('hull' in state,false);
+ const state=s.getSnapshot();assert.equal(state.phase,'Completed');assert.equal(state.hunger,0);assert.equal(state.hydration,0);assert.equal(state.health,22);assert.equal(state.voyageIndex,5);assert.equal(state.hand.length<=10,true);assert.equal('hull' in state,false);
 });
 
 test('save restore and rejected commands preserve RNG and deterministic replay',()=>{
@@ -36,21 +36,21 @@ function fixture(change){const save=createSession(17).exportSave();change(save.s
 function battle(monster,cards=[]){return fixture(st=>{st.phase='BattleAction';st.battleTurn=1;st.ap=3;st.node={nodeId:monster==='M01'?'N05':monster==='M02'?'N06':'N07'};st.enemies=[{id:'enemy-fixture',definitionId:monster,lane:0,health:MONSTERS[monster].health,wet:false,bound:false,baited:false,lastBound:-2}];st.hand=cards.map((definitionId,i)=>({id:'fixture-card-'+i,definitionId,age:0,temporary:false}));});}
 const use=(s,id,target,extra={})=>act(s,{type:'PlayCard',cardId:s.getSnapshot().hand.find(c=>c.definitionId===id).id,target,...extra});
 
-test('material mismatch is transactional; confirmation consumes, torch wins immediately',()=>{
+test('material mismatch is transactional; confirmation consumes, torch leaves one health',()=>{
  const s=battle('M02',['C17','C13']);const command={type:'PlayCard',cardId:'fixture-card-0',target:{kind:'enemy',enemyId:'enemy-fixture'}};
  const before=s.getSnapshot();assert.equal(s.preview(command).allowed,false);assert.equal(s.dispatch({expectedRevision:before.revision,command}).accepted,false);assert.deepEqual(s.getSnapshot(),before);
- act(s,{...command,allowIneffective:true});assert.equal(s.getSnapshot().enemies[0].health,3);assert.equal(s.getSnapshot().ap,2);
- use(s,'C13',{kind:'enemy',enemyId:'enemy-fixture'});assert.notEqual(s.getSnapshot().phase,'BattleAction');assert.equal(s.getSnapshot().health,30);assert.equal(s.getSnapshot().hunger,70);
+ act(s,{...command,allowIneffective:true});assert.equal(s.getSnapshot().enemies[0].health,4);assert.equal(s.getSnapshot().ap,2);
+ use(s,'C13',{kind:'enemy',enemyId:'enemy-fixture'});assert.equal(s.getSnapshot().phase,'BattleAction');assert.equal(s.getSnapshot().enemies[0].health,1);assert.equal(s.getSnapshot().health,30);assert.equal(s.getSnapshot().hunger,40);
 });
 
-test('wet and bound combos work; restricted monsters reject water; repeats are blocked',()=>{
+test('wet and bound combos work; crab accepts wet status; repeats are blocked',()=>{
  const s=battle('M01',['C06','C14']);use(s,'C06',{kind:'enemy',enemyId:'enemy-fixture'});assert.equal(s.getSnapshot().enemies[0].wet,true);use(s,'C14',{kind:'enemy',enemyId:'enemy-fixture'});assert.ok(s.getSnapshot().log.some(l=>l.includes('5 伤害')));
- const crab=battle('M03',['C06']);assert.equal(crab.preview({type:'PlayCard',cardId:'fixture-card-0',target:{kind:'enemy',enemyId:'enemy-fixture'}}).allowed,false);
+ const crab=battle('M03',['C06']);use(crab,'C06',{kind:'enemy',enemyId:'enemy-fixture'});assert.equal(crab.getSnapshot().enemies[0].wet,true);assert.equal(crab.getSnapshot().enemies[0].health,5);
  const tied=battle('M01',['C03','C03','C17']);use(tied,'C03',{kind:'enemy',enemyId:'enemy-fixture'});assert.equal(tied.preview({type:'PlayCard',cardId:'fixture-card-1',target:{kind:'enemy',enemyId:'enemy-fixture'}}).allowed,false);use(tied,'C17',{kind:'enemy',enemyId:'enemy-fixture'});assert.ok(tied.getSnapshot().log.some(l=>l.includes('5 伤害')));
 });
 
 test('battle does not age cells or drain hunger; retreat settles once and fails if lethal',()=>{
- const s=battle('M01');act(s,{type:'EndBattleTurn'});assert.equal(s.getSnapshot().hunger,80);assert.equal(s.getSnapshot().battleTurn,2);assert.equal(s.getSnapshot().phase,'BattleSupply');act(s,{type:'ChooseSupply',definitionId:'T01'});act(s,{type:'Retreat'});assert.equal(s.getSnapshot().health,26);assert.equal(s.getSnapshot().hunger,70);assert.equal(s.getSnapshot().hand.some(c=>c.temporary),false);
+ const s=battle('M01');act(s,{type:'EndBattleTurn'});assert.equal(s.getSnapshot().hunger,40);assert.equal(s.getSnapshot().battleTurn,2);assert.equal(s.getSnapshot().phase,'BattleSupply');act(s,{type:'ChooseSupply',definitionId:'T01'});act(s,{type:'Retreat'});assert.equal(s.getSnapshot().health,26);assert.equal(s.getSnapshot().hunger,30);assert.equal(s.getSnapshot().hand.some(c=>c.temporary),false);
  const dead=fixture(st=>{st.phase='BattleAction';st.battleTurn=2;st.health=4;});act(dead,{type:'Retreat'});assert.equal(dead.getSnapshot().phase,'Failed');
 });
 

@@ -23,15 +23,22 @@
 - `dist/assets/manifest.json`：运行资产登记；`asset-sources/`：原始 ZIP、制作源和程序化资产说明。
 - `npm run check` 检查脚本语法；`npm test` 运行规则与模型测试；`npm run check:assets` 检查资源 ID、文件、哈希、尺寸和全部 C/N/M 映射。
 
-实际结果、浏览器种子路线、试测决策与限制见 [首版验收记录](../docs/development/first-layer-demo-v1.md)。测试日志及实际截图位于 `evidence/`。这版已完成基本循环，不代表数值平衡、所有内容逐项视觉验收或性能优化完成。
+实际结果、浏览器种子路线、试测决策与限制见 [首版验收记录](docs/development/first-layer-demo-v1.md)。测试日志及实际截图位于 `evidence/`。这版已完成基本循环，不代表数值平衡、所有内容逐项视觉验收或性能优化完成。
 
 独立 [木筏资产工坊](http://127.0.0.1:5173/raft-assets.html) 保留拼接和战损展示；扩展板已生成，首版玩法尚无扩建费用规则，不在游戏中添加扩建命令。
 
 Three.js 使用 MIT 许可证，见 `dist/vendor/LICENSE`。美术来自用户提供的图片/素材包；作者和许可未另行确认。旧 `style.css` 和参考图保留为历史素材，当前入口加载 `demo.css`。
 
-2026-10-03 v2：[涌泉卡池与行动结束规则](../docs/design/spring-and-action-end.md) 已接入，旧的“一选二随机”航行补给已替换；远景不再截取旧 UI 截图。
+2026-10-03 v2：[涌泉卡池与行动结束规则](docs/design/spring-and-action-end.md) 已接入，旧的“一选二随机”航行补给已替换；远景不再截取旧 UI 截图。
 
-2026-10-03 v3：[木筏状态映射](../docs/design/raft-presentation.md) 按实际格子和设备快照生成，格上用文字标识，小型筏根仅展示帐篷/灯/箱/渔网。支持任意格布局、战损缺口和自动缩放；[状态映射工坊](http://127.0.0.1:5173/raft-state.html) 提供 12/20/6 格样例，不新增扩建命令。主场景不再显示原设备模型，工厂与测试保留。
-2026-10-03 v4：[轮末弃牌后导航](../docs/design/post-discard-navigation.md) 覆盖旧操作顺序。首次出发或上一轮结算/弃牌检查完成后，在右侧菜单选节点并确认移动，再抽涌泉、准备及处理当前节点。木筏/涌泉整体左移，左侧节点栏删除；内容版本 first-layer-v3。
+2026-10-03 v3：[木筏状态映射](docs/design/raft-presentation.md) 按实际格子和设备快照生成，格上用文字标识，小型筏根仅展示帐篷/灯/箱/渔网。支持任意格布局、战损缺口和自动缩放；[状态映射工坊](http://127.0.0.1:5173/raft-state.html) 提供 12/20/6 格样例，不新增扩建命令。主场景不再显示原设备模型，工厂与测试保留。
+2026-10-03 v4：[轮末弃牌后导航](docs/design/post-discard-navigation.md) 覆盖旧操作顺序。首次出发或上一轮结算/弃牌检查完成后，在右侧菜单选节点并确认移动，再抽涌泉、准备及处理当前节点。木筏/涌泉整体左移，左侧节点栏删除；内容版本 first-layer-v3。
 
 木筏表现 v6：扩大装饰营地、增加帐篷/箱/网/灯细节，使用轻侧视透视镜头。主游戏加入同波形升沉与倾斜，以及沿在位筏面外缘生成的白沫和接触暗边；关闭动态画面可冻结。资源与验收见 [资产记录](asset-sources/camp-contact-v6.md) 和 [验证记录](evidence/camp-contact-v6-verification.md)。
+
+2026-10-03 平衡试测 v5：初始饱食/水分各 40；属性战斗提供临时克制补刀、海水可浸湿蟹；后续低风险保底、工具箱领取移池、第二轮设施机会和晚期设施排除；漩涡可选材料/生存奖励；临时盾击毁释放槽位。规则 [说明](docs/design/first-layer-balance.md)，验证 `evidence/balance-v5-verification.md`。内容版本 first-layer-v4，旧存档拒绝加载。
+
+
+## 线上试玩和更新
+
+[第一层 Demo](https://taskstream.xyz/deep-surge/) · [部署与一键更新说明](DEPLOYMENT.md)。

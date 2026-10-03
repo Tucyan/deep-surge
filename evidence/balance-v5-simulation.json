@@ -1,0 +1,1831 @@
+{
+  "contentVersion": "first-layer-v4",
+  "seeds": "1..100",
+  "limits": "Two noncombat policies, not human play or an optimal strategy; first available low-risk choice, latest-card discard.",
+  "policies": [
+    {
+      "policy": "ignore survival; no crafting or facilities",
+      "completed": 100,
+      "healthRange": [
+        22,
+        22
+      ],
+      "meanDiscards": 18.93,
+      "meanToolboxAppearances": 1,
+      "runs": [
+        {
+          "seed": 1,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 2,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 3,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 4,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 5,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 6,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 7,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 8,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 9,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 10,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 11,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 12,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 13,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 14,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 15,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 16,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 17,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 18,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 19,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 20,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 21,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 22,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 23,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 24,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 25,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 26,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 27,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 28,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 29,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 21,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 30,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 31,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 32,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 33,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 34,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 35,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 36,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 37,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 38,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 39,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 40,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 41,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 42,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 43,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 44,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 45,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 46,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 47,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 48,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 49,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 50,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 51,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 52,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 53,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 54,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 55,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 56,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 57,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 58,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 59,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 60,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 21,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 61,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 62,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 63,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 64,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 65,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 66,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 67,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 68,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 21,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 69,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 70,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 71,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 72,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 73,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 21,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 74,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 75,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 76,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 77,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 21,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 78,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 79,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 80,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 81,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 82,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 83,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 84,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 85,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 86,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 87,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 88,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 89,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 90,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 91,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 92,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 93,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 21,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 94,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 95,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 96,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 97,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 20,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 98,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 99,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 22,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 100,
+          "phase": "Completed",
+          "health": 22,
+          "hunger": 0,
+          "hydration": 0,
+          "discarded": 19,
+          "toolboxAppearances": 1
+        }
+      ]
+    },
+    {
+      "policy": "eat/drink at <=30; no crafting or facilities",
+      "completed": 100,
+      "healthRange": [
+        30,
+        30
+      ],
+      "meanDiscards": 15.64,
+      "meanToolboxAppearances": 1,
+      "runs": [
+        {
+          "seed": 1,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 2,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 3,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 4,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 5,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 6,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 7,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 14,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 8,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 9,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 10,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 11,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 12,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 13,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 14,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 15,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 16,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 17,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 14,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 18,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 19,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 20,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 21,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 22,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 23,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 24,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 25,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 26,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 27,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 14,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 28,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 13,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 29,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 30,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 31,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 32,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 33,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 34,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 35,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 14,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 36,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 37,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 38,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 39,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 40,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 14,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 41,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 42,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 43,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 44,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 45,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 14,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 46,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 47,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 48,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 14,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 49,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 50,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 51,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 52,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 53,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 54,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 55,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 14,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 56,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 57,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 58,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 59,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 60,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 61,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 62,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 63,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 64,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 65,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 66,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 14,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 67,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 14,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 68,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 69,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 14,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 70,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 71,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 72,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 73,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 32,
+          "hydration": 14,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 74,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 14,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 75,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 76,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 77,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 78,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 79,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 80,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 81,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 82,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 83,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 84,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 85,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 86,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 13,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 87,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 88,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 89,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 15,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 90,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 11,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 91,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 92,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 93,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 14,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 94,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 14,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 95,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 96,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 97,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 16,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 98,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 14,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 99,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 38,
+          "hydration": 38,
+          "discarded": 18,
+          "toolboxAppearances": 1
+        },
+        {
+          "seed": 100,
+          "phase": "Completed",
+          "health": 30,
+          "hunger": 14,
+          "hydration": 14,
+          "discarded": 17,
+          "toolboxAppearances": 1
+        }
+      ]
+    }
+  ]
+}
