@@ -17,8 +17,11 @@ export function generateCandidates(state,count=2+rng(state,'nodes',2)){
  });
  if(chosen.includes('N02'))state.heatOpportunity=true;
 }
-export function beginVoyage(state){state.phase='VoyageSupply';state.ap=state.config.ap;state.rerollUsed=false;state.revealed=false;state.node=null;state.battleTurn=null;state.enemies=[];state.guard=false;generateCandidates(state);state.supply={choices:['C07','C08','C01'],fixed:Array.from({length:2},()=>state.config.supplies[rng(state,'supply',state.config.supplies.length)])};log(state,`第 ${state.voyageIndex}/${state.config.voyages} 次航行：补给已固定，选择后准备。`);}
-export function chooseSupply(state,id){requireRule(['VoyageSupply','BattleSupply'].includes(state.phase),'当前没有补给选择');requireRule(state.supply.choices.includes(id),'无效补给选项');const tactical=state.phase==='BattleSupply';grant(state,[id,...state.supply.fixed],tactical);state.supply=null;state.phase=tactical?'BattleAction':'VoyagePreparation';}
+function springCard(state){const entries=Object.entries(state.config.springWeights);const total=entries.reduce((n,[,weight])=>n+weight,0);let roll=rng(state,'supply',total);for(const [id,weight] of entries){if(roll<weight)return id;roll-=weight;}throw new Error('无效涌泉卡池');}
+export function beginVoyage(state){state.phase='VoyageSupply';state.ap=state.config.ap;state.rerollUsed=false;state.revealed=false;state.node=null;state.battleTurn=null;state.enemies=[];state.guard=false;generateCandidates(state);state.supply={cards:Array.from({length:3},()=>springCard(state))};log(state,`第 ${state.voyageIndex}/${state.config.voyages} 次航行：涌泉已凝聚三张牌，等待抽取。`);}
+export function drawSpring(state){requireRule(state.phase==='VoyageSupply','本轮涌泉已抽取或当前不能抽牌');grant(state,state.supply.cards);state.supply=null;state.phase='VoyagePreparation';log(state,'从涌泉抽出三张随机卡，不消耗 AP。');}
+export function chooseSupply(state,id){requireRule(state.phase==='BattleSupply','当前没有战术补给选择');requireRule(state.supply.choices.includes(id),'无效补给选项');grant(state,[id,...state.supply.fixed],true);state.supply=null;state.phase='BattleAction';}
+export function finishNodeActions(state){state.phase='VoyageAction';if(state.ap===0)settleVoyage(state);else log(state,'节点结束：仍可使用剩余 AP；主动结束行动后结算与弃牌。');}
 export function finishDiscard(state){requireRule(state.hand.length<=state.config.handLimit,'手牌仍然超限');if(state.afterDiscard==='battle'){state.battleTurn++;state.ap=state.config.ap;state.guardUsed=false;state.poleUsed=false;state.phase='BattleSupply';state.supply={choices:['T01','T02'],fixed:[]};}else if(state.voyageIndex>=state.config.voyages){state.phase='Completed';log(state,'第一层航行完成。灯火仍在，没有 Boss 战。');}else{state.voyageIndex++;beginVoyage(state);}}
 export function discardPhase(state,scope){state.afterDiscard=scope;state.phase=scope==='battle'?'BattleDiscard':'VoyageDiscard';if(state.hand.length<=state.config.handLimit)finishDiscard(state);}
 export function settleVoyage(state){
@@ -40,5 +43,5 @@ export function resolveNode(state,optionId){requireRule(state.phase==='NodeResol
  if(option.sanity)state.sanity=Math.min(100,state.sanity+option.sanity);
  if(option.rain)state.units.filter(u=>u.definitionId==='C21').forEach(u=>advanceProduction(state,u,2));
  grant(state,option.cards);if(node.nodeId==='N04')state.toolboxClaimed=true;
- log(state,`节点处理：${option.name}。`);settleVoyage(state);
+ log(state,`节点处理：${option.name}。`);finishNodeActions(state);
 }

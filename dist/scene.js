@@ -29,25 +29,26 @@ function rod(a,b,r,material,parent=scene){const from=new THREE.Vector3(...a),to=
 function rope(points,r=.027,parent=scene,material=ropeMat){return mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p))),24,r,5,false),material,0,0,0,parent)}
 
 // Broad wave bands, warped fine ripples, breaking white caps and red reflected light.
-const oceanMat=new THREE.ShaderMaterial({uniforms:{time:{value:0}},vertexShader:`varying vec3 vWorld;uniform float time;void main(){vec3 p=position;float h=sin(p.x*.65+time*.75)*cos(p.y*.77+time*.44)*.13+sin(p.x*1.15+p.y*1.2+time)*.06;p.z+=h;vec4 w=modelMatrix*vec4(p,1.);vWorld=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`,fragmentShader:`precision highp float;varying vec3 vWorld;uniform float time;
+const oceanMat=new THREE.ShaderMaterial({uniforms:{time:{value:0},horizonFade:{value:new THREE.Vector2(-35,-25)}},vertexShader:`varying vec3 vWorld;uniform float time;void main(){vec3 p=position;float h=sin(p.x*.65+time*.75)*cos(p.y*.77+time*.44)*.13+sin(p.x*1.15+p.y*1.2+time)*.06;p.z+=h;vec4 w=modelMatrix*vec4(p,1.);vWorld=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`,fragmentShader:`precision highp float;varying vec3 vWorld;uniform float time;uniform vec2 horizonFade;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+1.),f.x),f.y);}float fbm(vec2 p){float a=.5,n=0.;for(int i=0;i<5;i++){n+=a*noise(p);p=p*2.03+3.7;a*=.5;}return n;}
 void main(){vec2 p=vWorld.xz;float t=time*.33;float warp=fbm(p*.55+vec2(t,-t));float n=fbm(p*vec2(1.5,3.)+vec2(warp*3.,t));float band=sin(p.y*3.+sin(p.x*1.8+t)*1.4+warp*4.+t);float ridges=pow(max(0.,1.-abs(band)),7.);float crest=smoothstep(.66,.81,n+band*.12);vec3 col=mix(vec3(.012,.055,.081),vec3(.038,.145,.209),n);col+=ridges*vec3(.07,.15,.18)*(.3+n);col=mix(col,vec3(.34,.5,.58),crest*.73);float foam=smoothstep(.7,.82,fbm(p*vec2(2.8,5.5)+vec2(t,warp*2.)))*ridges;col+=foam*vec3(.36,.45,.5);float raftDist=length((p-vec2(-5.1,1.8))*vec2(.78,1.));float wake=exp(-pow(raftDist-5.5,2.)*4.)*smoothstep(.38,.68,n)*.18;col+=wake*vec3(.5,.65,.7);float vd=length(p-vec2(7.,2.9));float red=exp(-vd*.45)*(.25+ridges)*.6;col+=vec3(.52,.015,.025)*red;float fog=smoothstep(5.,48.,-p.y);col=mix(col,vec3(.13,.24,.31),fog*.94);gl_FragColor=vec4(col,1.);}`});
 const ocean=mesh(new THREE.PlaneGeometry(170,150,260,230),oceanMat,0,-.43,-20);ocean.rotation.x=-Math.PI/2;ocean.castShadow=false;ocean.receiveShadow=false;
 oceanMat.transparent=true;oceanMat.fragmentShader=oceanMat.fragmentShader.replace('crest*.73','crest*.46').replace('vec3(.038,.145,.209)','vec3(.052,.17,.233)').replace('gl_FragColor=vec4(col,1.);','gl_FragColor=vec4(col,smoothstep(-16.5,-11.8,p.y));');
 oceanMat.fragmentShader=oceanMat.fragmentShader.replace('vec2(7.,2.9)','vec2(7.,-.3)').replace('vec2(-5.1,1.8)','vec2(-5.1,-1.25)');
-oceanMat.fragmentShader=oceanMat.fragmentShader.replace('smoothstep(-16.5,-11.8,p.y)','smoothstep(-12.,-8.5,p.y)');
+oceanMat.fragmentShader=oceanMat.fragmentShader.replace('smoothstep(-16.5,-11.8,p.y)','smoothstep(horizonFade.x,horizonFade.y,p.y)');
 
 // Distant drowned architecture. Broken towers are silhouettes in the sea mist.
 function rock(x,z,h=2,r=.5,parent=scene,material=mat('#142a37')){const g=new THREE.CylinderGeometry(r*.28,r,h,5,2);const a=g.attributes.position;for(let i=0;i<a.count;i++){a.setX(i,a.getX(i)+(rand()-.5)*r*.45);a.setZ(i,a.getZ(i)+(rand()-.5)*r*.4)}g.computeVertexNormals();const m=mesh(g,material,x,h*.5-.35,z,parent,true);m.rotation.z=(rand()-.5)*.17;m.rotation.y=rand()*6;return m}
-for(let i=0;i<66;i++){const x=-36+rand()*74,z=-12-rand()*33;rock(x,z,.6+rand()*5,.22+rand()*.85)}
-for(let i=0;i<10;i++){const x=-15+rand()*5,z=-22+rand()*4;box(x,rand()*1.5+1,z,.5,2+rand()*3,.7,mat('#1b3746'));box(x,1.5,z,.9,.12,.9,mat('#253c46'))}
+const distantStone=mat('#284151');
+for(let i=0;i<66;i++){const x=-25+rand()*50,z=-10-rand()*5;rock(x,z,.4+rand()*1.4,.18+rand()*.5,scene,distantStone)}
+for(let i=0;i<10;i++){const x=-11+rand()*21,z=-11+rand()*2,h=.7+rand()*1.2;box(x,h*.5-.35,z,.35,h,.5,distantStone,scene,false);box(x,h*.65-.35,z,.7,.1,.7,distantStone,scene,false)}
 for(const [x,z,h,r]of [[-13,-2,2.5,.7],[3.5,-5,2.2,.65],[12,6,2.1,.65],[14,1,1.8,.7],[-14,8,1.1,.9]])rock(x,z,h,r);
 const guardian=new THREE.Group();guardian.position.set(1.3,0,-29);scene.add(guardian);const silhouette=mat('#203d4d');mesh(new THREE.SphereGeometry(2.1,10,8),silhouette,0,4,0,guardian);rock(-1.8,0,5,.5,guardian,silhouette);rock(1.8,0,5.6,.6,guardian,silhouette);for(let i=0;i<8;i++){const a=i*.78;rope([[Math.cos(a)*1.6,3.2,.5],[Math.cos(a)*2.5,1.7,.9],[Math.cos(a)*3.,0,1.4]],.24,guardian,silhouette)}const eye=mesh(new THREE.TorusGeometry(.34,.064,8,40),new THREE.MeshBasicMaterial({color:'#53c5d2'}),.4,4.9,1.91,guardian);const eyeLight=new THREE.PointLight('#40d5e8',6,7);eyeLight.position.set(.4,4.9,2.5);guardian.add(eyeLight);
 
 export const raft=new THREE.Group();raft.position.set(-5.15,0,1.6);scene.add(raft);
-raft.position.z=-1.25;raft.scale.setScalar(1.3);guardian.position.set(.6,0,-10.6);guardian.scale.setScalar(.7);
+raft.position.z=-1.25;raft.scale.setScalar(1.3);guardian.position.set(.6,-.9,-9);guardian.scale.setScalar(.55);
 silhouette.color.set('#1b3647');silhouette.roughness=1;eye.material.toneMapped=false;
-guardian.visible=false;
+guardian.visible=true;
 const tiles=[],selectable=[];
 const raftResources = createRaftResources({ seed: 2187 });
 const raftPanels = [];
@@ -105,7 +106,7 @@ export function expandRaft(){makeTile(5.75 + (tiles.length - 12) * 2.3, 2.25);}
 export function setSceneSettings(s){settings={...settings,...s};renderer.setPixelRatio(settings.quality==='high'?Math.min(devicePixelRatio,1.7):1);}
 let settings={motion:true,quality:'high'};let pointer={x:0,y:0};
 export function setPointer(x,y){pointer={x,y}}
-export function resizeScene(w,h){renderer.setSize(w,h,false);}
+export function resizeScene(w,h){renderer.setSize(w,h);}
 let last=0;const start=performance.now();
 function animate(now){requestAnimationFrame(animate);if(now-last<1000/(settings.quality==='high'?45:30))return;last=now;const t=settings.motion?(now-start)/1000:0;oceanMat.uniforms.time.value=t;vortexMat.uniforms.time.value=t;raft.rotation.z=Math.sin(t*.65)*.009;raft.rotation.x=Math.sin(t*.8)*.006;raft.position.y=Math.sin(t*.8)*.037;particles.rotation.y=-t*.14;eye.material.color.setHSL(.51,.6,.56+Math.sin(t)*.07);flames.forEach((l,i)=>l.intensity=10+Math.sin(t*7+i)*1.2);if(settings.motion){camera.position.x=pointer.x*.12;camera.lookAt(pointer.x*.08,0,-1.4+pointer.y*.07)}renderer.render(scene,camera)}requestAnimationFrame(animate);
 renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();window.dispatchEvent(new CustomEvent('scene-error',{detail:'画面连接中断，请刷新页面重试。'}))});
@@ -131,3 +132,5 @@ export function syncDemo(view){
  }
 }
 addEventListener('pagehide',()=>equipmentInstances.forEach(instance=>instance.dispose()),{once:true});
+
+export function getSpringScreenPosition(){camera.updateMatrixWorld();const p=vortex.getWorldPosition(new THREE.Vector3()).project(camera);return {x:(p.x+1)*innerWidth/2,y:(1-p.y)*innerHeight/2};}

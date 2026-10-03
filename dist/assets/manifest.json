@@ -1042,6 +1042,86 @@
         "scene.js"
       ],
       "validation": "Node footprint/state/resource tests; browser deployment routes; individual multiview art review pending"
+    },
+    {
+      "assetId": "model.distant-guardian",
+      "kind": "procedural-presentation",
+      "version": "v2",
+      "status": "integrated-tested",
+      "generator": {
+        "module": "scene.js",
+        "block": "guardian initialization",
+        "visualSeed": 2187
+      },
+      "sourceRecord": "asset-sources/spring-v2.md",
+      "dependencies": [],
+      "consumers": [
+        "index.html"
+      ],
+      "validation": "Static source checks and browser interaction/screenshot, 2026-10-03"
+    },
+    {
+      "assetId": "effect.spring-vortex",
+      "kind": "procedural-presentation",
+      "version": "v2",
+      "status": "integrated-tested",
+      "generator": {
+        "module": "scene.js",
+        "block": "vortex initialization",
+        "visualSeed": 2187
+      },
+      "sourceRecord": "asset-sources/spring-v2.md",
+      "dependencies": [],
+      "consumers": [
+        "index.html"
+      ],
+      "validation": "Static source checks and browser interaction/screenshot, 2026-10-03"
+    },
+    {
+      "assetId": "effect.spring-card-emergence",
+      "kind": "procedural-presentation",
+      "version": "v2",
+      "status": "integrated-tested",
+      "generator": {
+        "module": "app.js",
+        "block": "animateSpringCards",
+        "visualSeed": 2187
+      },
+      "sourceRecord": "asset-sources/spring-v2.md",
+      "dependencies": [
+        "image.card.c01",
+        "image.card.c02",
+        "image.card.c03",
+        "image.card.c04",
+        "image.card.c05",
+        "image.card.c06",
+        "image.card.c07",
+        "image.card.c08",
+        "image.card.c09",
+        "image.card.c17",
+        "image.card.c18"
+      ],
+      "consumers": [
+        "index.html"
+      ],
+      "validation": "Static source checks and browser interaction/screenshot, 2026-10-03"
+    },
+    {
+      "assetId": "model.distant-ruins",
+      "kind": "procedural-model",
+      "version": "v2",
+      "status": "integrated-tested",
+      "generator": {
+        "module": "scene.js",
+        "block": "distantStone and drowned architecture initialization",
+        "visualSeed": 2187
+      },
+      "sourceRecord": "asset-sources/spring-v2.md",
+      "dependencies": [],
+      "consumers": [
+        "index.html"
+      ],
+      "validation": "Browser horizontal composition inspection"
     }
   ]
 }

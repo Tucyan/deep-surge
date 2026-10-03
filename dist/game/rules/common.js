@@ -8,7 +8,7 @@ export function grant(state,definitions,temporary=false){for(const definitionId 
 export function unlock(state){if(['C12','C05','C02'].every(id=>state.hand.some(c=>c.definitionId===id)))state.energyUnlocked=true;}
 export function consume(state,ids){state.hand=state.hand.filter(c=>!ids.includes(c.id));}
 export function pay(state,cost){requireRule(state.ap>=cost,'行动点不足');state.ap-=cost;}
-export function actionable(state){requireRule(['VoyagePreparation','BattleAction'].includes(state.phase),'当前阶段不能使用物资或制作');}
+export function actionable(state){requireRule(['VoyagePreparation','VoyageAction','BattleAction'].includes(state.phase)&&state.ap>0,'当前阶段不能使用物资或制作');}
 export function cellFor(state,unit){return state.cells.find(c=>c.id===unit.cellId);}
 export function operational(state,unit){return unit.structure>0&&cellFor(state,unit)?.state==='intact';}
 export function perish(state){if(state.health<=0){state.health=0;state.phase='Failed';log(state,'生命归零，航行失败。');return true;}return false;}

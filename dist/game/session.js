@@ -1,12 +1,14 @@
 import {CONFIG,CARDS,NODES,MONSTERS} from './content/catalog.js';
 import {copy,requireRule,grant,uid,log,consume,pay,operational} from './rules/common.js';
-import {beginVoyage,chooseSupply,resolveNode,finishDiscard} from './rules/voyage.js';
-import {beginBattle,battleCommand} from './rules/battle.js';
+import {beginVoyage,chooseSupply,resolveNode,finishDiscard,drawSpring,finishNodeActions,settleVoyage} from './rules/voyage.js';
+import {beginBattle,battleCommand,endBattleTurn} from './rules/battle.js';
 import {craft,play,unitCommand} from './rules/cards.js';
 
 function invariant(state){requireRule(state.health>=0&&state.health<=30,'生命不变量');requireRule(state.ap>=0&&state.ap<=state.config.ap,'AP 不变量');const entities=[...state.hand,...state.units,...state.units.filter(u=>u.stored).map(u=>u.stored),...state.enemies];requireRule(new Set(entities.map(e=>e.id)).size===entities.length,'重复实体 ID');for(const c of state.hand)requireRule(CARDS[c.definitionId],'未知卡定义');requireRule(new Set(state.units.map(u=>u.slotKind+u.slotIndex)).size===state.units.length,'重复设备槽位');for(const u of state.units)requireRule(state.cells.some(c=>c.id===u.cellId&&c.state!=='lost'),'设备承载格不存在');}
 function execute(state,command){requireRule(!['Completed','Failed'].includes(state.phase),'本局已结束');const type=command.type;
- if(type==='ChooseSupply')chooseSupply(state,command.definitionId);
+ if(type==='DrawSpring')drawSpring(state);
+ else if(type==='EndVoyageAction'){requireRule(state.phase==='VoyageAction','节点结束后才能结束航行行动');settleVoyage(state);}
+ else if(type==='ChooseSupply')chooseSupply(state,command.definitionId);
  else if(type==='Craft')craft(state,command);
  else if(type==='PlayCard')play(state,command);
  else if(type==='SubmitVoyage'){
@@ -21,7 +23,10 @@ function execute(state,command){requireRule(!['Completed','Failed'].includes(sta
  else if(type==='DiscardCards'){
   requireRule(['VoyageDiscard','BattleDiscard'].includes(state.phase),'只在轮末弃牌');const ids=command.cardIds;requireRule(Array.isArray(ids)&&ids.length>0&&new Set(ids).size===ids.length,'弃牌输入重复或为空');requireRule(ids.length<=state.hand.length-state.config.handLimit,'只能弃到手牌上限');requireRule(ids.every(id=>state.hand.some(c=>c.id===id)),'弃牌不存在');consume(state,ids);log(state,`弃置 ${ids.length} 张牌。`);if(state.hand.length<=state.config.handLimit)finishDiscard(state);
  }else if(type==='FinishDiscard'){requireRule(['VoyageDiscard','BattleDiscard'].includes(state.phase),'当前不在弃牌阶段');finishDiscard(state);}
- else throw new Error('未知命令');invariant(state);
+ else throw new Error('未知命令');
+ if(state.ap===0&&state.phase==='VoyageAction')settleVoyage(state);
+ else if(state.ap===0&&state.phase==='BattleAction')endBattleTurn(state);
+ invariant(state);
 }
 function candidateDetails(state,c){
  const def=NODES[c.nodeId];
@@ -41,7 +46,7 @@ function sessionProbeCraft(state,recipeId){try{const draft=copy(state);draft.pha
 function session(initial){let state=initial;
  const preview=command=>{const draft=copy(state);try{execute(draft,command);return {allowed:true,apCost:Math.max(0,state.ap-draft.ap),errors:[]};}catch(error){return {allowed:false,apCost:0,errors:[{message:error.message}]};}};
  return {getSnapshot:()=>copy(state),getView:()=>{
-  const view=copy(state);delete view.random;delete view.nextId;
+  const view=copy(state);delete view.random;delete view.nextId;if(view.phase==='VoyageSupply')view.supply={count:3};
   view.candidates=view.candidates.map(c=>({id:c.id,nodeId:c.nodeId,name:NODES[c.nodeId].name,risk:(c.nodeId==='N04'&&state.toolboxClaimed?'后续工具箱：只给废铁与蓄电碎片':NODES[c.nodeId].risk)+(responseGap(state,c)?'；'+responseGap(state,c):''),kind:NODES[c.nodeId].kind,details:state.revealed?candidateDetails(state,c):null}));
   view.units=view.units.map(u=>({...u,operational:operational(state,u)}));return view;
  },preview,
@@ -49,7 +54,7 @@ function session(initial){let state=initial;
  exportSave:()=>({formatVersion:1,contentVersion:CONFIG.version,state:copy(state)}),
  };
 }
-export function createSession(seed=20261003,overrides={}){const config={...copy(CONFIG),...copy(overrides)};requireRule(config.supplies.length>0,'补给池不能为空');const state={schemaVersion:1,randomAlgorithm:'lcg32-v1',revision:0,nextId:0,seed:seed>>>0,config,random:Object.fromEntries(['nodes','rewards','supply','tactical','raftDamage'].map((key,i)=>[key,((seed>>>0)^Math.imul(i+1,2654435761))>>>0])),health:30,hunger:80,hydration:80,sanity:80,ap:3,voyageIndex:1,hand:[],units:[],cells:[],defense:[],logistics:[],enemies:[],candidates:[],log:[],encounters:{M01:0,M02:0,M03:0},energyUnlocked:false,heatOpportunity:true,toolboxClaimed:false};
+export function createSession(seed=20261003,overrides={}){const config={...copy(CONFIG),...copy(overrides)};requireRule(config.supplies.length>0,'补给池不能为空');if(overrides.supplies&&!overrides.springWeights)config.springWeights=Object.fromEntries(config.supplies.map(id=>[id,1]));requireRule(Object.entries(config.springWeights).length>0&&Object.entries(config.springWeights).every(([id,w])=>CARDS[id]&&Number.isInteger(w)&&w>0),'涌泉权重必须为正整数且卡牌存在');const state={schemaVersion:1,randomAlgorithm:'lcg32-v1',revision:0,nextId:0,seed:seed>>>0,config,random:Object.fromEntries(['nodes','rewards','supply','tactical','raftDamage'].map((key,i)=>[key,((seed>>>0)^Math.imul(i+1,2654435761))>>>0])),health:30,hunger:80,hydration:80,sanity:80,ap:3,voyageIndex:1,hand:[],units:[],cells:[],defense:[],logistics:[],enemies:[],candidates:[],log:[],encounters:{M01:0,M02:0,M03:0},energyUnlocked:false,heatOpportunity:true,toolboxClaimed:false};
  for(let z=0;z<3;z++)for(let x=0;x<4;x++)state.cells.push({id:`cell-${x}-${z}`,label:`${x+1}-${z+1}`,x,z,state:'intact',damagedAtVoyage:null});
  state.defense=Array.from({length:4},(_,index)=>({index,cellId:`cell-${index}-2`}));state.logistics=[{index:0,cellId:'cell-0-1'},{index:1,cellId:'cell-3-1'}];
  grant(state,config.initialCards);beginVoyage(state);invariant(state);return session(state);

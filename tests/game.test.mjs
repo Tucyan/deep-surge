@@ -3,8 +3,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createSession,restoreSession} from '../dist/game/session.js';
 import {CARDS,RECIPES,NODES,MONSTERS} from '../dist/game/content/catalog.js';
-const act=(session,command)=>{const result=session.dispatch({expectedRevision:session.getSnapshot().revision,command});assert.equal(result.accepted,true,JSON.stringify(result));return session.getSnapshot();};
-const prep=s=>act(s,{type:'ChooseSupply',definitionId:'C07'});
+const act=(session,command)=>{const result=session.dispatch({expectedRevision:session.getSnapshot().revision,command});assert.equal(result.accepted,true,JSON.stringify(result));if(session.getSnapshot().phase==='VoyageAction'){const end=session.dispatch({expectedRevision:session.getSnapshot().revision,command:{type:'EndVoyageAction'}});assert.equal(end.accepted,true);}return session.getSnapshot();};
+// Existing route helpers explicitly end post-node actions; the revision tests exercise that boundary directly.
+const prep=s=>act(s,{type:'DrawSpring'});
 
 test('catalog covers all first-layer content; starting supply is one-time and costs are atomic',()=>{
  assert.equal(Object.keys(CARDS).filter(id=>id.startsWith('C')).length,24);assert.equal(Object.keys(RECIPES).length,8);assert.equal(Object.keys(NODES).length,12);assert.equal(Object.keys(MONSTERS).length,3);
