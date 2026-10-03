@@ -338,8 +338,7 @@
         "model.raft-expansion-panel"
       ],
       "consumers": [
-        "raft-assets.html",
-        "scene.js"
+        "raft-assets.html"
       ],
       "validation": "Node asset tests and browser visual inspection on 2026-10-03"
     },
@@ -359,8 +358,8 @@
         "texture.raft-wood"
       ],
       "consumers": [
-        "raft-assets.html",
-        "scene.js"
+        "presentation/scene/raft-presenter.js",
+        "raft-assets.html"
       ],
       "validation": "Node asset tests and browser visual inspection on 2026-10-03"
     },
@@ -976,9 +975,9 @@
         "vendor/three.module.min.js"
       ],
       "consumers": [
-        "scene.js"
+        "tests/equipment.test.mjs"
       ],
-      "validation": "Node footprint/state/resource tests; browser deployment routes; individual multiview art review pending"
+      "validation": "Factory state/resource tests retained; main scene uses text placeholders since raft-state-v3; multiview art review pending"
     },
     {
       "assetId": "model.equipment.c19",
@@ -997,9 +996,9 @@
         "vendor/three.module.min.js"
       ],
       "consumers": [
-        "scene.js"
+        "tests/equipment.test.mjs"
       ],
-      "validation": "Node footprint/state/resource tests; browser deployment routes; individual multiview art review pending"
+      "validation": "Factory state/resource tests retained; main scene uses text placeholders since raft-state-v3; multiview art review pending"
     },
     {
       "assetId": "model.equipment.c20",
@@ -1018,9 +1017,9 @@
         "vendor/three.module.min.js"
       ],
       "consumers": [
-        "scene.js"
+        "tests/equipment.test.mjs"
       ],
-      "validation": "Node footprint/state/resource tests; browser deployment routes; individual multiview art review pending"
+      "validation": "Factory state/resource tests retained; main scene uses text placeholders since raft-state-v3; multiview art review pending"
     },
     {
       "assetId": "model.equipment.c21",
@@ -1039,9 +1038,9 @@
         "vendor/three.module.min.js"
       ],
       "consumers": [
-        "scene.js"
+        "tests/equipment.test.mjs"
       ],
-      "validation": "Node footprint/state/resource tests; browser deployment routes; individual multiview art review pending"
+      "validation": "Factory state/resource tests retained; main scene uses text placeholders since raft-state-v3; multiview art review pending"
     },
     {
       "assetId": "model.distant-guardian",
@@ -1122,6 +1121,63 @@
         "index.html"
       ],
       "validation": "Browser horizontal composition inspection"
+    },
+    {
+      "assetId": "model.raft-root",
+      "kind": "procedural-model",
+      "version": "v3",
+      "status": "integrated-tested",
+      "generator": {
+        "module": "presentation/models/raft-root.js",
+        "factory": "createRaftRoot"
+      },
+      "sourceRecord": "asset-sources/raft-state-v3.md",
+      "dependencies": [
+        "texture.raft-wood"
+      ],
+      "consumers": [
+        "scene.js",
+        "raft-state.html"
+      ],
+      "validation": "Node snapshot/fit/pick/resource tests and browser initial/expanded/damaged/small layouts, 2026-10-03"
+    },
+    {
+      "assetId": "presentation.raft-state",
+      "kind": "procedural-presentation",
+      "version": "v3",
+      "status": "integrated-tested",
+      "generator": {
+        "module": "presentation/scene/raft-presenter.js",
+        "factory": "createRaftPresenter"
+      },
+      "sourceRecord": "asset-sources/raft-state-v3.md",
+      "dependencies": [
+        "model.raft-expansion-panel",
+        "model.raft-root",
+        "texture.raft-cell-label"
+      ],
+      "consumers": [
+        "scene.js",
+        "raft-state.html"
+      ],
+      "validation": "Node snapshot/fit/pick/resource tests and browser initial/expanded/damaged/small layouts, 2026-10-03"
+    },
+    {
+      "assetId": "texture.raft-cell-label",
+      "kind": "canvas-texture",
+      "version": "v3",
+      "status": "integrated-tested",
+      "generator": {
+        "module": "presentation/materials/cell-label.js",
+        "factory": "createCellLabel"
+      },
+      "sourceRecord": "asset-sources/raft-state-v3.md",
+      "dependencies": [],
+      "consumers": [
+        "scene.js",
+        "raft-state.html"
+      ],
+      "validation": "Node snapshot/fit/pick/resource tests and browser initial/expanded/damaged/small layouts, 2026-10-03"
     }
   ]
 }

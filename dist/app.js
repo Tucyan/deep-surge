@@ -1,7 +1,7 @@
-import {createSession} from './game/session.js?v=spring-v2';
+import {createSession} from './game/session.js?v=raft-state-v3';
 import {CARDS,RECIPES,NODES,MONSTERS,EQUIPMENT,MATERIAL_NAMES} from './game/content/catalog.js';
 import {cardArt,nodeArt,monsterArt} from './presentation/art.js';
-import {syncDemo,setPointer,resizeScene,setSceneSettings,getSpringScreenPosition} from './scene.js?v=spring-v2';
+import {syncDemo,setPointer,resizeScene,setSceneSettings,getSpringScreenPosition,getRaftSummary,pickTile} from './scene.js?v=raft-state-v3';
 
 const $=selector=>document.querySelector(selector);
 const escape=text=>String(text??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -27,7 +27,7 @@ function closeDialog(){dialogMode=null;$('#dialog').close();}
 function start(){const seed=Number($('#seed').value);session=createSession(Number.isFinite(seed)?seed>>>0:20261003);view=session.getView();selectedCandidate=null;armedAnchor=null;closeDialog();$('#start-screen').hidden=true;$('#end-screen').hidden=true;render();}
 function stats(){const items=[['生命',view.health,30,'#d38462'],['饱食',view.hunger,100,'#d6ac62'],['水分',view.hydration,100,'#6fbacb'],['SAN',view.sanity,100,'#a297cb']];$('#stats').innerHTML=items.map(([name,n,max,color])=>`<div class="stat"><span>${name}</span><div class="bar"><i style="--color:${color};width:${n/max*100}%"></i></div><strong>${n}/${max}</strong></div>`).join('');}
 function render(){
- stats();syncDemo(view);updateSpring();$('#ap').innerHTML=`行动点 <b>${view.ap}/${view.config.ap}</b>`;
+ stats();syncDemo(view);updateSpring();const raftSummary=getRaftSummary();$('.raft-label').innerHTML=`木筏 · ${raftSummary.total-raftSummary.lost} 格在位 / ${raftSummary.total} 格登记 <span>扩展 +${raftSummary.expanded} · 破损 ${raftSummary.damaged} · 脱落 ${raftSummary.lost} · 后方筏根仅装饰</span>`;$('#ap').innerHTML=`行动点 <b>${view.ap}/${view.config.ap}</b>`;
  $('#voyage').innerHTML=`第 ${view.voyageIndex} / ${view.config.voyages} 次航行 <small>${phaseNames[view.phase]} · 种子 ${view.seed}</small>`;
  $('#hand-count').textContent=`手牌 ${view.hand.length} / ${view.config.handLimit}`;
  const discard=view.phase.endsWith('Discard');$('#hand-tip').textContent=discard?`请弃置 ${view.hand.length-view.config.handLimit} 张：点击即弃牌`:'点击物资查看用途 · 工具保留，制作与使用分别付费';
@@ -72,11 +72,11 @@ function renderBattle(){
 }
 function renderDialog(){const mode=dialogMode;if(!mode)return;let html='';
  if(mode.kind==='help')html=`<h2>航行指南</h2><p>目标：完成五次航行并活下来。本层没有 Boss。</p><ol><li>每轮从右侧涌泉随机抽三张牌，获得 3 AP；可进食、饮水、制作、安装和维修。</li><li>从左侧 2～3 个候选中选择一个，再提交航行。事件需要选择一次选项，战斗有独立 AP。</li><li>战斗时看清材料限制。火把对付水母，放电包对付绝壳蟹。每回合设备先攻击，之后敌人执行意图。</li><li>选择手牌查看可用目标；合成只消耗原料与制作 AP，工具保留。制作出的物资使用时仍需 AP。</li><li>每航行轮饱食、水分各 -10，归零会扣生命；战斗不重复扣饥渴。</li><li>破损筏格停用设备，两个后续航行轮未修就脱落；漂流木或修补包可修破损格，不能补建缺口。</li><li>行动点耗尽或主动结束行动后才开放弃牌；行动期间允许超过 10 张。节点奖励入手不立即弃牌，可使用剩余 AP。战斗第二回合起可撤退，代价是生命 -4 且无奖励。</li></ol><p>鼠标点击按钮操作；手牌横向滚动查看更多。暂无存档，刷新和重开会清除当前局。数值为首版试测。</p>`;
- else if(mode.kind==='settings')html=`<h2>视觉设置</h2><p>视觉设置不影响规则结算。</p><div class="buttons"><button data-ui="motion">随波动态：${settings.motion?'开启':'关闭'}</button><button data-ui="quality">画质：${settings.quality==='high'?'高':'低'}</button></div><a href="raft-assets.html" target="_blank" style="color:#dfc68e">查看独立木筏资产工坊</a>`;
+ else if(mode.kind==='settings')html=`<h2>视觉设置</h2><p>视觉设置不影响规则结算。</p><div class="buttons"><button data-ui="motion">随波动态：${settings.motion?'开启':'关闭'}</button><button data-ui="quality">画质：${settings.quality==='high'?'高':'低'}</button></div><a href="raft-assets.html" target="_blank" style="color:#dfc68e">查看独立木筏资产工坊</a><br><a href="raft-state.html" target="_blank" style="color:#dfc68e">查看木筏状态映射样例（含扩展/战损）</a>`;
  else if(mode.kind==='log')html=`<h2>航海日志 · 种子 ${view?.seed??'—'}</h2><div class="log-list">${view?.log.slice().reverse().map(line=>`<p>${escape(line)}</p>`).join('')??'<p>还未开始航行。</p>'}</div>`;
  else if(mode.kind==='craft')html='<h2>确定合成 · 制作与使用分别收费</h2><p>自动选取最早入手的匹配原料；工具保留，临时战术牌不可制作永久物资。</p>'+Object.entries(RECIPES).map(([id,r])=>`<div class="recipe"><div><strong>${id} · ${CARDS[r.output].name}</strong><p>工具：${CARDS[r.tool].name}<br>消耗：${r.ingredients.map(c=>CARDS[c].name).join(' + ')}<br>制作 ${r.cost} AP · 后续使用 ${CARDS[r.output].cost} AP</p></div>${commandButton('制作 '+CARDS[r.output].name,{type:'Craft',recipeId:id})}</div>`).join('');
  else if(mode.kind==='raft'){
-  html='<h2>木筏 · 承载格与设备</h2><p>橙色为破损，虚线为脱落。防卫位绑定前排四格，后勤位绑定左右中排格。初始 12 格为本版布局试测。</p><div class="cell-grid">'+view.cells.map(c=>`<button class="${c.state}" data-cell-info="${c.id}">${c.label} · ${c.state==='intact'?'完好':c.state==='lost'?'脱落':`破损 / ${Math.max(0,2-Math.max(0,view.voyageIndex-1-c.damagedAtVoyage))}轮`}</button>`).join('')+'</div>';
+  html='<h2>木筏 · 承载格与设备</h2><p>橙色为破损，虚线为脱落。防卫位绑定前排四格，后勤位绑定左右中排格。初始 12 格为本版布局试测；三维格子按当前状态逐格显示内容，后方帐篷、灯、箱子和渔网属于独立装饰根区。</p><div class="cell-grid">'+view.cells.map(c=>`<button class="${c.state}" data-cell-info="${c.id}">${c.label} · ${c.state==='intact'?'完好':c.state==='lost'?'脱落':`破损 / ${Math.max(0,2-Math.max(0,view.voyageIndex-1-c.damagedAtVoyage))}轮`}</button>`).join('')+'</div>';
   html+=view.units.map(u=>{const scrap=view.hand.find(c=>c.definitionId==='C02'&&!c.temporary);let controls='';if(u.structure===0){controls=commandButton('重建 2 AP + 废铁',{type:'RebuildWreck',unitId:u.id,scrapCardId:scrap?.id})+commandButton('拆除 1 AP',{type:'DismantleWreck',unitId:u.id});}else{if(u.stored)controls+=commandButton('免费领取 '+CARDS[u.stored.definitionId].name,{type:'CollectProduction',unitId:u.id});if(u.slotKind==='defense')for(const destination of [u.slotIndex-1,u.slotIndex+1])if(destination>=0&&destination<4){const occupied=view.units.some(n=>n.slotKind==='defense'&&n.slotIndex===destination);controls+=commandButton(`${occupied?'交换':'移动'}至航道 ${destination+1}`,{type:occupied?'SwapDefense':'MoveDefense',unitId:u.id,destination});}}
    return `<div class="unit-row">${CARDS[u.definitionId].name} · ${u.slotKind==='defense'?'防卫':'后勤'} ${u.slotIndex+1} · 结构 ${u.structure}/${EQUIPMENT[u.definitionId].structure} · ${u.structure===0?'残骸':u.operational?'工作中':'停用'}${EQUIPMENT[u.definitionId].threshold?` · 生产进度 ${u.progress}/${EQUIPMENT[u.definitionId].threshold}`:''}<div>${controls}</div></div>`;}).join('')||'<p>尚无部署设备。</p>';
  }else if(mode.kind==='card')html=cardDialog(mode.cardId);
@@ -104,6 +104,7 @@ function cardDialog(cardId){const card=view.hand.find(c=>c.id===cardId);if(!card
 }
 
 document.addEventListener('click',event=>{
+ if(event.target.tagName==='CANVAS'&&view){const cell=pickTile(event.clientX/innerWidth*2-1,1-event.clientY/innerHeight*2);if(cell){const unit=view.units.find(u=>u.cellId===cell.id);toast(`筏格 ${cell.x+1}-${cell.z+1}：${unit?CARDS[unit.definitionId].name:'空格'}，${view.cells.find(c=>c.id===cell.id)?.state==='damaged'?'破损':'完好'}`);}return;}
  const button=event.target.closest('button');if(!button||button.disabled)return;
  if(button.dataset.command){const command=JSON.parse(decodeURIComponent(button.dataset.command));if(dispatch(command)&&dialogMode?.kind==='confirm')closeDialog();return;}
  if(button.dataset.card){if(view.phase.endsWith('Discard'))dispatch({type:'DiscardCards',cardIds:[button.dataset.card]});else openDialog({kind:'card',cardId:button.dataset.card});return;}
