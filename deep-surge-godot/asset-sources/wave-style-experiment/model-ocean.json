@@ -1,0 +1,17 @@
+{
+  "version": "model-ocean-stylized-v2",
+  "horizontal_scale": 0.45,
+  "height_scale": 0.24,
+  "grid_stride": 2,
+  "contact_margin": 1.2,
+  "contact_transition": 2.4,
+  "raft_draft": 0.055,
+  "slope_limit": 0.022,
+  "foam_threshold": 0.48,
+  "foam_strength": 0.90,
+  "flat_color": "#164a65",
+  "shadow_color": "#0c173b",
+  "foam_color": "#bed8e5",
+  "shade_start": 0.035,
+  "shade_end": 0.09
+}

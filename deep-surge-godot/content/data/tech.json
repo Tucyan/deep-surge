@@ -1,0 +1,41 @@
+{
+  "knowledge": {
+    "name": "漂流知识",
+    "description": "永久手牌上限+1。",
+    "price": 3,
+    "requires": [],
+    "modifiers": {
+      "handLimit": 1
+    }
+  },
+  "craft": {
+    "name": "熟练双手",
+    "description": "永久基地AP上限+1。",
+    "price": 6,
+    "requires": [
+      "knowledge"
+    ],
+    "modifiers": {
+      "baseAp": 1
+    }
+  },
+  "endurance": {
+    "name": "深海耐性",
+    "description": "永久精神上限+10。",
+    "price": 4,
+    "requires": [
+      "knowledge"
+    ],
+    "modifiers": {
+      "sanityMax": 10
+    }
+  },
+  "spear": {
+    "name": "长矛工艺",
+    "description": "解锁矛架制造。",
+    "price": 5,
+    "requires": [
+      "craft"
+    ]
+  }
+}

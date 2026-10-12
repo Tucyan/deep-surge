@@ -1,0 +1,837 @@
+{
+  "drift": {
+    "id": "drift",
+    "name": "漂浮物带",
+    "kind": "supply",
+    "description": "残片被缆绳和油污缠住，需投入物资才能回收；也可换取补给。",
+    "options": [
+      {
+        "id": "wood",
+        "name": "编网打捞木料",
+        "description": "投入绳索、布条各1和1 AP，获得木头×2、塑料×1。",
+        "effects": [
+          {
+            "type": "GiveCard",
+            "id": "wood",
+            "amount": 2
+          },
+          {
+            "type": "GiveCard",
+            "id": "plastic"
+          }
+        ],
+        "cost": 1,
+        "cardCosts": {
+          "rope": 1,
+          "cloth": 1
+        }
+      },
+      {
+        "id": "metal",
+        "name": "撬开金属货箱",
+        "description": "投入木头×2、塑料×1和1 AP，获得废铁×2、绳索×1。",
+        "effects": [
+          {
+            "type": "GiveCard",
+            "id": "iron",
+            "amount": 2
+          },
+          {
+            "type": "GiveCard",
+            "id": "rope"
+          }
+        ],
+        "cost": 1,
+        "cardCosts": {
+          "wood": 2,
+          "plastic": 1
+        }
+      },
+      {
+        "id": "provisions",
+        "name": "修复密封补给箱",
+        "description": "投入废铁、绳索、布条各1和1 AP，获得淡水、食物各1。",
+        "effects": [
+          {
+            "type": "GiveCard",
+            "id": "water"
+          },
+          {
+            "type": "GiveCard",
+            "id": "food"
+          }
+        ],
+        "cost": 1,
+        "cardCosts": {
+          "iron": 1,
+          "rope": 1,
+          "cloth": 1
+        }
+      },
+      {
+        "id": "leave",
+        "name": "平稳驶过",
+        "description": "不投入物资，也不获得奖励。",
+        "effects": [],
+        "cost": 0
+      }
+    ],
+    "variants": [
+      {
+        "id": "salvage",
+        "name": "漂浮物·缆绳残片",
+        "description": "残片被缆绳和油污缠住，需投入物资才能回收；也可换取补给。",
+        "options": [
+          {
+            "id": "wood",
+            "name": "编网打捞木料",
+            "description": "投入绳索、布条各1和1 AP，获得木头×2、塑料×1。",
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "wood",
+                "amount": 2
+              },
+              {
+                "type": "GiveCard",
+                "id": "plastic"
+              }
+            ],
+            "cost": 1,
+            "cardCosts": {
+              "rope": 1,
+              "cloth": 1
+            }
+          },
+          {
+            "id": "metal",
+            "name": "撬开金属货箱",
+            "description": "投入木头×2、塑料×1和1 AP，获得废铁×2、绳索×1。",
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "iron",
+                "amount": 2
+              },
+              {
+                "type": "GiveCard",
+                "id": "rope"
+              }
+            ],
+            "cost": 1,
+            "cardCosts": {
+              "wood": 2,
+              "plastic": 1
+            }
+          },
+          {
+            "id": "provisions",
+            "name": "修复密封补给箱",
+            "description": "投入废铁、绳索、布条各1和1 AP，获得淡水、食物各1。",
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "water"
+              },
+              {
+                "type": "GiveCard",
+                "id": "food"
+              }
+            ],
+            "cost": 1,
+            "cardCosts": {
+              "iron": 1,
+              "rope": 1,
+              "cloth": 1
+            }
+          },
+          {
+            "id": "leave",
+            "name": "平稳驶过",
+            "description": "不投入物资，也不获得奖励。",
+            "effects": [],
+            "cost": 0
+          }
+        ]
+      },
+      {
+        "id": "sealed",
+        "name": "漂浮物·封蜡木箱",
+        "description": "撬箱需要投入；也可拾取少量碎木，或承受幻听换取材料。",
+        "options": [
+          {
+            "id": "scraps",
+            "name": "捡拾漂浮残片",
+            "description": "免费随机获得木头或塑料1。",
+            "effects": [],
+            "cost": 0,
+            "outcomes": [
+              {
+                "weight": 1,
+                "effects": [
+                  {
+                    "type": "GiveCard",
+                    "id": "wood"
+                  }
+                ]
+              },
+              {
+                "weight": 1,
+                "effects": [
+                  {
+                    "type": "GiveCard",
+                    "id": "plastic"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "open",
+            "name": "撬开封蜡箱",
+            "description": "木头1、1 AP；70%食水各1，30%塑料1。",
+            "effects": [],
+            "cost": 1,
+            "cardCosts": {
+              "wood": 1
+            },
+            "outcomes": [
+              {
+                "weight": 7,
+                "effects": [
+                  {
+                    "type": "GiveCard",
+                    "id": "food"
+                  },
+                  {
+                    "type": "GiveCard",
+                    "id": "water"
+                  }
+                ]
+              },
+              {
+                "weight": 3,
+                "effects": [
+                  {
+                    "type": "GiveCard",
+                    "id": "plastic"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "voices",
+            "name": "听取船底幻声",
+            "description": "SAN10换废铁与绳索各1。",
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "iron"
+              },
+              {
+                "type": "GiveCard",
+                "id": "rope"
+              }
+            ],
+            "cost": 0,
+            "statCosts": {
+              "sanity": 10
+            }
+          },
+          {
+            "id": "leave",
+            "name": "平稳驶过",
+            "description": "无代价、无奖励。",
+            "effects": [],
+            "cost": 0
+          }
+        ]
+      },
+      {
+        "id": "lostBag",
+        "name": "漂浮物·遗失货袋",
+        "description": "可用一份随机手牌换回确定材料。",
+        "options": [
+          {
+            "id": "bag",
+            "name": "换取货袋",
+            "description": "随机失去1份合格手牌，获得废铁与绳索各1。",
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "iron"
+              },
+              {
+                "type": "GiveCard",
+                "id": "rope"
+              }
+            ],
+            "cost": 0,
+            "randomCardCost": 1
+          },
+          {
+            "id": "leave",
+            "name": "平稳驶过",
+            "description": "无代价、无奖励。",
+            "effects": [],
+            "cost": 0
+          }
+        ]
+      }
+    ]
+  },
+  "camp": {
+    "id": "camp",
+    "name": "灯火休整地",
+    "kind": "rest",
+    "description": "守灯人提供免费的安顿调整，每次只能领取一个方向的收益。",
+    "options": [
+      {
+        "id": "rest",
+        "name": "包扎补给休整",
+        "description": "免费休整；生命+15，饱食、水分、精神各+40，获得休整余裕。",
+        "effects": [
+          {
+            "type": "ChangeCurrent",
+            "stat": "hp",
+            "delta": 15
+          },
+          {
+            "type": "ChangeCurrent",
+            "stat": "hunger",
+            "delta": 40
+          },
+          {
+            "type": "ChangeCurrent",
+            "stat": "hydration",
+            "delta": 40
+          },
+          {
+            "type": "ChangeCurrent",
+            "stat": "sanity",
+            "delta": 40
+          },
+          {
+            "type": "AddBuff",
+            "id": "rested"
+          }
+        ],
+        "cost": 0
+      },
+      {
+        "id": "upgrade",
+        "name": "委托升级设备",
+        "description": "免费选择已安装设备升一级，不消耗目标。",
+        "effects": [],
+        "cost": 0,
+        "special": "upgrade"
+      },
+      {
+        "id": "enchant",
+        "name": "供奉附魔手牌",
+        "description": "免费选择战斗、生存或行动牌赋予回牌或瞬发，不消耗目标。",
+        "effects": [],
+        "cost": 0,
+        "special": "enchant"
+      },
+      {
+        "id": "leave",
+        "name": "继续航行",
+        "description": "不投入物资，也不获得休整效果。",
+        "effects": [],
+        "cost": 0
+      }
+    ]
+  },
+  "trader": {
+    "id": "trader",
+    "name": "海怪商人",
+    "kind": "shop",
+    "description": "商人用触腕敲击货箱。贝币或尸体皆可交易。",
+    "options": [
+      {
+        "id": "calm",
+        "name": "听一段海上故事",
+        "description": "无需费用，精神恢复5，结束本次商店停留。",
+        "effects": [
+          {
+            "type": "ChangeCurrent",
+            "stat": "sanity",
+            "delta": 5
+          }
+        ],
+        "cost": 0
+      },
+      {
+        "id": "leave",
+        "name": "离开商店",
+        "description": "保留货币，继续航行。",
+        "effects": [],
+        "cost": 0
+      }
+    ]
+  },
+  "jelly": {
+    "id": "jelly",
+    "name": "水母转换者",
+    "kind": "exchange",
+    "description": "水母转换一份基础资源，也可以交换鲜血或记忆。",
+    "options": [
+      {
+        "id": "card",
+        "name": "投入媒介转换资源",
+        "description": "只投入1 AP，选择一份基础资源随机换为另一种，无额外媒介。",
+        "effects": [],
+        "cost": 1,
+        "special": "exchange"
+      },
+      {
+        "id": "blood",
+        "name": "包扎后献出5点生命",
+        "description": "投入布条×1并损失5生命；50%获得普通藏品，否则无所得。",
+        "effects": [],
+        "cost": 0,
+        "special": "blood",
+        "cardCosts": {
+          "cloth": 1
+        }
+      },
+      {
+        "id": "memory",
+        "name": "交换潮汐记忆",
+        "description": "塑料1、SAN10、1 AP；60%获得普通藏品，否则贝币1；支付前SAN>80时确定获得藏品。",
+        "effects": [],
+        "cost": 1,
+        "cardCosts": {
+          "plastic": 1
+        },
+        "statCosts": {
+          "sanity": 10
+        },
+        "special": "relicChance",
+        "relicProbability": 0.6,
+        "successCondition": {
+          "stat": "sanity",
+          "operator": "gt",
+          "value": 80
+        }
+      },
+      {
+        "id": "emergency",
+        "name": "收取应急补给",
+        "description": "支付SAN6，随机获得一份基础资源；无需材料和AP。",
+        "effects": [],
+        "cost": 0,
+        "statCosts": {
+          "sanity": 6
+        },
+        "outcomes": [
+          {
+            "weight": 1,
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "wood"
+              }
+            ]
+          },
+          {
+            "weight": 1,
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "iron"
+              }
+            ]
+          },
+          {
+            "weight": 1,
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "plastic"
+              }
+            ]
+          },
+          {
+            "weight": 1,
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "rope"
+              }
+            ]
+          },
+          {
+            "weight": 1,
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "cloth"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "leave",
+        "name": "保持距离",
+        "description": "不付出代价，也无所得。",
+        "effects": [],
+        "cost": 0
+      }
+    ]
+  },
+  "storm": {
+    "id": "storm",
+    "name": "裂潮风暴",
+    "kind": "environment",
+    "description": "散落的货物正沉入浪底，回收需要消耗固定物资。",
+    "options": [
+      {
+        "id": "risk",
+        "name": "系绳深入打捞",
+        "description": "投入绳索、木头各1和1 AP；外围一格受损，获得木头×1、废铁×2。",
+        "effects": [
+          {
+            "type": "DamageCell"
+          },
+          {
+            "type": "GiveCard",
+            "id": "wood"
+          },
+          {
+            "type": "GiveCard",
+            "id": "iron",
+            "amount": 2
+          }
+        ],
+        "cost": 1,
+        "cardCosts": {
+          "rope": 1,
+          "wood": 1
+        }
+      },
+      {
+        "id": "secure",
+        "name": "搭浮架回收补给",
+        "description": "投入废铁、绳索、布条各1和1 AP；无额外筏损，获得淡水、食物各1，精神恢复20。",
+        "effects": [
+          {
+            "type": "GiveCard",
+            "id": "water"
+          },
+          {
+            "type": "GiveCard",
+            "id": "food"
+          },
+          {
+            "type": "ChangeCurrent",
+            "stat": "sanity",
+            "delta": 20
+          }
+        ],
+        "cost": 1,
+        "cardCosts": {
+          "iron": 1,
+          "rope": 1,
+          "cloth": 1
+        }
+      },
+      {
+        "id": "leave",
+        "name": "绕过浪头",
+        "description": "不获得牌，本轮食水航耗各减少5。",
+        "effects": [
+          {
+            "type": "SetFlag",
+            "key": "avoidWave",
+            "value": true
+          }
+        ],
+        "cost": 0
+      }
+    ],
+    "variants": [
+      {
+        "id": "surface",
+        "name": "风暴·散落货物",
+        "description": "散落的货物正沉入浪底，回收需要消耗固定物资。",
+        "options": [
+          {
+            "id": "risk",
+            "name": "系绳深入打捞",
+            "description": "投入绳索、木头各1和1 AP；外围一格受损，获得木头×1、废铁×2。",
+            "effects": [
+              {
+                "type": "DamageCell"
+              },
+              {
+                "type": "GiveCard",
+                "id": "wood"
+              },
+              {
+                "type": "GiveCard",
+                "id": "iron",
+                "amount": 2
+              }
+            ],
+            "cost": 1,
+            "cardCosts": {
+              "rope": 1,
+              "wood": 1
+            }
+          },
+          {
+            "id": "secure",
+            "name": "搭浮架回收补给",
+            "description": "投入废铁、绳索、布条各1和1 AP；无额外筏损，获得淡水、食物各1，精神恢复20。",
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "water"
+              },
+              {
+                "type": "GiveCard",
+                "id": "food"
+              },
+              {
+                "type": "ChangeCurrent",
+                "stat": "sanity",
+                "delta": 20
+              }
+            ],
+            "cost": 1,
+            "cardCosts": {
+              "iron": 1,
+              "rope": 1,
+              "cloth": 1
+            }
+          },
+          {
+            "id": "leave",
+            "name": "绕过浪头",
+            "description": "不获得牌，本轮食水航耗各减少5。",
+            "effects": [
+              {
+                "type": "SetFlag",
+                "key": "avoidWave",
+                "value": true
+              }
+            ],
+            "cost": 0
+          }
+        ]
+      },
+      {
+        "id": "hold",
+        "name": "风暴·沉底货舱",
+        "description": "明确的打捞风险，失败只破损而不立即脱落。",
+        "options": [
+          {
+            "id": "salvage",
+            "name": "下潜货舱",
+            "description": "绳索1、1 AP；65%废铁2，35%废铁1并破损一格。",
+            "effects": [],
+            "cost": 1,
+            "cardCosts": {
+              "rope": 1
+            },
+            "outcomes": [
+              {
+                "weight": 65,
+                "effects": [
+                  {
+                    "type": "GiveCard",
+                    "id": "iron",
+                    "amount": 2
+                  }
+                ]
+              },
+              {
+                "weight": 35,
+                "effects": [
+                  {
+                    "type": "GiveCard",
+                    "id": "iron"
+                  },
+                  {
+                    "type": "DamageCell",
+                    "damageOnly": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "tide",
+            "name": "追随顺流",
+            "description": "SAN5，下一轮开始获得2次航行顺流。",
+            "effects": [
+              {
+                "type": "AddBuff",
+                "id": "current"
+              }
+            ],
+            "cost": 0,
+            "statCosts": {
+              "sanity": 5
+            }
+          },
+          {
+            "id": "abyss",
+            "name": "追逐异常歌声",
+            "description": "SAN10，获得贝币2；下一轮进入1次航行迷雾Ⅲ。",
+            "effects": [
+              {
+                "type": "GiveCard",
+                "id": "coin",
+                "amount": 2
+              },
+              {
+                "type": "AddBuff",
+                "id": "fog3"
+              }
+            ],
+            "cost": 0,
+            "statCosts": {
+              "sanity": 10
+            }
+          },
+          {
+            "id": "leave",
+            "name": "绕过浪头",
+            "description": "不获得牌，本轮食水航耗各减少5。",
+            "effects": [
+              {
+                "type": "SetFlag",
+                "key": "avoidWave",
+                "value": true
+              }
+            ],
+            "cost": 0
+          }
+        ]
+      }
+    ]
+  },
+  "altar": {
+    "id": "altar",
+    "name": "深潮祭坛",
+    "kind": "exchange",
+    "description": "先从固定的两件未持有普通藏品中选择一件，再以一种代价换取；藏品可拒绝，不能重抽。",
+    "options": [
+      {
+        "id": "sacrifice",
+        "name": "献出行囊",
+        "description": "随机失去3份合格手牌，获得所选普通藏品。",
+        "effects": [],
+        "cost": 0,
+        "randomCardCost": 3,
+        "special": "altar"
+      },
+      {
+        "id": "blood",
+        "name": "献出鲜血",
+        "description": "支付8 HP且至少剩1，获得所选普通藏品。",
+        "effects": [],
+        "cost": 0,
+        "statCosts": {
+          "hp": 8
+        },
+        "special": "altar"
+      },
+      {
+        "id": "raft",
+        "name": "献出筏身",
+        "description": "随机立即脱落一个合法外围格及其设备，获得所选普通藏品。",
+        "effects": [],
+        "cost": 0,
+        "detachCell": true,
+        "special": "altar"
+      },
+      {
+        "id": "leave",
+        "name": "离开祭坛",
+        "description": "无代价、无奖励。",
+        "effects": [],
+        "cost": 0
+      }
+    ]
+  },
+  "fogGuide": {
+    "id": "fogGuide",
+    "name": "漂流灯塔",
+    "kind": "environment",
+    "description": "独立的雾中导引事件；守灯人不在休息节点收取费用。",
+    "options": [
+      {
+        "id": "guide",
+        "name": "接受雾中导引",
+        "description": "支付木头1；有完好燃灯时下一次导航揭示所有候选，下一次偏航概率降低15个百分点。",
+        "effects": [],
+        "cost": 0,
+        "cardCosts": {
+          "wood": 1
+        },
+        "special": "guide"
+      },
+      {
+        "id": "listen",
+        "name": "听取航线提醒",
+        "description": "免费获得1份木头。",
+        "effects": [
+          {
+            "type": "GiveCard",
+            "id": "wood"
+          }
+        ],
+        "cost": 0
+      },
+      {
+        "id": "leave",
+        "name": "离开灯塔",
+        "description": "不付出也不获得。",
+        "effects": [],
+        "cost": 0
+      }
+    ]
+  },
+  "battle": {
+    "id": "battle",
+    "name": "捕食者水域",
+    "kind": "battle",
+    "description": "水下传来咬合声。战胜敌人获得尸体、贝币与经验。",
+    "monster": "biter"
+  },
+  "jellyBattle": {
+    "id": "jellyBattle",
+    "name": "水母幽光",
+    "kind": "battle",
+    "description": "透明的伞盖遮住航线。",
+    "monster": "jelly"
+  },
+  "crabBattle": {
+    "id": "crabBattle",
+    "name": "硬壳暗礁",
+    "kind": "battle",
+    "description": "一只绝壳蟹盘踞在暗礁上。",
+    "monster": "crab"
+  },
+  "ruin": {
+    "id": "ruin",
+    "name": "沉没遗迹",
+    "kind": "ruin",
+    "description": "困难战斗；胜利50%获得藏品，50%获得日记。败退恢复进入时生命。",
+    "monster": "sentinel"
+  },
+  "boss": {
+    "id": "boss",
+    "name": "层底：涌潮之眼",
+    "kind": "battle",
+    "description": "本层最后的阻拦。Boss会污染手牌。",
+    "monster": "boss",
+    "boss": true
+  }
+}

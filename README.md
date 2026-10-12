@@ -1,5 +1,12 @@
 # 水世代 · 第一层 Three.js Demo
 
+## Godot V0.2
+
+当前 Godot 游戏工程位于 [deep-surge-godot/](deep-surge-godot/README.md)。在 Godot 4.7.2 中导入该目录的 `project.godot`，Windows 可运行目录内的 `启动游戏.cmd`。
+
+本次包含剧情/挑战可玩流程、卡牌素材、风格化夜海与三层远雾。Godot 工程及来源资产、验证截图均保留；原 Three.js Demo 的 `dist/` 与运行方式继续保留在仓库根目录。Godot 更详细的边界与验证说明以工程 README 为准。
+
+
 2026-10-03：已实现五次航行的第一版可玩循环，无 Boss。沿用原来的海面、木筏和界面布局，加入简单开始界面、随机种子、真实物资/AP、四航道战斗、合成、生产、战损修补、轮末弃牌与通关/失败页面。
 
 ## 本地运行

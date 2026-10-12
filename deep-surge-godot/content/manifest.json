@@ -1,0 +1,34 @@
+{
+  "version": "godot-v02-pages-1",
+  "source": [
+    {
+      "path": "玩法实验/src/content/cards.js",
+      "sha256": "5ebf7e3baf8588371a470bd75e73b83cd3191e6da0a8d24f97d3d1b135a9b98b"
+    },
+    {
+      "path": "玩法实验/src/content/nodes.js",
+      "sha256": "10d3e43c850500d3f93adc8299ed77e2e10f69441af8e2ff1bb097ba6574a9f1"
+    },
+    {
+      "path": "玩法实验/src/content/equipment.js",
+      "sha256": "adb6aad19def599d5586c97f91a91e5b179b02bea10a2ee37df3e7f642a4f082"
+    },
+    {
+      "path": "玩法实验/src/content/relics.js",
+      "sha256": "4befe20fa3a2794084abe37cfa4407f5227d54874c7d13c81994efd14011ab4e"
+    }
+  ],
+  "tables": {
+    "cards": "res://content/data/cards.json",
+    "nodes": "res://content/data/nodes.json",
+    "enemies": "res://content/data/enemies.json",
+    "equipment": "res://content/data/equipment.json",
+    "recipes": "res://content/data/recipes.json",
+    "shops": "res://content/data/shops.json",
+    "meta_shop": "res://content/data/meta_shop.json",
+    "tech": "res://content/data/tech.json",
+    "relics": "res://content/data/relics.json",
+    "story_nodes": "res://content/data/story_nodes.json",
+    "story_config": "res://content/data/story_config.json"
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "version": "supplied-ocean-bake-v1",
+  "frames": 16,
+  "grid_side": 101,
+  "frame_seconds": 0.625,
+  "tile_size": 54.99999523162842,
+  "uv_bounds": [
+    [
+      0.0,
+      0.0
+    ],
+    [
+      1.0,
+      1.0
+    ]
+  ],
+  "atlas_grid": 4,
+  "source_resolution": 16,
+  "runtime_resolution": 10,
+  "source_driver": "frame/20 (manually evaluated; source scripts not run)",
+  "poses": [
+    {
+      "source_frame": 24,
+      "time": 1.2,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.368127465248108,
+      "height_max": 1.0310596227645874,
+      "foam_min": 0.011612244881689548,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 39,
+      "time": 1.95,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.3687971830368042,
+      "height_max": 0.9562394022941589,
+      "foam_min": 0.011612244881689548,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 54,
+      "time": 2.7,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.2303352355957031,
+      "height_max": 1.1032947301864624,
+      "foam_min": 0.015208514407277107,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 69,
+      "time": 3.45,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.2284027338027954,
+      "height_max": 1.0832953453063965,
+      "foam_min": 0.014443840831518173,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 84,
+      "time": 4.2,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.2172585725784302,
+      "height_max": 1.2529213428497314,
+      "foam_min": 0.015996292233467102,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 99,
+      "time": 4.95,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.1209090948104858,
+      "height_max": 1.3839836120605469,
+      "foam_min": 0.014443840831518173,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 114,
+      "time": 5.7,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.2535613775253296,
+      "height_max": 1.230649471282959,
+      "foam_min": 0.013702080585062504,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 129,
+      "time": 6.45,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.1045395135879517,
+      "height_max": 1.070563793182373,
+      "foam_min": 0.013702080585062504,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 144,
+      "time": 7.2,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.012567162513733,
+      "height_max": 1.2449504137039185,
+      "foam_min": 0.015208514407277107,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 159,
+      "time": 7.95,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -0.9857574701309204,
+      "height_max": 1.3609586954116821,
+      "foam_min": 0.015996292233467102,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 174,
+      "time": 8.7,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -0.9351500272750854,
+      "height_max": 1.1487149000167847,
+      "foam_min": 0.015996292233467102,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 189,
+      "time": 9.45,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.0395201444625854,
+      "height_max": 1.1021896600723267,
+      "foam_min": 0.015996292233467102,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 204,
+      "time": 10.2,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.3391660451889038,
+      "height_max": 1.0784826278686523,
+      "foam_min": 0.015996292233467102,
+      "foam_max": 0.9215819239616394
+    },
+    {
+      "source_frame": 219,
+      "time": 10.95,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.343375325202942,
+      "height_max": 1.0064765214920044,
+      "foam_min": 0.015996292233467102,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 234,
+      "time": 11.7,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.2294502258300781,
+      "height_max": 1.0289536714553833,
+      "foam_min": 0.014443840831518173,
+      "foam_max": 1.0
+    },
+    {
+      "source_frame": 249,
+      "time": 12.45,
+      "vertices": 10201,
+      "polygons": 10000,
+      "height_min": -1.241926908493042,
+      "height_max": 0.7790913581848145,
+      "foam_min": 0.016807375475764275,
+      "foam_max": 1.0
+    }
+  ],
+  "blend_shape_names": [
+    "OceanPose01",
+    "OceanPose02",
+    "OceanPose03",
+    "OceanPose04",
+    "OceanPose05",
+    "OceanPose06",
+    "OceanPose07",
+    "OceanPose08",
+    "OceanPose09",
+    "OceanPose10",
+    "OceanPose11",
+    "OceanPose12",
+    "OceanPose13",
+    "OceanPose14",
+    "OceanPose15"
+  ],
+  "frame0_samples": [
+    [
+      -26.079784393310547,
+      -0.24579547345638275,
+      27.266986846923828
+    ],
+    [
+      -25.34231948852539,
+      -0.16559718549251556,
+      27.263269424438477
+    ],
+    [
+      -26.082983016967773,
+      -0.20977634191513062,
+      26.726337432861328
+    ],
+    [
+      28.920211791992188,
+      -0.24579547345638275,
+      -27.733009338378906
+    ]
+  ],
+  "palette_linear": [
+    [
+      0.0115535129,
+      0.035830617,
+      0.243468523
+    ],
+    [
+      0.0197290517,
+      0.0556245632,
+      0.2743761241
+    ],
+    [
+      0.0267577171,
+      0.0569837242,
+      0.3052954674
+    ],
+    [
+      0.0849153697,
+      0.4026930928,
+      1.0
+    ]
+  ],
+  "foam_threshold": 0.3363636434,
+  "adaptation": "geometry/morphs sampled from Ocean; foam in aligned data atlas; ShaderToRGB adapted in Godot; no GN spray instances",
+  "glb_bytes": 4208720,
+  "glb_sha256": "a16a45492c8d47c3184bf9d576d7f5d5122b2e41acb47033e633a7385af8a793"
+}

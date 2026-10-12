@@ -1,0 +1,27 @@
+{
+  "sea_size": 110,
+  "pattern_scale": 0.12,
+  "flow_a": [
+    0.02,
+    0.014
+  ],
+  "flow_b": [
+    -0.016,
+    0.023
+  ],
+  "deep_color": "#092332",
+  "ripple_color": "#315c69",
+  "normal_strength": 1.8,
+  "cell_spacing": [
+    2.35,
+    2.1
+  ],
+  "foam_width": 0.38,
+  "foam_color": "#9cb4b3",
+  "foam_opacity": 0.6,
+  "foam_speed": 0.09,
+  "raft_base_height": -0.055,
+  "bob_amplitude": 0.025,
+  "tilt_amplitude": 0.006,
+  "visual_seed": 20261012
+}

@@ -1,0 +1,910 @@
+{
+  "materials": [
+    {
+      "name": "Shader Nodetree",
+      "nodes": [
+        {
+          "name": "着色器 转 RGB",
+          "type": "ShaderNodeShaderToRGB",
+          "operation": null,
+          "attribute": null,
+          "inputs": []
+        },
+        {
+          "name": "颜色渐变.001",
+          "type": "ShaderNodeValToRGB",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Factor",
+              "value": 0.5
+            }
+          ],
+          "ramp": [
+            {
+              "position": 0.0,
+              "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "position": 0.33636364340782166,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            }
+          ],
+          "interpolation": "CONSTANT"
+        },
+        {
+          "name": "属性",
+          "type": "ShaderNodeAttribute",
+          "operation": null,
+          "attribute": "foam",
+          "inputs": []
+        },
+        {
+          "name": "材质输出",
+          "type": "ShaderNodeOutputMaterial",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Displacement",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "name": "Thickness",
+              "value": 0.0
+            }
+          ]
+        },
+        {
+          "name": "漫射 BSDF.001",
+          "type": "ShaderNodeBsdfDiffuse",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Color",
+              "value": [
+                0.800000011920929,
+                0.800000011920929,
+                0.800000011920929,
+                1.0
+              ]
+            },
+            {
+              "name": "Roughness",
+              "value": 0.0
+            },
+            {
+              "name": "Normal",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "name": "Weight",
+              "value": 0.0
+            }
+          ]
+        },
+        {
+          "name": "原理化 BSDF",
+          "type": "ShaderNodeBsdfPrincipled",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Base Color",
+              "value": [
+                0.800000011920929,
+                0.800000011920929,
+                0.800000011920929,
+                1.0
+              ]
+            },
+            {
+              "name": "Metallic",
+              "value": 0.0
+            },
+            {
+              "name": "Roughness",
+              "value": 0.5
+            },
+            {
+              "name": "IOR",
+              "value": 1.5
+            },
+            {
+              "name": "Alpha",
+              "value": 1.0
+            },
+            {
+              "name": "Thin Wall",
+              "value": false
+            },
+            {
+              "name": "Normal",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "name": "Weight",
+              "value": 0.0
+            },
+            {
+              "name": "Diffuse Roughness",
+              "value": 0.0
+            },
+            {
+              "name": "Subsurface Weight",
+              "value": 0.0
+            },
+            {
+              "name": "Subsurface Radius",
+              "value": [
+                1.0,
+                0.20000000298023224,
+                0.10000000149011612
+              ]
+            },
+            {
+              "name": "Subsurface Scale",
+              "value": 0.004999999888241291
+            },
+            {
+              "name": "Subsurface IOR",
+              "value": 1.399999976158142
+            },
+            {
+              "name": "Subsurface Anisotropy",
+              "value": 0.0
+            },
+            {
+              "name": "Specular IOR Level",
+              "value": 0.5
+            },
+            {
+              "name": "Specular Tint",
+              "value": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "name": "Anisotropic",
+              "value": 0.0
+            },
+            {
+              "name": "Anisotropic Rotation",
+              "value": 0.0
+            },
+            {
+              "name": "Tangent",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "name": "Transmission Weight",
+              "value": 0.0
+            },
+            {
+              "name": "Coat Weight",
+              "value": 0.0
+            },
+            {
+              "name": "Coat Roughness",
+              "value": 0.029999999329447746
+            },
+            {
+              "name": "Coat IOR",
+              "value": 1.5
+            },
+            {
+              "name": "Coat Tint",
+              "value": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "name": "Coat Normal",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "name": "Sheen Weight",
+              "value": 0.0
+            },
+            {
+              "name": "Sheen Roughness",
+              "value": 0.5
+            },
+            {
+              "name": "Sheen Tint",
+              "value": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "name": "Emission Color",
+              "value": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "name": "Emission Strength",
+              "value": 0.0
+            },
+            {
+              "name": "Thin Film Thickness",
+              "value": 0.0
+            },
+            {
+              "name": "Thin Film IOR",
+              "value": 1.3300000429153442
+            }
+          ]
+        },
+        {
+          "name": "颜色渐变",
+          "type": "ShaderNodeValToRGB",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Factor",
+              "value": 0.5
+            }
+          ],
+          "ramp": [
+            {
+              "position": 0.7727270126342773,
+              "color": [
+                0.011553512886166573,
+                0.03583061695098877,
+                0.2434685230255127,
+                1.0
+              ]
+            },
+            {
+              "position": 0.8272725343704224,
+              "color": [
+                0.019729051738977432,
+                0.05562456324696541,
+                0.27437612414360046,
+                1.0
+              ]
+            },
+            {
+              "position": 0.9181816577911377,
+              "color": [
+                0.02675771713256836,
+                0.05698372423648834,
+                0.305295467376709,
+                1.0
+              ]
+            },
+            {
+              "position": 0.9772727489471436,
+              "color": [
+                0.08491536974906921,
+                0.40269309282302856,
+                1.0,
+                1.0
+              ]
+            }
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "name": "混合",
+          "type": "ShaderNodeMix",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Factor",
+              "value": 1.0
+            },
+            {
+              "name": "Factor",
+              "value": [
+                0.5,
+                0.5,
+                0.5
+              ]
+            },
+            {
+              "name": "A",
+              "value": 0.0
+            },
+            {
+              "name": "B",
+              "value": 0.0
+            },
+            {
+              "name": "A",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "name": "B",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "name": "A",
+              "value": [
+                0.5,
+                0.5,
+                0.5,
+                1.0
+              ]
+            },
+            {
+              "name": "B",
+              "value": [
+                0.5,
+                0.5,
+                0.5,
+                1.0
+              ]
+            },
+            {
+              "name": "A",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "name": "B",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          ]
+        }
+      ],
+      "links": [
+        [
+          "属性",
+          "Color",
+          "颜色渐变.001",
+          "Factor"
+        ],
+        [
+          "原理化 BSDF",
+          "BSDF",
+          "着色器 转 RGB",
+          "Shader"
+        ],
+        [
+          "漫射 BSDF.001",
+          "BSDF",
+          "材质输出",
+          "Surface"
+        ],
+        [
+          "着色器 转 RGB",
+          "Color",
+          "颜色渐变",
+          "Factor"
+        ],
+        [
+          "颜色渐变",
+          "Color",
+          "混合",
+          "A"
+        ],
+        [
+          "颜色渐变.001",
+          "Color",
+          "混合",
+          "B"
+        ],
+        [
+          "混合",
+          "Result",
+          "漫射 BSDF.001",
+          "Color"
+        ]
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "name": "几何节点",
+      "nodes": [
+        {
+          "name": "组输入",
+          "type": "NodeGroupInput",
+          "operation": null,
+          "attribute": null,
+          "inputs": []
+        },
+        {
+          "name": "组输出",
+          "type": "NodeGroupOutput",
+          "operation": null,
+          "attribute": null,
+          "inputs": []
+        },
+        {
+          "name": "颜色渐变",
+          "type": "ShaderNodeValToRGB",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Factor",
+              "value": 0.5
+            }
+          ],
+          "ramp": [
+            {
+              "position": 1.0,
+              "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "position": 1.0,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            }
+          ],
+          "interpolation": "LINEAR"
+        },
+        {
+          "name": "分布点于面上",
+          "type": "GeometryNodeDistributePointsOnFaces",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Selection",
+              "value": true
+            },
+            {
+              "name": "Distance Min",
+              "value": 0.0
+            },
+            {
+              "name": "Density Max",
+              "value": 10.0
+            },
+            {
+              "name": "Density",
+              "value": 10.0
+            },
+            {
+              "name": "Density Factor",
+              "value": 1.0
+            },
+            {
+              "name": "Seed",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "运算",
+          "type": "ShaderNodeMath",
+          "operation": "MULTIPLY",
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Value",
+              "value": 9.300000190734863
+            },
+            {
+              "name": "Value",
+              "value": 1.0
+            },
+            {
+              "name": "Value",
+              "value": 0.5
+            }
+          ]
+        },
+        {
+          "name": "已命名属性",
+          "type": "GeometryNodeInputNamedAttribute",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Name",
+              "value": "foam"
+            }
+          ]
+        },
+        {
+          "name": "经纬球",
+          "type": "GeometryNodeMeshUVSphere",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Segments",
+              "value": 3
+            },
+            {
+              "name": "Rings",
+              "value": 2
+            },
+            {
+              "name": "Radius",
+              "value": 0.10000000149011612
+            }
+          ]
+        },
+        {
+          "name": "设置材质",
+          "type": "GeometryNodeSetMaterial",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Selection",
+              "value": true
+            },
+            {
+              "name": "Material",
+              "value": "<bpy_struct, Material(\"材质\") at 0x00000254C82E95A0>"
+            }
+          ]
+        },
+        {
+          "name": "实例化于点上",
+          "type": "GeometryNodeInstanceOnPoints",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Selection",
+              "value": true
+            },
+            {
+              "name": "Pick Instance",
+              "value": false
+            },
+            {
+              "name": "Instance Index",
+              "value": 0
+            },
+            {
+              "name": "Rotation",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "name": "Scale",
+              "value": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "设置位置",
+          "type": "GeometryNodeSetPosition",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Selection",
+              "value": true
+            },
+            {
+              "name": "Position",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "name": "Offset",
+              "value": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "合并几何体",
+          "type": "GeometryNodeJoinGeometry",
+          "operation": null,
+          "attribute": null,
+          "inputs": []
+        },
+        {
+          "name": "随机值",
+          "type": "FunctionNodeRandomValue",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Min",
+              "value": 4.499999523162842
+            },
+            {
+              "name": "Max",
+              "value": 1.4000000953674316
+            },
+            {
+              "name": "ID",
+              "value": 0
+            },
+            {
+              "name": "Seed",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "随机值.001",
+          "type": "FunctionNodeRandomValue",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Min",
+              "value": 1.0
+            },
+            {
+              "name": "Max",
+              "value": 360.0
+            },
+            {
+              "name": "ID",
+              "value": 0
+            },
+            {
+              "name": "Seed",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "已命名属性.001",
+          "type": "GeometryNodeInputNamedAttribute",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Name",
+              "value": "Spray"
+            }
+          ]
+        },
+        {
+          "name": "颜色渐变.001",
+          "type": "ShaderNodeValToRGB",
+          "operation": null,
+          "attribute": null,
+          "inputs": [
+            {
+              "name": "Factor",
+              "value": 0.5
+            }
+          ],
+          "ramp": [
+            {
+              "position": 0.0,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "position": 0.09999991953372955,
+              "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            }
+          ],
+          "interpolation": "EASE"
+        }
+      ],
+      "links": [
+        [
+          "运算",
+          "Value",
+          "分布点于面上",
+          "Density"
+        ],
+        [
+          "颜色渐变",
+          "Color",
+          "运算",
+          "Value"
+        ],
+        [
+          "已命名属性",
+          "Attribute",
+          "颜色渐变",
+          "Factor"
+        ],
+        [
+          "经纬球",
+          "Mesh",
+          "设置材质",
+          "Geometry"
+        ],
+        [
+          "分布点于面上",
+          "Points",
+          "实例化于点上",
+          "Points"
+        ],
+        [
+          "设置材质",
+          "Geometry",
+          "实例化于点上",
+          "Instance"
+        ],
+        [
+          "实例化于点上",
+          "Instances",
+          "设置位置",
+          "Geometry"
+        ],
+        [
+          "组输入",
+          "几何数据",
+          "合并几何体",
+          "Geometry"
+        ],
+        [
+          "合并几何体",
+          "Geometry",
+          "组输出",
+          "几何数据"
+        ],
+        [
+          "设置位置",
+          "Geometry",
+          "合并几何体",
+          "Geometry"
+        ],
+        [
+          "随机值.001",
+          "Value",
+          "实例化于点上",
+          "Rotation"
+        ],
+        [
+          "随机值",
+          "Value",
+          "实例化于点上",
+          "Scale"
+        ],
+        [
+          "已命名属性.001",
+          "Attribute",
+          "颜色渐变.001",
+          "Factor"
+        ],
+        [
+          "组输入",
+          "几何数据",
+          "分布点于面上",
+          "Mesh"
+        ]
+      ]
+    }
+  ],
+  "drivers": [
+    {
+      "data_path": "modifiers[\"洋面\"].time",
+      "expression": " frame/20"
+    }
+  ],
+  "evaluated": {
+    "vertices": 66049,
+    "polygons": 65536,
+    "attributes": [
+      [
+        "position",
+        "FLOAT_VECTOR",
+        "POINT"
+      ],
+      [
+        ".corner_vert",
+        "INT",
+        "CORNER"
+      ],
+      [
+        ".corner_edge",
+        "INT",
+        "CORNER"
+      ],
+      [
+        ".edge_verts",
+        "INT32_2D",
+        "EDGE"
+      ],
+      [
+        "UVMap",
+        "FLOAT2",
+        "CORNER"
+      ],
+      [
+        "foam",
+        "BYTE_COLOR",
+        "CORNER"
+      ],
+      [
+        "Spray",
+        "BYTE_COLOR",
+        "CORNER"
+      ]
+    ]
+  }
+}
