@@ -1,0 +1,36 @@
+{
+  "biter": {
+    "name": "啃筏者",
+    "hp": 6,
+    "damage": 2,
+    "intent": "咬击：生命−2。"
+  },
+  "jelly": {
+    "name": "胶膜水母",
+    "hp": 7,
+    "damage": 1,
+    "intent": "刺击：生命−1，并施加中毒。",
+    "buff": "poisoned"
+  },
+  "crab": {
+    "name": "绝壳蟹",
+    "hp": 9,
+    "damage": 3,
+    "intent": "重击：生命−3。"
+  },
+  "sentinel": {
+    "name": "遗迹守卫",
+    "hp": 11,
+    "damage": 3,
+    "intent": "回响：生命−3，并施加畏惧。",
+    "buff": "fearful"
+  },
+  "boss": {
+    "name": "涌潮之眼",
+    "hp": 18,
+    "damage": 3,
+    "intent": "潮蚀：生命−3；隔回合污染手牌。",
+    "buff": "fearful",
+    "pollution": true
+  }
+}

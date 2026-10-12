@@ -1,0 +1,1001 @@
+{
+  "version": 1,
+  "assets": {
+    "card.wood": {
+      "path": "res://assets/images/supplied-20261012/asset-09.png",
+      "color": "#284c57",
+      "label": "木头",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形木材堆图标.png",
+      "sha256": "6b2b1fdf6e3656c02aa8c093eeceb9bf67b1cafbea638c094fd5166bfa1df748",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.iron": {
+      "path": "res://assets/images/supplied-20261012/asset-14.png",
+      "color": "#284c57",
+      "label": "废铁",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形锈蚀金属废料堆.png",
+      "sha256": "b3efbc76cd5cd9101403bf44648fe32c60e1efb1acae6e0ae956e2d3169fa097",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.plastic": {
+      "path": "res://assets/images/supplied-20261012/asset-03.png",
+      "color": "#284c57",
+      "label": "塑料",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形塑料垃圾堆 (1).png",
+      "sha256": "e0e951af399eec99b644e2df163e388466a9efcdb47d495c175d6085932418bd",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.rope": {
+      "path": "res://assets/images/supplied-20261012/asset-15.png",
+      "color": "#284c57",
+      "label": "绳索",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/手绘风格粗绳线圈与结头.png",
+      "sha256": "01c0d66e2a35d1add76a89f33039abcedb20d05175e7ff36c410895e633a63ca",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.cloth": {
+      "path": "res://assets/images/supplied-20261012/asset-06.png",
+      "color": "#284c57",
+      "label": "布条",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形撕裂布条堆.png",
+      "sha256": "4611f5f6e881220bee117df865c216e545b816c9efc7d42a6047a0c26c29fec3",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.corpse": {
+      "path": "",
+      "color": "#284c57",
+      "label": "怪物尸体",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "card.coin": {
+      "path": "",
+      "color": "#756439",
+      "label": "贝币",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "card.water": {
+      "path": "res://assets/images/supplied-20261012/asset-13.png",
+      "color": "#326253",
+      "label": "淡水",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形棕色皮革水壶背包.png",
+      "sha256": "a9fe2c1e690133ebd65018a6520587f1145705162691d1cd65813047406f5bbb",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.food": {
+      "path": "res://assets/images/supplied-20261012/asset-04.png",
+      "color": "#326253",
+      "label": "食用植物",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形多层绿甘蓝插画 (1).png",
+      "sha256": "eb2b4fbad8b05a58e3994036b16051c60593d8258b1bef5db346f48ca3960f34",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.calm": {
+      "path": "res://assets/images/supplied-20261012/asset-01.png",
+      "color": "#326253",
+      "label": "灯火余温",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/中世纪海灯手提灯.png",
+      "sha256": "4b46f68d845e6d880a41c01f886c144266e65c6a07b9129f251fe132dee0af9a",
+      "dimensions": [
+        1246,
+        1262
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.punch": {
+      "path": "res://assets/images/supplied-20261012/asset-07.png",
+      "color": "#674543",
+      "label": "出拳",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形暖色系竖起拳头.png",
+      "sha256": "2996a4e874904a3f46fb9c5dd5efa26441b842616262f18f49ec45732c7877c5",
+      "dimensions": [
+        1246,
+        1262
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.arrow": {
+      "path": "res://assets/images/supplied-20261012/asset-12.png",
+      "color": "#674543",
+      "label": "射箭",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形木质弩箭器械.png",
+      "sha256": "c326232515378cb058d8e6459f1e113c2d004a8f8bfa3630407553aa48cbe003",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.spear": {
+      "path": "res://assets/images/supplied-20261012/asset-02.png",
+      "color": "#674543",
+      "label": "矛击",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形原始木柄长矛.png",
+      "sha256": "db142438ad20271869eb35ea07a934fbcab8ffe9a864d413b3694d401d861778",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.pollution": {
+      "path": "",
+      "color": "#533c55",
+      "label": "潮蚀污染",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "card.lamp": {
+      "path": "res://assets/images/supplied-20261012/asset-01.png",
+      "color": "#555d44",
+      "label": "灯",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/中世纪海灯手提灯.png",
+      "sha256": "4b46f68d845e6d880a41c01f886c144266e65c6a07b9129f251fe132dee0af9a",
+      "dimensions": [
+        1246,
+        1262
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.filter": {
+      "path": "res://assets/images/supplied-20261012/asset-11.png",
+      "color": "#555d44",
+      "label": "滤水器",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形木架炭滤净水装置.png",
+      "sha256": "e036f586da642207646c10c0caa3d1de797d3be6dfb9c5126a1029101f94ddd0",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.planter": {
+      "path": "res://assets/images/supplied-20261012/asset-08.png",
+      "color": "#555d44",
+      "label": "土盆",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形木制 raised 花箱.png",
+      "sha256": "2126516b9fb901d6ca5f0e9d8fadd76cf8a04d368a2e33fd6d5eb5cf66af6095",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.medkit": {
+      "path": "res://assets/images/supplied-20261012/asset-05.png",
+      "color": "#555d44",
+      "label": "包扎包",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形帆布急救卷包.png",
+      "sha256": "4815fa68f26c1295a2d176cb5917458bb3e1425b6f4a2aa56dddd743574cf520",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.crossbow": {
+      "path": "res://assets/images/supplied-20261012/asset-12.png",
+      "color": "#555d44",
+      "label": "弓弩",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形木质弩箭器械.png",
+      "sha256": "c326232515378cb058d8e6459f1e113c2d004a8f8bfa3630407553aa48cbe003",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.spearRack": {
+      "path": "res://assets/images/supplied-20261012/asset-02.png",
+      "color": "#555d44",
+      "label": "矛架",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形原始木柄长矛.png",
+      "sha256": "db142438ad20271869eb35ea07a934fbcab8ffe9a864d413b3694d401d861778",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.dismantle": {
+      "path": "res://assets/images/supplied-20261012/asset-10.png",
+      "color": "#4b496a",
+      "label": "拆除",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形木板工具箱与工具组合.png",
+      "sha256": "b24211de6159106921db83ca6ba9bc3f222a684b8367cc7f9e621d6ff11f0f2a",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "card.repair": {
+      "path": "res://assets/images/supplied-20261012/asset-10.png",
+      "color": "#4b496a",
+      "label": "修补包",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形木板工具箱与工具组合.png",
+      "sha256": "b24211de6159106921db83ca6ba9bc3f222a684b8367cc7f9e621d6ff11f0f2a",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "node.drift": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "漂浮物带",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.camp": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "灯火休整地",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.trader": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "海怪商人",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.jelly": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "水母转换者",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.storm": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "裂潮风暴",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.altar": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "深潮祭坛",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.fogGuide": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "漂流灯塔",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.battle": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "捕食者水域",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.jellyBattle": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "水母幽光",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.crabBattle": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "硬壳暗礁",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.ruin": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "沉没遗迹",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "node.boss": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "层底：涌潮之眼",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "enemy.biter": {
+      "path": "",
+      "color": "#694550",
+      "label": "啃筏者",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "enemy.jelly": {
+      "path": "",
+      "color": "#694550",
+      "label": "胶膜水母",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "enemy.crab": {
+      "path": "",
+      "color": "#694550",
+      "label": "绝壳蟹",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "enemy.sentinel": {
+      "path": "",
+      "color": "#694550",
+      "label": "遗迹守卫",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "enemy.boss": {
+      "path": "",
+      "color": "#694550",
+      "label": "涌潮之眼",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.emberWick": {
+      "path": "",
+      "color": "#655f40",
+      "label": "余烬灯芯",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.tideLens": {
+      "path": "",
+      "color": "#655f40",
+      "label": "潮纹镜片",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.headingNeedle": {
+      "path": "",
+      "color": "#655f40",
+      "label": "定向骨针",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.mendingNeedle": {
+      "path": "",
+      "color": "#655f40",
+      "label": "缝潮针",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.namedKnot": {
+      "path": "",
+      "color": "#655f40",
+      "label": "记名绳结",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.scavengerRing": {
+      "path": "",
+      "color": "#655f40",
+      "label": "拾荒者指环",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.emptyCompass": {
+      "path": "",
+      "color": "#655f40",
+      "label": "空腹罗盘",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.deepContract": {
+      "path": "",
+      "color": "#655f40",
+      "label": "深潮契印",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.luckyShell": {
+      "path": "",
+      "color": "#655f40",
+      "label": "回声贝壳",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.guardian": {
+      "path": "",
+      "color": "#655f40",
+      "label": "守潮骨片",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.curse": {
+      "path": "",
+      "color": "#655f40",
+      "label": "锈蚀金币",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.pearl": {
+      "path": "",
+      "color": "#655f40",
+      "label": "塞壬的珍珠",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "relic.memory": {
+      "path": "",
+      "color": "#655f40",
+      "label": "记忆的回响",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "scene.ocean": {
+      "path": "",
+      "color": "#123542",
+      "label": "深潮海域",
+      "version": 1,
+      "source": "procedural-solid-label-v1"
+    },
+    "model.raft": {
+      "path": "res://assets/models/raft.glb",
+      "role": "rig-cargo-decoration; original deck hidden; logical cells native meshes",
+      "sha256": "822d7c0da07c14e4f5b3515b1aab098c8de0bc3cf0ad0ced884a54a0787e7613",
+      "version": 1,
+      "source": "raft-model/raft.glb (raft_v004.blend)"
+    },
+    "scene.voyage": {
+      "dependencies": [
+        "model.raft",
+        "model.ocean",
+        "data.ocean.config",
+        "data.ocean.surface",
+        "data.ocean.model-config",
+        "shader.ocean.model",
+        "texture.ocean.foam",
+        "data.ocean.texture-config",
+        "texture.ocean.contact-foam",
+        "shader.ocean.contact",
+        "shader.raft.wet-wood"
+      ],
+      "source": [
+        "presentation/voyage_world.gd",
+        "presentation/model_ocean.gd",
+        "presentation/supplied_ocean.gd",
+        "presentation/texture_ocean.gd"
+      ],
+      "version": 6,
+      "role": "read-only cells projection; visual time only"
+    },
+    "shader.ocean": {
+      "source": "assets/shaders/ocean.gdshader",
+      "uniforms": [
+        "visual_time",
+        "deep_color",
+        "crest_color"
+      ],
+      "version": 1
+    },
+    "ui.voyage-hud": {
+      "dependencies": [
+        "card.*",
+        "scene.voyage",
+        "ui.card.front",
+        "ui.card.type.*",
+        "card.*"
+      ],
+      "source": "pages/voyage_hud.gd + pages/flow_battle.gd + presentation/item_card.gd + presentation/widgets.gd",
+      "version": 3
+    },
+    "story.ST.L1.T01": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "漂来的补给箱",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "story.ST.L1.T02": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "搭起第一件设备",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "story.ST.L1.T03": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "筏边的啃咬声",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "story.ST.L1.S04": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "陌生船队的邀请",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "story.ST.L1.S05": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "多出来的一扇门",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "story.ST.L1.A08": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "物品错位",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "story.ST.L1.A11": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "不相邻的床铺",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "story.ST.L1.P14": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "危机前夜",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "story.ST.L1.F15": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "舱壁之外",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "story.ST.L1.EP15": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "仍在的铁钉",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "story.ST.L1.SOLO15": {
+      "path": "",
+      "color": "#244b5b",
+      "label": "雾外的灯",
+      "version": 1,
+      "source": "test-story-solid-label-v1",
+      "dependencies": [
+        "presentation/asset_catalog.gd",
+        "presentation/widgets.gd",
+        "content/data/story_nodes.json"
+      ]
+    },
+    "tool.handtool": {
+      "label": "手工工具",
+      "path": "res://assets/images/supplied-20261012/asset-10.png",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/低多边形木板工具箱与工具组合.png",
+      "sha256": "b24211de6159106921db83ca6ba9bc3f222a684b8367cc7f9e621d6ff11f0f2a",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "ui.unavailable": {
+      "label": "禁止使用工具",
+      "path": "res://assets/images/supplied-20261012/asset-16.png",
+      "version": 2,
+      "source": "user-supplied/card(5).zip/card/禁止使用工具箱开奖号.png",
+      "sha256": "df2fcf15a3262bcc3462afd8758846790ebc3793c41f1207447e39007aa5beef",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "crop": null,
+      "show_label": false,
+      "dependencies": [],
+      "license": "user-supplied; no additional license assertion"
+    },
+    "model.ocean": {
+      "path": "res://assets/models/supplied-ocean.glb",
+      "version": 1,
+      "source": "tools/export_supplied_ocean.py",
+      "source_asset": "asset-sources/user-pack-20261012/ocean-original.blend",
+      "sha256": "a16a45492c8d47c3184bf9d576d7f5d5122b2e41acb47033e633a7385af8a793",
+      "bytes": 4208720,
+      "dependencies": [
+        "data.ocean.config",
+        "texture.ocean.foam",
+        "shader.ocean.supplied"
+      ]
+    },
+    "data.ocean.config": {
+      "path": "res://assets/data/supplied-ocean.json",
+      "version": 1,
+      "source": "tools/export_supplied_ocean.py",
+      "source_asset": "asset-sources/user-pack-20261012/ocean-original.blend",
+      "sha256": "24d15e9d146af0c276deda7eb1ad7bf289440208aa2eabd6d21d423ed44de038",
+      "bytes": 5868,
+      "dependencies": [
+        "data.ocean.surface"
+      ]
+    },
+    "data.ocean.surface": {
+      "path": "res://assets/data/supplied-ocean-surface.bin",
+      "version": 1,
+      "source": "tools/export_supplied_ocean.py",
+      "source_asset": "asset-sources/user-pack-20261012/ocean-original.blend",
+      "sha256": "8929b36fb183a03cafb50049330c84be0241edae9bae168ab716b49799bfba4d",
+      "bytes": 1958592,
+      "dependencies": []
+    },
+    "texture.ocean.foam": {
+      "path": "res://assets/textures/supplied-ocean-foam.png",
+      "version": 1,
+      "source": "tools/export_supplied_ocean.py",
+      "source_asset": "asset-sources/user-pack-20261012/ocean-original.blend",
+      "sha256": "4519bfdcb903308532fde745b3318fd4d88ba6bac2650311b0d5e2809785c18b",
+      "bytes": 206802,
+      "dependencies": [],
+      "dimensions": [
+        404,
+        404
+      ],
+      "color_space": "data",
+      "crop": null,
+      "show_label": false
+    },
+    "shader.ocean.supplied": {
+      "path": "res://assets/shaders/supplied_ocean.gdshader",
+      "version": 1,
+      "source": "source ShaderToRGB/foam ramp adapted to Godot",
+      "source_asset": "asset-sources/user-pack-20261012/ocean-original.blend",
+      "sha256": "4c25660478db8c83f4da3ff4ea0fa71be1ad306900cec9897d4541d9a490575d",
+      "bytes": 1527,
+      "dependencies": [
+        "texture.ocean.foam",
+        "data.ocean.config"
+      ]
+    },
+    "ui.card.type.combat": {
+      "path": "res://assets/images/supplied-ui-20261012/ui-01.png",
+      "version": 1,
+      "source": "user-supplied/card-ui-original.zip/卡牌ui/ChatGPT 图像 2026年10月7日 19_28_37.png",
+      "sha256": "179c253713541205d59e4f176530705336e9575ca3ece294981ef6f0f094cf78",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "region": null,
+      "show_label": false,
+      "dependencies": []
+    },
+    "ui.card.type.survival": {
+      "path": "res://assets/images/supplied-ui-20261012/ui-02.png",
+      "version": 1,
+      "source": "user-supplied/card-ui-original.zip/卡牌ui/ChatGPT 图像 2026年10月7日 19_28_44-1.png",
+      "sha256": "cad42950a96d14a739e2d793b122c043c82d5a071d13a8e48c847cf394cb7161",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "region": null,
+      "show_label": false,
+      "dependencies": []
+    },
+    "ui.card.type.material": {
+      "path": "res://assets/images/supplied-ui-20261012/ui-03.png",
+      "version": 1,
+      "source": "user-supplied/card-ui-original.zip/卡牌ui/ChatGPT 图像 2026年10月7日 19_28_47-2.png",
+      "sha256": "1841040f917a3da297e02d41d6bcd276ff816230d2cc7015122704c743dce327",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "region": null,
+      "show_label": false,
+      "dependencies": []
+    },
+    "ui.card.front": {
+      "path": "res://assets/images/supplied-ui-20261012/ui-04.png",
+      "version": 1,
+      "source": "user-supplied/card-ui-original.zip/卡牌ui/星海秘仪双卡设计.png",
+      "sha256": "480dc8b07a739796a83015ccbcbe87abc129de81dc0d144ba3f508ba4b523b2e",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "region": [
+        90,
+        28,
+        654,
+        1004
+      ],
+      "show_label": false,
+      "dependencies": []
+    },
+    "ui.card.back": {
+      "path": "res://assets/images/supplied-ui-20261012/ui-04.png",
+      "version": 1,
+      "source": "user-supplied/card-ui-original.zip/卡牌ui/星海秘仪双卡设计.png",
+      "sha256": "480dc8b07a739796a83015ccbcbe87abc129de81dc0d144ba3f508ba4b523b2e",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "region": [
+        750,
+        28,
+        610,
+        1000
+      ],
+      "show_label": false,
+      "dependencies": []
+    },
+    "ui.item-card": {
+      "path": "res://presentation/item_card.gd",
+      "version": 1,
+      "source": "presentation/item_card.gd",
+      "dependencies": [
+        "ui.card.front",
+        "ui.card.type.*",
+        "card.*"
+      ]
+    },
+    "texture.ocean.ripples": {
+      "path": "res://assets/textures/ocean-ripples-v1.png",
+      "version": 1,
+      "source": "tools/generate_texture_ocean.py",
+      "sha256": "b5f9320ec2ca9c570c72f328faa539647c7a2debb6f6356dcb129db8f2a67381",
+      "dependencies": [],
+      "license": "project-authored procedural asset; no external imagery",
+      "visual_seed": 20261012,
+      "dimensions": [
+        512,
+        512
+      ],
+      "crop": null
+    },
+    "texture.ocean.contact-foam": {
+      "path": "res://assets/textures/ocean-contact-foam-v1.png",
+      "version": 1,
+      "source": "tools/generate_texture_ocean.py",
+      "sha256": "b790484966be37f9f2eccba84aed50441b07d58fb71395b1e16417cce3aa8f95",
+      "dependencies": [],
+      "license": "project-authored procedural asset; no external imagery",
+      "visual_seed": 20261012,
+      "dimensions": [
+        256,
+        256
+      ],
+      "crop": null
+    },
+    "data.ocean.texture-config": {
+      "path": "res://assets/data/texture-ocean.json",
+      "version": 2,
+      "source": "tools/generate_texture_ocean.py",
+      "sha256": "5a1277393ec921e8ed30f205b25890f7ba2923ac85b22dc65005999484b97f91",
+      "dependencies": [],
+      "license": "project-authored procedural asset; no external imagery",
+      "visual_seed": 20261012
+    },
+    "shader.ocean.texture": {
+      "path": "res://assets/shaders/texture_ocean.gdshader",
+      "version": 1,
+      "source": "assets/shaders/texture_ocean.gdshader",
+      "sha256": "41b81dc164f18a60b1450bcd3f10deae5b5261bd53eff430754de0ceb4e5794b",
+      "dependencies": [],
+      "license": "project-authored procedural asset; no external imagery",
+      "visual_seed": 20261012
+    },
+    "shader.ocean.contact": {
+      "path": "res://assets/shaders/contact_foam.gdshader",
+      "version": 2,
+      "source": "assets/shaders/contact_foam.gdshader",
+      "sha256": "01c5d63628e77505b600a81fb8ffa25a972515e262160bd76f0df3cd1d333887",
+      "dependencies": [],
+      "license": "project-authored shader/config; source Ocean stays user-supplied"
+    },
+    "shader.raft.wet-wood": {
+      "path": "res://assets/shaders/wet_wood.gdshader",
+      "version": 2,
+      "source": "assets/shaders/wet_wood.gdshader",
+      "sha256": "0f81514938d469ff935c8d8498fadbb2d7518faed5e13b0ede47a2d485a8ebcc",
+      "dependencies": [],
+      "license": "project-authored shader/config; source Ocean stays user-supplied"
+    },
+    "data.ocean.model-config": {
+      "path": "res://assets/data/model-ocean.json",
+      "version": 3,
+      "source": "assets/data/model-ocean.json",
+      "sha256": "2a0c2f90e8a220781f6413450dc30e3b1a3d36482508fcca9d32e160764ebad3",
+      "dependencies": [],
+      "license": "project-authored shader/config; source Ocean stays user-supplied"
+    },
+    "shader.ocean.model": {
+      "path": "res://assets/shaders/model_ocean.gdshader",
+      "version": 3,
+      "source": "assets/shaders/model_ocean.gdshader",
+      "sha256": "4cb3ac5f4abd40c07ed90cfd885972372786813ba3ef4d816363101b344cc6a9",
+      "dependencies": [],
+      "license": "project-authored shader/config; source Ocean stays user-supplied"
+    },
+    "geometry.ocean.lod": {
+      "version": 1,
+      "source": "asset-sources/wave-style-experiment/model_ocean.gd",
+      "dependencies": [
+        "model.ocean",
+        "data.ocean.surface"
+      ],
+      "runtime": null,
+      "status": "archived; original GLB restored"
+    },
+    "shader.ocean.stylized-far": {
+      "path": "res://assets/shaders/stylized_far_ocean.gdshader",
+      "version": 2,
+      "source": "assets/shaders/stylized_far_ocean.gdshader",
+      "sha256": "37f12fbc5fa9dc34e56c2c9283e1a4af13f447cbd1e2759eed051631b693f3d3",
+      "dependencies": [],
+      "license": "project-authored shader/config; source Ocean stays user-supplied"
+    }
+  }
+}

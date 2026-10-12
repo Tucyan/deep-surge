@@ -1,0 +1,16 @@
+config_version=5
+
+[application]
+config/name="Deep Surge · V0.2"
+run/main_scene="res://scenes/main.tscn"
+
+[display]
+window/size/viewport_width=1600
+window/size/viewport_height=900
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.027,0.063,0.086,1)

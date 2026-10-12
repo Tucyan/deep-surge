@@ -1,0 +1,42 @@
+[
+  {
+    "asset_id": "ui.card.type.combat",
+    "source": "卡牌ui/ChatGPT 图像 2026年10月7日 19_28_37.png",
+    "region": null,
+    "sha256": "179c253713541205d59e4f176530705336e9575ca3ece294981ef6f0f094cf78"
+  },
+  {
+    "asset_id": "ui.card.type.survival",
+    "source": "卡牌ui/ChatGPT 图像 2026年10月7日 19_28_44-1.png",
+    "region": null,
+    "sha256": "cad42950a96d14a739e2d793b122c043c82d5a071d13a8e48c847cf394cb7161"
+  },
+  {
+    "asset_id": "ui.card.type.material",
+    "source": "卡牌ui/ChatGPT 图像 2026年10月7日 19_28_47-2.png",
+    "region": null,
+    "sha256": "1841040f917a3da297e02d41d6bcd276ff816230d2cc7015122704c743dce327"
+  },
+  {
+    "asset_id": "ui.card.front",
+    "source": "卡牌ui/星海秘仪双卡设计.png",
+    "region": [
+      90,
+      28,
+      654,
+      1004
+    ],
+    "sha256": "480dc8b07a739796a83015ccbcbe87abc129de81dc0d144ba3f508ba4b523b2e"
+  },
+  {
+    "asset_id": "ui.card.back",
+    "source": "卡牌ui/星海秘仪双卡设计.png",
+    "region": [
+      750,
+      28,
+      610,
+      1000
+    ],
+    "sha256": "480dc8b07a739796a83015ccbcbe87abc129de81dc0d144ba3f508ba4b523b2e"
+  }
+]

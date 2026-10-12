@@ -1,0 +1,48 @@
+{
+  "contact_triangles": 16,
+  "contacts": [
+    {
+      "bottom_height_corners": [
+        -0.163597911596298,
+        -0.163597911596298,
+        -0.186397761106491,
+        -0.186397761106491
+      ],
+      "time": 0.0
+    },
+    {
+      "bottom_height_corners": [
+        -0.155357226729393,
+        -0.134713768959045,
+        -0.165699198842049,
+        -0.145055741071701
+      ],
+      "time": 2.0
+    },
+    {
+      "bottom_height_corners": [
+        -0.216419577598572,
+        -0.199398219585419,
+        -0.195345595479012,
+        -0.178324222564697
+      ],
+      "time": 5.0
+    },
+    {
+      "bottom_height_corners": [
+        -0.158047914505005,
+        -0.174251407384872,
+        -0.151040732860565,
+        -0.167244225740433
+      ],
+      "time": 8.0
+    }
+  ],
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "renderer": "gl_compatibility",
+  "scope": "Whole app wall time; includes UI, raft and display pacing, not isolated GPU timing. No FPS percentage claim.",
+  "sea_triangles": 2,
+  "visual_update_cpu_us": 4.4437,
+  "whole_app_frame_median_ms": 8.342,
+  "whole_app_frame_p95_ms": 8.714
+}

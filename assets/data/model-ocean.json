@@ -1,0 +1,9 @@
+{
+  "contact_margin": 1.2,
+  "contact_transition": 2.4,
+  "raft_draft": 0.055,
+  "slope_limit": 0.022,
+  "version": "original-ocean-with-contact-v3",
+  "horizontal_scale": 1.0,
+  "height_scale": 1.0
+}

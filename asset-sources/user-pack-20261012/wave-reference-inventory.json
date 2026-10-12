@@ -1,0 +1,17 @@
+{
+  "AssetId": "reference.wave-style.video",
+  "version": 1,
+  "source": "user-supplied/10月12日(1).mp4",
+  "file": "asset-sources/user-pack-20261012/waves-reference.mp4",
+  "sha256": "48940a308ad01877f0cb4892959baf9dda5b61ffb25ca74be8cdd8c4e7d4c649",
+  "bytes": 4302227,
+  "dimensions": [
+    1974,
+    1080
+  ],
+  "fps": 30,
+  "duration_seconds": 4.6,
+  "dependencies": [],
+  "runtime_mapping": null,
+  "role": "style reference for crest foam; darker game palette per user request"
+}

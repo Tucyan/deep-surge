@@ -1,0 +1,311 @@
+[
+  {
+    "index": 1,
+    "archive_name": "card/中世纪海灯手提灯.png",
+    "file": "asset-sources/user-pack-20261012/images/source-01.png",
+    "size": [
+      1246,
+      1262
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "4b46f68d845e6d880a41c01f886c144266e65c6a07b9129f251fe132dee0af9a",
+    "asset_ids": [
+      "card.lamp",
+      "card.calm"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-01.png",
+    "status": "integrated"
+  },
+  {
+    "index": 2,
+    "archive_name": "card/低多边形原始木柄长矛.png",
+    "file": "asset-sources/user-pack-20261012/images/source-02.png",
+    "size": [
+      1312,
+      1199
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "db142438ad20271869eb35ea07a934fbcab8ffe9a864d413b3694d401d861778",
+    "asset_ids": [
+      "card.spear",
+      "card.spearRack"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-02.png",
+    "status": "integrated"
+  },
+  {
+    "index": 3,
+    "archive_name": "card/低多边形塑料垃圾堆 (1).png",
+    "file": "asset-sources/user-pack-20261012/images/source-03.png",
+    "size": [
+      1312,
+      1199
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "e0e951af399eec99b644e2df163e388466a9efcdb47d495c175d6085932418bd",
+    "asset_ids": [
+      "card.plastic"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-03.png",
+    "status": "integrated"
+  },
+  {
+    "index": 4,
+    "archive_name": "card/低多边形多层绿甘蓝插画 (1).png",
+    "file": "asset-sources/user-pack-20261012/images/source-04.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "eb2b4fbad8b05a58e3994036b16051c60593d8258b1bef5db346f48ca3960f34",
+    "asset_ids": [
+      "card.food"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-04.png",
+    "status": "integrated"
+  },
+  {
+    "index": 5,
+    "archive_name": "card/低多边形帆布急救卷包.png",
+    "file": "asset-sources/user-pack-20261012/images/source-05.png",
+    "size": [
+      1312,
+      1199
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "4815fa68f26c1295a2d176cb5917458bb3e1425b6f4a2aa56dddd743574cf520",
+    "asset_ids": [
+      "card.medkit"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-05.png",
+    "status": "integrated"
+  },
+  {
+    "index": 6,
+    "archive_name": "card/低多边形撕裂布条堆.png",
+    "file": "asset-sources/user-pack-20261012/images/source-06.png",
+    "size": [
+      1448,
+      1086
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "4611f5f6e881220bee117df865c216e545b816c9efc7d42a6047a0c26c29fec3",
+    "asset_ids": [
+      "card.cloth"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-06.png",
+    "status": "integrated"
+  },
+  {
+    "index": 7,
+    "archive_name": "card/低多边形暖色系竖起拳头.png",
+    "file": "asset-sources/user-pack-20261012/images/source-07.png",
+    "size": [
+      1246,
+      1262
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "2996a4e874904a3f46fb9c5dd5efa26441b842616262f18f49ec45732c7877c5",
+    "asset_ids": [
+      "card.punch"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-07.png",
+    "status": "integrated"
+  },
+  {
+    "index": 8,
+    "archive_name": "card/低多边形木制 raised 花箱.png",
+    "file": "asset-sources/user-pack-20261012/images/source-08.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "2126516b9fb901d6ca5f0e9d8fadd76cf8a04d368a2e33fd6d5eb5cf66af6095",
+    "asset_ids": [
+      "card.planter"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-08.png",
+    "status": "integrated"
+  },
+  {
+    "index": 9,
+    "archive_name": "card/低多边形木材堆图标.png",
+    "file": "asset-sources/user-pack-20261012/images/source-09.png",
+    "size": [
+      1312,
+      1199
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "6b2b1fdf6e3656c02aa8c093eeceb9bf67b1cafbea638c094fd5166bfa1df748",
+    "asset_ids": [
+      "card.wood"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-09.png",
+    "status": "integrated"
+  },
+  {
+    "index": 10,
+    "archive_name": "card/低多边形木板工具箱与工具组合.png",
+    "file": "asset-sources/user-pack-20261012/images/source-10.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "b24211de6159106921db83ca6ba9bc3f222a684b8367cc7f9e621d6ff11f0f2a",
+    "asset_ids": [
+      "card.repair",
+      "card.dismantle",
+      "tool.handtool"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-10.png",
+    "status": "integrated"
+  },
+  {
+    "index": 11,
+    "archive_name": "card/低多边形木架炭滤净水装置.png",
+    "file": "asset-sources/user-pack-20261012/images/source-11.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "e036f586da642207646c10c0caa3d1de797d3be6dfb9c5126a1029101f94ddd0",
+    "asset_ids": [
+      "card.filter"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-11.png",
+    "status": "integrated"
+  },
+  {
+    "index": 12,
+    "archive_name": "card/低多边形木质弩箭器械.png",
+    "file": "asset-sources/user-pack-20261012/images/source-12.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "sha256": "c326232515378cb058d8e6459f1e113c2d004a8f8bfa3630407553aa48cbe003",
+    "asset_ids": [
+      "card.crossbow",
+      "card.arrow"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-12.png",
+    "status": "integrated"
+  },
+  {
+    "index": 13,
+    "archive_name": "card/低多边形棕色皮革水壶背包.png",
+    "file": "asset-sources/user-pack-20261012/images/source-13.png",
+    "size": [
+      1312,
+      1199
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "a9fe2c1e690133ebd65018a6520587f1145705162691d1cd65813047406f5bbb",
+    "asset_ids": [
+      "card.water"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-13.png",
+    "status": "integrated"
+  },
+  {
+    "index": 14,
+    "archive_name": "card/低多边形锈蚀金属废料堆.png",
+    "file": "asset-sources/user-pack-20261012/images/source-14.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "b3efbc76cd5cd9101403bf44648fe32c60e1efb1acae6e0ae956e2d3169fa097",
+    "asset_ids": [
+      "card.iron"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-14.png",
+    "status": "integrated"
+  },
+  {
+    "index": 15,
+    "archive_name": "card/手绘风格粗绳线圈与结头.png",
+    "file": "asset-sources/user-pack-20261012/images/source-15.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "sha256": "01c0d66e2a35d1add76a89f33039abcedb20d05175e7ff36c410895e633a63ca",
+    "asset_ids": [
+      "card.rope"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-15.png",
+    "status": "integrated"
+  },
+  {
+    "index": 16,
+    "archive_name": "card/禁止使用工具箱开奖号.png",
+    "file": "asset-sources/user-pack-20261012/images/source-16.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "sha256": "df2fcf15a3262bcc3462afd8758846790ebc3793c41f1207447e39007aa5beef",
+    "asset_ids": [
+      "ui.unavailable"
+    ],
+    "runtime_path": "res://assets/images/supplied-20261012/asset-16.png",
+    "status": "integrated"
+  }
+]
