@@ -42,7 +42,7 @@ func run() -> void:
 		ocean.sync_cells(app.session.view().cells)
 		for time in [0.0,2.0,5.0,9.0]:
 			app.world_view._time = time; app.world_view.motion = false; app.world_view._process(0)
-			var baseline: float = app.world_view.model_ocean.plane_height if app.world_view.model_ocean != null else 0.0
+			var baseline: float = app.world_view.ocean.plane_height if app.world_view.ocean != null else 0.0
 			check(absf(app.world_view.raft.position.y-baseline+0.055) <= 0.026,"木筏保持水面下的固定吃水")
 			check(is_equal_approx(ocean.contact.position.y,0.006),"泡沫留在水面，不随木筏升降")
 		check(app.session.snapshot() == snapshot,"视觉播放与外缘更新不改变规则及随机状态")

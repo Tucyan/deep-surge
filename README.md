@@ -1,6 +1,10 @@
 # Deep Surge · Godot V0.2 流程重做
 
-2026-10-12 当前海面：按用户要求恢复第一版原GLB九块/180000三角形、完整16姿态、原尺寸与浪高、蓝色渐变和泡沫图集。只保留船边水面柔化、共享水线、局部泡沫和湿木修复。降面/缩放/风格化试验已归档。详见[模型海面验证](evidence/model-ocean-verification.md)。下文轻量海面为回退及历史记录。
+2026-10-12 雾调整：深度雾保持14米开始/38米完全浓雾，并保留镜头比例缩放；色彩从蓝色移向低饱和灰青，三层低空雾偏灰绿、缓慢漂移，近筏遮罩保护木筏及扩展范围。没有改海面波形或海面色板。验证见[雾验证](evidence/fog-verification.md)。
+
+2026-10-12 当前海面（风格化冷夜v1）：程序化Gerstner波＋三渲二分档暗蓝着色、浪脊断续硬边泡沫、月光闪点、灯笼暖光、筏格接触环、深度雾与航行视口冷夜调色；参数见`assets/data/toon-ocean.json`。原GLB海面保留为回退。详见[风格化夜海验证](evidence/toon-ocean-verification.md)。下一段GLB海面说明为回退及历史记录。
+
+2026-10-12 GLB海面（现为回退）：按用户要求恢复第一版原GLB九块/180000三角形、完整16姿态、原尺寸与浪高、蓝色渐变和泡沫图集。只保留船边水面柔化、共享水线、局部泡沫和湿木修复。降面/缩放/风格化试验已归档。详见[模型海面验证](evidence/model-ocean-verification.md)。下文轻量海面为回退及历史记录。
 
 2026-10-12 轻量海面：航行使用一个不透明3D平面、双层滚动周期水纹、木筏外缘局部泡沫与湿木水线。海面2个三角形，初始四格接触泡沫16个三角形；无水面形变、屏幕/深度采样或额外泡沫视口。用户Blender源与派生GLB完整保留，不再在游戏启动时加载。规则、随机和存档版本保持不变。详见[纹理海面验证](evidence/texture-ocean-verification.md)。
 
@@ -95,6 +99,8 @@ python tools/check_supplied_assets.py
 godot --headless --path . --script tests/test_supplied_assets.gd
 godot --headless --path . --script tests/test_texture_ocean.gd
 godot --headless --path . --script tests/test_model_ocean.gd
+godot --headless --path . --script tests/test_toon_ocean.gd
+godot --path . --script tests/toon_ocean_visual.gd
 godot --path . --script tests/model_ocean_visual.gd
 godot --path . --script tests/texture_ocean_visual.gd
 godot --path . --script tests/supplied_visual_smoke.gd
@@ -102,7 +108,7 @@ godot --path . --script tests/flow_ui_smoke.gd -- --capture
 godot --path . --script tests/story_ui_smoke.gd -- --capture
 ```
 
-`test_session.gd`/`ui_smoke.gd`仅为新测试的兼容别名。所有新测试隔离用户存档；机械页面的测试夹具标明test-fixture，完整鼠标航程用真实种子22和正常候选，无测试状态注入。最新海面画面为`evidence/model-ocean-*.png`，卡牌素材回归脚本使用`supplied-current-*`；旧`texture-ocean-*`、`supplied-texture-*`、`hud-*`和`supplied-*`记录保留为历史。未验证发行导出构建和跨平台字体。
+`test_session.gd`/`ui_smoke.gd`仅为新测试的兼容别名。所有新测试隔离用户存档；机械页面的测试夹具标明test-fixture，完整鼠标航程用真实种子22和正常候选，无测试状态注入。最新海面画面为`evidence/toon-ocean-*.png`（`model-ocean-*.png`为GLB回退记录），卡牌素材回归脚本使用`supplied-current-*`；旧`texture-ocean-*`、`supplied-texture-*`、`hud-*`和`supplied-*`记录保留为历史。未验证发行导出构建和跨平台字体。
 
 素材原图/原zip/原blend归档在`asset-sources/`，由`.gdignore`隔离自动导入。不直接引用微信下载目录。当前模型外观参数在`assets/data/model-ocean.json`，源采样在`supplied-ocean.json/surface.bin`；通过`tools/register_model_ocean.py`更新hash登记。`tools/generate_texture_ocean.py`保留纹理回退及泡沫纹理生成，不覆盖新版scene.voyage映射。图片/颜色/形变数据/泡沫/逻辑状态独立，源模型文件未修改。
 

@@ -6,10 +6,12 @@ func _init() -> void: call_deferred("run")
 func run() -> void:
 	check(FileAccess.file_exists("res://presentation/model_ocean.gd"),"需要校准尺度与水线的3D模型海面组件")
 	if failures: quit(1); return
+	# The original GLB ocean is now the fallback; force it to keep this regression meaningful.
+	load("res://presentation/voyage_world.gd").ocean_style_override = "model"
 	var app = load("res://scenes/main.tscn").instantiate(); app.persistence = false; root.add_child(app); await process_frame
 	app.handle_command("new",{"mode":"challenge","origin":"strong","seed":22}); await process_frame
 	var ocean = app.world_view.model_ocean
-	check(ocean != null,"默认航行使用3D模型海面")
+	check(ocean != null and app.world_view.ocean == ocean,"强制回退时使用3D模型海面")
 	check(ocean.meshes[0].mesh.get_blend_shape_count() == 15,"保留用户源的16姿态动画")
 	check(ocean.meshes[0].mesh.surface_get_arrays(0)[Mesh.ARRAY_INDEX].size()/3 == 20000,"恢复第一版原GLB每块20000三角形")
 	check(ocean.meshes[0].mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX].size() == 10201,"恢复第一版完整源顶点")

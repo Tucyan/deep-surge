@@ -9,12 +9,15 @@ func capture(id: String) -> void:
 	check(root.get_texture().get_image().save_png("res://evidence/texture-ocean-"+id+".png") == OK,"截图保存")
 func run() -> void:
 	root.size = Vector2i(1600,900)
+	# Historical texture preview: keep the pre-toon environment by forcing the GLB path, then hide it.
+	load("res://presentation/voyage_world.gd").ocean_style_override = "model"
 	app = load("res://scenes/main.tscn").instantiate(); app.persistence = false; root.add_child(app); await process_frame
 	app.handle_command("new",{"mode":"challenge","origin":"strong","seed":22})
 	app.handle_command("voyage",{"id":app.session.state.candidates[0].visit_id})
 	# Explicitly preview the retained texture fallback; the game's default is 3D.
-	if app.world_view.model_ocean != null:
-		app.world_view.model_ocean.queue_free(); app.world_view.model_ocean = null
+	if app.world_view.ocean != null:
+		app.world_view.ocean.queue_free(); app.world_view.ocean = null
+		app.world_view.model_ocean = null; app.world_view.toon_ocean = null
 	app.world_view.texture_ocean.sea.position.y = 0.0
 	app.world_view.texture_ocean.sea.visible = true
 	app.world_view.texture_ocean.sea.material_override = app.world_view.texture_ocean.material

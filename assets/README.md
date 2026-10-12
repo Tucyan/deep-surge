@@ -1,5 +1,16 @@
 # 素材登记
 
+当前使用scene.voyage v8：默认风格化冷夜海面，远雾使用低饱和灰青/灰绿，与深蓝海水区分。三层雾原高度保留，近筏透明区随真实筏格范围同步，镜头拉远时过渡宽度跟随缩放。
+
+| AssetId | 源 / 映射 / 依赖 |
+| --- | --- |
+| data.ocean.toon-config v2 | assets/data/toon-ocean.json；原波形/色板/泡沫/月光/灯笼/调色保持，雾色/过渡/漂移参数更新，hash清单登记 |
+| shader.ocean.toon v1 | assets/shaders/toon_ocean.gdshader；Gerstner位移与presentation/toon_ocean.gd同公式；程序噪声/Voronoi，无外部图片、屏幕或深度采样；依赖data.ocean.toon-config |
+| shader.voyage.night-grade v1 | assets/shaders/night_grade.gdshader；航行SubViewportContainer画布调色（降饱和、冷色、暗角），不作用于HUD |
+| shader.voyage.night-mist v1 | assets/shaders/night_mist.gdshader；原三层程序噪声雾，新增clear_bounds/clear_fade近筏遮罩；依赖data.ocean.toon-config，随格变化与镜头缩放同步；无额外纹理/视口 |
+
+近景平面/远景平面网格为toon_ocean.gd运行时生成的实例私有资源，随节点释放；视觉噪声为着色器内固定哈希，不使用规则随机。登记更新命令`python -X utf8 tools/register_toon_ocean.py`。原GLB海面相关资产保留为回退，下文为其记录。
+
 当前使用scene.voyage v6：按用户要求恢复第一版原GLB/16姿态/尺寸/法线/UV/蓝色渐变和泡沫图集；只保留共同水线、船边柔化、局部泡沫和湿木修复。data.ocean.model-config/shader.ocean.model为v3，后者fragment与第一版一致，仅vertex加入局部接触处理。geometry.ocean.lod标记archived。v5试验代码、shader、配置保存在asset-sources/wave-style-experiment；下表与后文v5/v3等说明均为历史记录。
 
 | v5试验历史 AssetId | 源 / 映射 / 依赖 |

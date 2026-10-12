@@ -9,11 +9,13 @@ func capture(id: String) -> void:
 	check(root.get_texture().get_image().save_png("res://evidence/model-ocean-"+id+".png") == OK,"保存GPU截图")
 func run() -> void:
 	root.size = Vector2i(1600,900)
+	# The original GLB ocean is now the fallback; force it to keep this regression meaningful.
+	load("res://presentation/voyage_world.gd").ocean_style_override = "model"
 	app = load("res://scenes/main.tscn").instantiate(); app.persistence = false; root.add_child(app); await process_frame
 	app.handle_command("new",{"mode":"challenge","origin":"strong","seed":22})
 	app.handle_command("voyage",{"id":app.session.state.candidates[0].visit_id})
 	app.world_view.motion = false
-	var ocean = app.world_view.model_ocean; check(ocean != null,"默认使用模型海面")
+	var ocean = app.world_view.model_ocean; check(ocean != null,"强制回退时使用模型海面")
 	var saved: Dictionary = app.session.snapshot(); var contacts: Array = []
 	for time in [0.0,1.25,2.5,5.0,7.5,9.9999]:
 		app.world_view._time = time; app.world_view._process(0)

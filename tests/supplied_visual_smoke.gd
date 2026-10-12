@@ -1,5 +1,5 @@
 extends SceneTree
-# Supplied card/UI regression on the CURRENT model ocean. Source Ocean archive
+# Supplied card/UI regression on the CURRENT default ocean. Source Ocean archive
 # import/poses remain covered separately by test_supplied_assets.gd.
 var failures := 0
 var app: Control
@@ -18,7 +18,7 @@ func run() -> void:
 	app.handle_command("voyage",{"id":app.session.state.candidates[0].visit_id})
 	app.world_view.motion = false
 	var saved: Dictionary = app.session.snapshot()
-	var ocean = app.world_view.model_ocean
+	var ocean = app.world_view.ocean
 	check(ocean != null,"真实场景使用新海面，未走旧占位回退")
 	var samples: Array = []
 	var times: Array = [0.0,0.3125,1.25,2.5,5.0,7.5,9.9999,0.0001]
@@ -47,5 +47,5 @@ func run() -> void:
 		tile.create(assets,{"id":id,"definition":catalog.entry("cards",id)},"查看",func(): pass,180,245)
 	await snapshot_frame("card-gallery")
 	gallery.queue_free(); await process_frame
-	print("SUPPLIED VISUAL: %s (模型海面8时刻、浮动、图鉴卡背、配方、19卡图与UI)" % ("PASS" if failures == 0 else "FAIL"))
+	print("SUPPLIED VISUAL: %s (当前海面8时刻、浮动、图鉴卡背、配方、19卡图与UI)" % ("PASS" if failures == 0 else "FAIL"))
 	quit(0 if failures == 0 else 1)

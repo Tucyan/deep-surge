@@ -1,0 +1,211 @@
+{
+  "version": "toon-ocean-night-v1-fog-v2",
+  "near_size": 64,
+  "near_subdivisions": 200,
+  "far_size": 600,
+  "amplitude_fade": [
+    20,
+    30
+  ],
+  "waves": [
+    {
+      "direction_deg": 112,
+      "wavelength": 15.0,
+      "amplitude": 0.3,
+      "steepness": 0.3,
+      "speed": 0.8,
+      "phase": 0.0
+    },
+    {
+      "direction_deg": 138,
+      "wavelength": 8.6,
+      "amplitude": 0.14,
+      "steepness": 0.17,
+      "speed": 0.85,
+      "phase": 1.7
+    },
+    {
+      "direction_deg": 84,
+      "wavelength": 4.3,
+      "amplitude": 0.055,
+      "steepness": 0.09,
+      "speed": 0.95,
+      "phase": 3.1
+    },
+    {
+      "direction_deg": 156,
+      "wavelength": 2.7,
+      "amplitude": 0.028,
+      "steepness": 0.06,
+      "speed": 1.0,
+      "phase": 4.4
+    }
+  ],
+  "contact_margin": 1.2,
+  "contact_transition": 2.4,
+  "raft_draft": 0.055,
+  "slope_limit": 0.022,
+  "max_cells": 48,
+  "cell_spacing": [
+    2.35,
+    2.1
+  ],
+  "palette": {
+    "trough": "#03070f",
+    "deep": "#071328",
+    "body": "#0a1a35",
+    "lit": "#16315a",
+    "rim": "#28497a",
+    "sky_reflect": "#132a4c",
+    "foam": "#7f97b8",
+    "foam_core": "#b4c6de",
+    "glint": "#d2e0f4",
+    "lantern": "#c98a46"
+  },
+  "shading": {
+    "key_direction": [
+      -0.35,
+      0.62,
+      -0.7
+    ],
+    "light_weight": 0.62,
+    "height_weight": 0.38,
+    "band_thresholds": [
+      0.36,
+      0.52,
+      0.74,
+      0.88
+    ],
+    "fresnel_power": 4.0,
+    "fresnel_strength": 0.45
+  },
+  "foam": {
+    "fold_gain": 0.25,
+    "height_gain": 0.1,
+    "noise_scale": 0.9,
+    "erosion": 0.55,
+    "threshold": 0.36,
+    "core_threshold": 0.68,
+    "drift": [
+      0.035,
+      0.05
+    ],
+    "streak_scale": 0.42,
+    "streak_width": 0.05,
+    "streak_strength": 0.28,
+    "fade_distance": [
+      18,
+      42
+    ],
+    "contact_width": 0.95,
+    "contact_frequency": 1.6,
+    "contact_speed": 0.32,
+    "streak_crest": 0.2,
+    "contact_threshold": 0.74,
+    "contact_strength": 0.5,
+    "crest_sharpness": 18.0,
+    "crest_gain": 0.75,
+    "contact_noise": 0.7
+  },
+  "glint": {
+    "moon_direction": [
+      -0.1,
+      0.28,
+      -0.95
+    ],
+    "threshold": 0.9965,
+    "noise": 0.004,
+    "sheen_power": 70.0,
+    "sheen_strength": 0.1
+  },
+  "lantern": {
+    "radius": 3.6,
+    "strength": 1.0,
+    "glint_threshold": 0.985
+  },
+  "environment": {
+    "background": "#495b61",
+    "ambient_color": "#3d5578",
+    "ambient_energy": 0.38,
+    "fog_color": "#495b61",
+    "fog_depth_begin": 14.0,
+    "fog_depth_end": 38.0,
+    "fog_depth_curve": 1.1,
+    "moon_color": "#9db5d9",
+    "moon_energy": 1.15,
+    "moon_rotation": [
+      -40,
+      -18,
+      0
+    ],
+    "lantern_energy": 2.6,
+    "rock_color": "#0e1824",
+    "contact_foam_color": "#7f97b8",
+    "contact_shadow_color": "#02050b",
+    "contact_foam_opacity": 0.42
+  },
+  "grade": {
+    "exposure": 0.96,
+    "contrast": 1.08,
+    "contrast_pivot": 0.18,
+    "saturation": 0.86,
+    "tint": [
+      0.92,
+      0.97,
+      1.08
+    ],
+    "vignette_radius": 0.62,
+    "vignette_softness": 0.55,
+    "vignette_strength": 0.62
+  },
+  "mist": {
+    "color": "#697c76",
+    "size": 220,
+    "distance_range": [
+      14,
+      30
+    ],
+    "base_haze": 0.42,
+    "band_thresholds": [
+      0.42,
+      0.6
+    ],
+    "band_softness": 0.12,
+    "layers": [
+      {
+        "height": 0.35,
+        "density": 0.58,
+        "noise_scale": 0.05,
+        "drift": [
+          0.015,
+          0.006
+        ],
+        "seed": 0.0
+      },
+      {
+        "height": 0.95,
+        "density": 0.48,
+        "noise_scale": 0.07,
+        "drift": [
+          0.018,
+          -0.003
+        ],
+        "seed": 1.0
+      },
+      {
+        "height": 1.8,
+        "density": 0.38,
+        "noise_scale": 0.04,
+        "drift": [
+          0.009,
+          0.006
+        ],
+        "seed": 2.0
+      }
+    ],
+    "clear_fade": [
+      1.6,
+      5.8
+    ]
+  }
+}

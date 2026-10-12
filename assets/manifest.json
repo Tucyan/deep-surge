@@ -553,25 +553,30 @@
     "scene.voyage": {
       "dependencies": [
         "model.raft",
+        "data.ocean.toon-config",
+        "shader.ocean.toon",
+        "shader.voyage.night-grade",
+        "shader.voyage.night-mist",
+        "data.ocean.texture-config",
+        "texture.ocean.contact-foam",
+        "shader.ocean.contact",
+        "shader.raft.wet-wood",
         "model.ocean",
         "data.ocean.config",
         "data.ocean.surface",
         "data.ocean.model-config",
         "shader.ocean.model",
-        "texture.ocean.foam",
-        "data.ocean.texture-config",
-        "texture.ocean.contact-foam",
-        "shader.ocean.contact",
-        "shader.raft.wet-wood"
+        "texture.ocean.foam"
       ],
       "source": [
         "presentation/voyage_world.gd",
+        "presentation/toon_ocean.gd",
         "presentation/model_ocean.gd",
         "presentation/supplied_ocean.gd",
         "presentation/texture_ocean.gd"
       ],
-      "version": 6,
-      "role": "read-only cells projection; visual time only"
+      "version": 8,
+      "role": "read-only cells projection; visual time only; toon ocean default, original GLB ocean is fallback"
     },
     "shader.ocean": {
       "source": "assets/shaders/ocean.gdshader",
@@ -996,6 +1001,44 @@
       "sha256": "37f12fbc5fa9dc34e56c2c9283e1a4af13f447cbd1e2759eed051631b693f3d3",
       "dependencies": [],
       "license": "project-authored shader/config; source Ocean stays user-supplied"
+    },
+    "data.ocean.toon-config": {
+      "path": "res://assets/data/toon-ocean.json",
+      "version": 2,
+      "source": "assets/data/toon-ocean.json",
+      "sha256": "eb3092da3e1afb110449666f53a820856a70341e1291b803b083e5ee6f42b7ec",
+      "dependencies": [],
+      "license": "project-authored procedural shader/config; no external imagery"
+    },
+    "shader.ocean.toon": {
+      "path": "res://assets/shaders/toon_ocean.gdshader",
+      "version": 1,
+      "source": "assets/shaders/toon_ocean.gdshader",
+      "sha256": "c8bae88978af6f00267373c1c34a0bdbf24052243949b6ddda67b1d7343f6eed",
+      "dependencies": [
+        "data.ocean.toon-config"
+      ],
+      "license": "project-authored procedural shader/config; no external imagery",
+      "role": "procedural Gerstner waves mirrored by presentation/toon_ocean.gd; visual time only"
+    },
+    "shader.voyage.night-grade": {
+      "path": "res://assets/shaders/night_grade.gdshader",
+      "version": 1,
+      "source": "assets/shaders/night_grade.gdshader",
+      "sha256": "65e7f7a92fefa7b7bf2e1444fb6c0b6d6509378d5f0e070481d090c344a54ab4",
+      "dependencies": [],
+      "license": "project-authored procedural shader/config; no external imagery"
+    },
+    "shader.voyage.night-mist": {
+      "path": "res://assets/shaders/night_mist.gdshader",
+      "version": 1,
+      "source": "assets/shaders/night_mist.gdshader",
+      "sha256": "a5763e8f82c4f119e1f3a68b1be721b48bf2e77b672d4a71994baa7932f04375",
+      "dependencies": [
+        "data.ocean.toon-config"
+      ],
+      "license": "project-authored procedural shader/config; no external imagery",
+      "role": "three low mist planes; clear_bounds follows occupied raft, clear_fade follows view scale"
     }
   }
 }
